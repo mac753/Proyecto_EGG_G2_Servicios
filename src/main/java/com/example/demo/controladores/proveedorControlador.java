@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.logging.Level;
 import com.example.demo.Excepciones.MiException;
-import com.example.demo.proveedorServicio.proveedorServicio;
+import com.example.demo.Servicios.proveedorServicio;
 
 @Controller
 @RequestMapping("/proveedor") // localhost:8080/proveedor

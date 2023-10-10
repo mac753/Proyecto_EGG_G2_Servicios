@@ -1,4 +1,4 @@
-package com.example.demo.proveedorServicio;
+package com.example.demo.Servicios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.entidades.Proovedor;
 import com.example.demo.enume.Rol;
-import com.example.demo.personaRepo.proveedorRepositorio;
+import com.example.demo.Repositorio.proveedorRepositorio;
 
 import jakarta.transaction.Transactional;
 
