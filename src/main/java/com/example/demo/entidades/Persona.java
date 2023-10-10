@@ -1,6 +1,7 @@
 package com.example.demo.entidades;
 
-import en.Rol;
+import com.example.demo.enume.Rol;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,18 +12,18 @@ public abstract class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
+    protected Long id;
     protected String nombre;
     protected String email;
     protected Rol rol;
     protected String password;
-    protected Integer telefono;
+    protected Long telefono;
 
-    protected Persona() {
+    public Persona() {
 
     }
 
-    protected Persona(Long id, String nombre, String email, Rol rol, String password, Integer telefono) {
+    public Persona(Long id, String nombre, String email, Rol rol, String password, Long telefono) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -71,11 +72,11 @@ public abstract class Persona {
         this.password = password;
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
