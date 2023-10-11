@@ -1,8 +1,8 @@
-package com.example.demo.proveedorServicio;
+package com.example.demo.Servicios;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.entidades.Proovedor;
 import com.example.demo.enume.Rol;
-import com.example.demo.personaRepo.proveedorRepositorio;
+import com.example.demo.Repositorio.proveedorRepositorio;
 
 import jakarta.transaction.Transactional;
 
@@ -22,17 +22,16 @@ public class proveedorServicio {
 
     @Transactional
     public void crearProveedor(String nombre, String email, String password, Long telefono,
-            String comentarios, String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
+             String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
 
-        validar(nombre, email, password, telefono, comentarios, direccion, honorarioHoras, cantidadContactos);
+        validar(nombre, email, password, telefono, direccion, honorarioHoras, cantidadContactos);
         Proovedor proveedor = new Proovedor();
-        // proveedor.setId(id);
+       
         proveedor.setNombre(nombre);
         proveedor.setEmail(email);
         proveedor.setRol(Rol.PROVEEDOR);
         proveedor.setPassword(password);
         proveedor.setTelefono(telefono);
-        proveedor.setComentarios(comentarios);
         proveedor.setDireccion(direccion);
         proveedor.setHonorarioHora(honorarioHoras);
         proveedor.setCantidadContactos(cantidadContactos);
@@ -77,7 +76,7 @@ public class proveedorServicio {
      * }
      */
     private void validar(String nombre, String email, String password, Long telefono,
-            String comentarios, String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
+             String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
 
         if (nombre.isEmpty()) {
             throw new MiException("El nombre no puede estar vacio");
@@ -91,9 +90,7 @@ public class proveedorServicio {
         if (telefono == null) {
             throw new MiException("El telfono no puede ser nulo");
         }
-        if (comentarios.isEmpty()) {
-            throw new MiException("El comentario no puede estar vacio");
-        }
+        
         if (direccion.isEmpty()) {
             throw new MiException("La direccion no puede estar vacia");
         }
