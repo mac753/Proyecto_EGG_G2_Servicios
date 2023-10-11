@@ -17,6 +17,8 @@ public class OrdenTrabajo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rubro;
+    private Integer puntaje;
+
     @Enumerated(EnumType.STRING)
     private EstadoOrdenTrabajo estadOrden;
     @OneToOne
@@ -28,14 +30,20 @@ public class OrdenTrabajo {
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(Long id, String rubro, EstadoOrdenTrabajo estadOrden, Proovedor proveedor, Usuario usuario, String comentario) {
+
+
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, EstadoOrdenTrabajo estadOrden, Proovedor proveedor,
+            Usuario usuario, String comentario) {
         this.id = id;
         this.rubro = rubro;
+        this.puntaje = puntaje;
         this.estadOrden = estadOrden;
         this.proveedor = proveedor;
         this.usuario = usuario;
         this.comentario = comentario;
     }
+
+
 
     public Long getId() {
         return id;
@@ -83,6 +91,18 @@ public class OrdenTrabajo {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+
+
+    public Integer getPuntaje() {
+        return puntaje;
+    }
+
+
+
+    public void setPuntaje(Integer puntaje) {
+        this.puntaje = puntaje;
     }
     
     

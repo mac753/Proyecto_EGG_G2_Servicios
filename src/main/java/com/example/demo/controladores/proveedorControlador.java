@@ -31,7 +31,7 @@ public class proveedorControlador {
             String comentarios, String direccion, float honorarioHoras, Integer cantidadContactos) {
 
         try {
-            proveedorServicio.crearProveedor(nombre, email, password, telefono, comentarios, direccion,
+            proveedorServicio.crearProveedor(nombre, email, password, telefono, direccion,
                     honorarioHoras, cantidadContactos);
         } catch (MiException ex) {
             Logger.getLogger(proveedorControlador.class.getName()).log(Level.SEVERE, null, ex);

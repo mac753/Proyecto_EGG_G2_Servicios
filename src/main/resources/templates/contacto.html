@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Document</title>
+    <title>Registro usuario</title>
 </head>
 <body>
     <div class="container1">
@@ -21,8 +21,37 @@
             </nav>
         </header>
     </div>
+//
 
-    <h1>que hacemos aca</h1>
+    
+    <form action="/usuario/registro" method="POST">
+
+        <h1>Registro de usuario</h1>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required /><br />
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br />
+  
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required /><br />
+  
+        <label for="telefono">Teléfono:</label>
+        <input type="number" id="telefono" name="telefono" required /><br />
+  
+         
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required /><br />
+
+        <button type="submit">Registrar usuario</button>
+        </form>
+  
+       
+        
+      
+        /><br />
+  
 
 
     <a href="#arriba">Ir arriba</a><br><br>
