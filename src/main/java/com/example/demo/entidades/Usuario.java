@@ -1,6 +1,7 @@
 package com.example.demo.entidades;
 
-import com.example.demo.enume.Rol;
+import com.example.demo.Enumeraciones.Rol;
+
 import jakarta.persistence.Entity;
 
 @Entity
@@ -10,8 +11,6 @@ public class Usuario extends Persona {
 
     public Usuario() {
     }
-    
-    
 
     public Usuario(String direccion, Long id, String nombre, String email, Rol rol, String password, Long telefono) {
         super(id, nombre, email, rol, password, telefono);
@@ -25,8 +24,5 @@ public class Usuario extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
-    
 
 }
