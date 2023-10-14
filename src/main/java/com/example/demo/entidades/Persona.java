@@ -1,6 +1,6 @@
 package com.example.demo.entidades;
 
-import com.example.demo.enume.Rol;
+import com.example.demo.Enumeraciones.Rol;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

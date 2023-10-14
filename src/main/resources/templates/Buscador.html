@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscador de Proveedores</title>
+</head>
+
+<body>
+    <div class="container1">
+        <header class="encabezado">
+            <a name="arriba"><img id="logo" src="logos/logo1.png" alt="logo" /></a>
+
+            <nav id="navbar">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <form action="/proveedor/buscador" method="get">
+        <h1>Buscador de Proveedores por Rubro</h1>
+        <label for="rubro">Rubro:</label>
+        <input type="text" id="rubro" name="rubro" required />
+        <button type="submit">Buscar</button>
+    </form>
+    <div id="resultado">
+        <!-- Mostrar los resultados de la búsqueda -->
+        <ul>
+            <th:block th:each="proveedor : ${proveedores}">
+                <li>
+                    <span th:text="${proveedor.nombre}"></span> -
+                    <span th:text="${proveedor.direccion}"></span> -
+                    <span th:text="${proveedor.honorarioHora}"></span>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</body>
+
+</html>

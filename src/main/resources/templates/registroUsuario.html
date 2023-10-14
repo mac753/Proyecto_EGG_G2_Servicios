@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+</html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="logos/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+    <title>Registro de Proveedor</title>
+</head>
+
+<body>
+    <div class="container1">
+        <header class="encabezado">
+            <a name="arriba"><img id="logo" src="/logos/logo1.png" alt="logo" /></a>
+
+            <nav id="navbar">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <form class="formulario" th:action="@{/registro}" method="POST">
+        <div class="form-group my-3">
+            <h3 class="card-title">Registrate!</h3>
+        </div>
+        <div class="form-group my-3">
+            <input type="text" class="form-control" name="nombre" placeholder="NOMBRE" th:value="${nombre}" />
+        </div>
+        <div class="form-group my-3">
+            <input type="email" class="form-control" name="email" placeholder="EMAIL" th:value="${email}" />
+        </div>
+
+        <div class="form-group my-3">
+            <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA"
+                th:value="${password}" />
+        </div>
+        <div class="form-group my-3">
+            <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA"
+                th:value="${password2}" />
+        </div>
+        <div class="form-group my-3">
+            <input type="number" class="form-control" name="telefono" placeholder="telefono" th:value="${telefono}" />
+        </div>
+        <div class="form-group my-3">
+            <input type="text" class="form-control" name="direccion" placeholder="Direccion" th:value="${direccion}" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3 botones">
+            Registrarme
+        </button>
+    </form>
+
+    <footer class="pie">
+        <div class="texto-pie">
+            <p>ubicacion - chacras de coria -Mendoza</p>
+        </div>
+        <div class="redes-sociales">
+            <a href="https://www.facebook.com/" target="_blank"><img src="/logos/facebook.png" alt="Facebook" /></a>
+            <a href="https://www.instagram.com/" target="_blank"><img src="/logos/instagram.png" alt="Instagram" /></a>
+            <a href="https://twitter.com/" target="_blank"><img src="/logos/twitter.png" alt="Twitter" /></a>
+            <p></p>
+        </div>
+    </footer>
+</body>
+
+</html>

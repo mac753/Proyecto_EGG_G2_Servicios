@@ -13,8 +13,8 @@ public class Servicios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String descripcion;
+    // private String nombre;
+    // private String descripcion;
     @ManyToMany(mappedBy = "serviciosOfrecidos")
-    private List<Proovedor> proveedores; // Proveedores que ofrecen este servicio
+    private List<Proveedor> proveedores; // Proveedores que ofrecen este servicio
 }
