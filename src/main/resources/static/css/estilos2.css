@@ -240,10 +240,10 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 20%;
   margin-left: 10%;
   margin-right: 10%;
-margin-bottom: 20px;
+ margin-bottom: 35%;
 }
 
 .imagen-enmarcada img {
