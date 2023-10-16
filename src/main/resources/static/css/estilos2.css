@@ -219,7 +219,6 @@ h3{
     border-radius: 2%; 
   }
   
-  /* Estilo adicional para el título */
   .container3 h1 {
     text-align: center;
     margin-bottom: 20px; 
@@ -235,7 +234,10 @@ h3{
     color:white;
   }
 /*buscar proveedor*/
-
+.botonBus{
+  
+  margin-left: 70%;
+}
 
 /*registro usuario*/
 
