@@ -1,7 +1,8 @@
 
 package com.example.demo.entidades;
 
-import com.example.demo.enume.EstadoOrdenTrabajo;
+import com.example.demo.Enumeraciones.EstadoOrdenTrabajo;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,7 +23,7 @@ public class OrdenTrabajo {
     @Enumerated(EnumType.STRING)
     private EstadoOrdenTrabajo estadOrden;
     @OneToOne
-    private Proovedor proveedor;
+    private Proveedor proveedor;
     @OneToOne
     private Usuario usuario;
     private String comentario;
@@ -30,9 +31,7 @@ public class OrdenTrabajo {
     public OrdenTrabajo() {
     }
 
-
-
-    public OrdenTrabajo(Long id, String rubro, Integer puntaje, EstadoOrdenTrabajo estadOrden, Proovedor proveedor,
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, EstadoOrdenTrabajo estadOrden, Proveedor proveedor,
             Usuario usuario, String comentario) {
         this.id = id;
         this.rubro = rubro;
@@ -42,8 +41,6 @@ public class OrdenTrabajo {
         this.usuario = usuario;
         this.comentario = comentario;
     }
-
-
 
     public Long getId() {
         return id;
@@ -69,11 +66,11 @@ public class OrdenTrabajo {
         this.estadOrden = estadOrden;
     }
 
-    public Proovedor getProveedor() {
+    public Proveedor getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proovedor proveedor) {
+    public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
 
@@ -93,19 +90,12 @@ public class OrdenTrabajo {
         this.comentario = comentario;
     }
 
-
-
     public Integer getPuntaje() {
         return puntaje;
     }
 
-
-
     public void setPuntaje(Integer puntaje) {
         this.puntaje = puntaje;
     }
-    
-    
 
-    
 }
