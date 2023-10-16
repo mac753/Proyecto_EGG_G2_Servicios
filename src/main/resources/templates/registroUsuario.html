@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +22,8 @@
           <div class="navbar-nav">
             <a class="nav-link active" href="/">Inicio</a>
             <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-            <a class="nav-link" href="/registrar">RegUsuario</a>
-            <a class="nav-link" href="/proveedor/registrar">RegProv</a>
+           <!-- <a class="nav-link" href="/registrar">RegUsuario</a>
+            <a class="nav-link" href="/proveedor/registrar">RegProv</a>-->
             <a class="nav-link" href="/login">Login</a>
         </div>
           </div>
@@ -31,72 +31,72 @@
   </nav>
 
 <h1>ProSkillFinder</h1>
-<h1>Registro de Usuario</h1>
+<h6 class="textRegU">
+  <br>Regístrate ahora y entra en un espacio donde tus necesidades se convierten en prioridad,
+   donde la excelencia es la norma, y donde tus sueños pueden hacerse realidad.
+   <br>
+   ¡Tu futuro está a un clic de distancia! <br>
+   Regístrate y descubre todo lo que tenemos para ti."</h6>
 
 
 <form class="formulario" th:action="@{/registro}" method="POST">
-    <div class="form-group my-3">
-      <h3 class="card-title">Registrate!</h3>
-    </div>
-    <div class="form-group my-3">
+    <div class="regUsuario">
+      <h3 class="card-title">Registro Usuario</h3>
+
       <input
         type="text"
         class="form-control"
         name="nombre"
         placeholder="NOMBRE"
         th:value="${nombre}"
-    >
-    </div>
-    <div class="form-group my-3">
+    ><br>
+
       <input
         type="email"
         class="form-control"
         name="email"
         placeholder="EMAIL"
         th:value="${email}"
-    >
-    </div>
+    ><br>
 
-    <div class="form-group my-3">
       <input
         type="password"
         class="form-control"
         name="password"
         placeholder="CONTRASEÑA"
         th:value="${password}"
-    >
-    </div>
-    <div class="form-group my-3">
+    ><br>
+
       <input
         type="password"
         class="form-control"
         name="password2"
         placeholder="REPETIR CONTRASEÑA"
         th:value="${password2}"
-    >
-    </div>
-    <div class="form-group my-3">
+    ><br>
+
+
       <input
         type="number"
         class="form-control"
         name="telefono"
         placeholder="telefono"
         th:value="${telefono}"
-    >
-    </div>
-    <div class="form-group my-3">
+    ><br>
+
       <input
         type="text"
         class="form-control"
         name="direccion"
         placeholder="Direccion"
         th:value="${direccion}"
-    >
-    </div>
+    ><br>
+
 
     <button type="submit" class="btn btn-primary mt-3 botones">
       Registrarme
     </button>
+</div>
   </form>
 <!--
     <form class="formulario" th:action="@{/registro}" method="POST">
@@ -136,15 +136,13 @@
     <section class="text-center container">
         <div class="row mt-3">
             <div class="divVolver">
-                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                <a th:href="@{/login}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
             </div>
         </div>
       </section>
      <!--- <div>
         <a class="arriba" href="/">Ir arriba</a>
       </div>-->
-
-      <script src="js/main.js"></script>
 
       <footer class="pie">
         <div class="texto-pie">

@@ -10,31 +10,31 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-          <a class="navbar-brand" href="@{/}">
-            <img class="logo" src="logos/casacasa.png" alt="">
+          <a class="navbar-brand">
+              <img src="logos/casacasa.png"  width="30" height="30" class="d-inline-block align-top">
           </a>
-          <a class="navbar-brand" href="#"></a>
+          <a class="navbar-brand" href="logos/casacasa.png"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" href="/">Inicio</a>
-        <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-        <a class="nav-link" href="/registrar">RegUsuario</a>
-        <a class="nav-link" href="/proveedor/registrar">RegProv</a>
-        <a class="nav-link" href="/login">Login</a>
-    </div>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="/">Inicio</a>
+              <a class="nav-link" href="/proveedor/buscador">Buscar</a>
+             <!-- <a class="nav-link" href="/registrar">RegUsuario</a>
+              <a class="nav-link" href="/proveedor/registrar">RegProv</a>-->
+              <a class="nav-link" href="/login">Login</a>
           </div>
-      </div>
-  </nav>
+            </div>
+        </div>
+    </nav>
 
 <h1>ProSkillFinder</h1>
-<h1>Registro de Proveedor</h1>
+<h1>R</h1>
 <div class="container3">
-
+  <h1>Registro de Proveedor</h1>
   <form action="/proveedor/registro" method="POST">
     <label class="textofp" for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required><br>
@@ -81,7 +81,7 @@
   <section class="text-center container">
     <div class="row mt-3">
         <div class="divVolver">
-            <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+            <a th:href="@{/login}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
         </div>
     </div>
   </section>
