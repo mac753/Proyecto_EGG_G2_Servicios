@@ -87,6 +87,20 @@ public class OrdenTrabajoServicio {
         }
     }
     
+    @Transactional //El usuario califica la orden del servicio
+    public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario,String comentario,Integer puntaje) {
+        Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
+
+        if (respuesta.isPresent()) {
+
+            OrdenTrabajo ordentrabajo = respuesta.get();
+            ordentrabajo.setComentario(comentario);
+            ordentrabajo.setPuntaje(puntaje);
+            //ordentrabajo.getProveedor().setPuntaje
+            otRepositorio.save(ordentrabajo);
+        }
+    }
+    
     public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList();
