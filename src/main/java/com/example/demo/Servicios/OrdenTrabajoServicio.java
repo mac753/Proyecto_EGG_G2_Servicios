@@ -50,7 +50,7 @@ public class OrdenTrabajoServicio {
 //    }
     
     
-    @Transactional //El usuario acepta la cotizacion e iniciar la orden
+    @Transactional //El usuario acepta la cotizacion e inicia la orden
     public void aceptarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
@@ -58,6 +58,19 @@ public class OrdenTrabajoServicio {
 
             OrdenTrabajo ordentrabajo = respuesta.get();
             ordentrabajo.setEstadOrden(EstadoOrdenTrabajo.ACTIVA);
+            otRepositorio.save(ordentrabajo);
+        }
+    }
+    
+    
+    @Transactional //El usuario cancela orden de servicio
+    public void cancelarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
+        Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
+
+        if (respuesta.isPresent()) {
+
+            OrdenTrabajo ordentrabajo = respuesta.get();
+            ordentrabajo.setEstadOrden(EstadoOrdenTrabajo.CANCELADA);
             otRepositorio.save(ordentrabajo);
         }
     }
@@ -77,7 +90,7 @@ public class OrdenTrabajoServicio {
     public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList();
-        ordenesTrabajo = otRepositorio.findAll();
+        ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
         return ordenesTrabajo;   }
 
     
