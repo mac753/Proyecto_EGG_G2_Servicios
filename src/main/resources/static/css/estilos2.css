@@ -135,10 +135,53 @@ h3{
     color:red;
   }
   
+/* conocenos*/
 
+  
+.titulo1{
+  margin-top: 5%;
+  font-size: 28px;
+  color:#000;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+
+}
+.titulo2{
+  font-size: 23px;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+.subtit{
+  font-size: 20px;
+  color:#000;
+  margin-left: 15%;
+  margin-right: 15%;
+  text-decoration: underline black;
+
+}
+
+.textcono{
+  font-size: 18px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.textfin{
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+}
 
 
 /*login*/
+
 .container2 {
     display: flex;
     justify-content: center;
@@ -246,10 +289,11 @@ h3{
 
   input, select, textarea{
     width: 100%;
-
   }
 
-
+  .container3 button{
+    margin-left: 35%;
+  }
 
 /*buscar proveedor*/
 .botonBus{
