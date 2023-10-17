@@ -55,6 +55,7 @@
               <h1 class="text-center">Nuestros Servicios</h1>
           </div>
       </div>
+    </div>
       <!--ver si esta bien conectado a la base de datos el form-->
       <div class="row justify-content-center">
         <form action="/proveedor/buscador" method="get">
@@ -79,7 +80,18 @@
             <button type="submit" class="botonBus">Buscar</button>
           </form>
       </div>
-  </div>
+      <div id="resultado">
+        Mostrar los resultados de la búsqueda
+       <ul>
+           <th:block th:each="proveedor : ${proveedores}">
+               <li>
+                   <span th:text="${proveedor.nombre}"></span> -
+                   <span th:text="${proveedor.direccion}"></span> -
+                   <span th:text="${proveedor.honorarioHora}"></span>
+               </li>
+           </th:block>
+       </ul>
+   </div>
 
   <br>
 

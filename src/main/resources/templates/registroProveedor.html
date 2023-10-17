@@ -32,9 +32,15 @@
     </nav>
 
 <h1>ProSkillFinder</h1>
-<h1>R</h1>
+
+<h6 class="textRegU">¿Eres un proveedor de servicios? <br>
+  ¿Quieres llegar a más clientes y aumentar tus oportunidades de negocio?<br>
+  Entra en nuestro portal de servicios y regístrate como proveedor <br>
+  Es sencillo. Completa tu perfil y selecciona tu categoría de servicios. <br>
+</h6>
+
 <div class="container3">
-  <h1>Registro de Proveedor</h1>
+  <h5>Registro de Proveedor</h5>
   <form action="/proveedor/registro" method="POST">
     <label class="textofp" for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required><br>
@@ -73,8 +79,11 @@
 
     <label for="presentacion" id="pres">presentacion:</label>
     <textarea id="presentacion" name="presentacion" rows="4" required></textarea><br>
-
-    <button class="botonp" type="submit" id="botonr">Registrar Proveedor</button>
+    <div class="botoncentrado">
+    <button type="submit" id="botonrp" class="btn btn-primary mt-3 botones">
+      Registrarme
+    </button>
+  </div>
   </form>
 
 </div>
