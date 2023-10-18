@@ -1,12 +1,11 @@
 
 package com.example.demo.Servicios;
 
-import com.example.demo.Excepciones.MiException;
+
 import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.OrdenTrabajo;
-import com.example.demo.entidades.Usuario;
 import com.example.demo.enume.EstadoOrdenTrabajo;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
@@ -27,27 +26,26 @@ public class OrdenTrabajoServicio {
  @Autowired
     proveedorRepositorio proveedorRepositorio;
 
-    @Transactional
-    public void crearOt(Long idProveedor, Long idUsuario) {
+    @Transactional// crear orden de trabajo en estado cotizando para el contacto.
+    public void crearOt(Long idProveedor, Long idUsuario, String comentario) {
         OrdenTrabajo ordentrabajo = new OrdenTrabajo();  
         ordentrabajo.setProveedor(proveedorRepositorio.findById(idProveedor).get());
         ordentrabajo.setUsuario(usuarioRepositorio.findById(idUsuario).get());
         ordentrabajo.setEstadOrden(EstadoOrdenTrabajo.COTIZANDO);
+        ordentrabajo.setComentario(comentario);// necesito pintar zzzz
         otRepositorio.save(ordentrabajo);
     }
 
-//    @Transactional ---- Servicio para asignar el valor por parte del proveedor
-//    public void asignarValor(Long idOrdenTrabajo, Long idProveedor, double valor) {
-//        Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
-//
-//        if (respuesta.isPresent()) {
-//
-//            OrdenTrabajo ordentrabajo = respuesta.get();
-//            ordentrabajo;
-//
-//            otRepositorio.save(ordentrabajo);
-//        }
-//    }
+    @Transactional //Servicio para asignar el valor por parte del proveedor
+    public void asignarValor(Long idOrdenTrabajo, Long idProveedor, double valor) {
+        Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
+
+        if (respuesta.isPresent()) {
+            OrdenTrabajo ordentrabajo = respuesta.get();
+            ordentrabajo.setValor(0);
+            otRepositorio.save(ordentrabajo);
+        }
+    }
     
     
     @Transactional //El usuario acepta la cotizacion e inicia la orden
@@ -90,7 +88,7 @@ public class OrdenTrabajoServicio {
     @Transactional //El usuario califica la orden del servicio
     public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario,String comentario,Integer puntaje) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
-
+        // agregar condicional si se califica solo si está finalizada
         if (respuesta.isPresent()) {
 
             OrdenTrabajo ordentrabajo = respuesta.get();
