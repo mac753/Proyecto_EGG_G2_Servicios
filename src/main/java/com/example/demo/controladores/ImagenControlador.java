@@ -1,4 +1,4 @@
-package com.example.demo.Controladores;
+package com.example.demo.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
