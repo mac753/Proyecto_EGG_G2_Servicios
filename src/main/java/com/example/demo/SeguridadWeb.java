@@ -31,16 +31,16 @@ public class SeguridadWeb {
                 http
                                 .csrf((csrf) -> csrf.disable())
                                 .authorizeHttpRequests((requests) -> requests
-                                                // .requestMatchers("/usuario").hasRole("USER")
-                                                // .requestMatchers("/admin/**").hasRole("ADMIN")
+                                                .requestMatchers("/usuario").hasRole("USER")
+                                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .requestMatchers("/css/*", "/js/*", "/img/*", "/**")
                                                 .permitAll())
                                 .formLogin((form) -> form
                                                 .loginPage("/login")
                                                 .loginProcessingUrl("/logincheck")
-                                                .usernameParameter("nombreUsuario")
+                                                .usernameParameter("email")
                                                 .passwordParameter("password")
-                                                .defaultSuccessUrl("/")
+                                                .defaultSuccessUrl("/inicio")
                                                 .permitAll())
                                 .logout((logout) -> logout
                                                 .logoutUrl("/logout")
