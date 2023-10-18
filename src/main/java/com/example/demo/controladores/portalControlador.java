@@ -1,4 +1,4 @@
-package com.example.demo.Controladores;
+package com.example.demo.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -60,7 +60,7 @@ public class portalControlador {
     @GetMapping("/inicio")
     public String inicio() {
 
-        return "vistaUsuario.html";
+        return "buscador.html";
     }
 
     @GetMapping("/conocenos")
