@@ -60,7 +60,7 @@ public class portalControlador {
     @GetMapping("/inicio")
     public String inicio() {
 
-        return "vistaUsuario.html";
+        return "buscador.html";
     }
 
     @GetMapping("/conocenos")
@@ -68,7 +68,6 @@ public class portalControlador {
 
         return "conocenos.html";
     }
-
 
 
 }

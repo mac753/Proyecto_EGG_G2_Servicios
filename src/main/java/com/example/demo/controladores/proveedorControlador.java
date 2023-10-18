@@ -1,4 +1,4 @@
-package com.example.demo.Controladores;
+package com.example.demo.controladores;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class proveedorControlador {
         try {
             proveedorServicio.crearProveedor(nombre, email, password, password2, telefono, direccion,
                     honorarioHoras, rubro, presentacion);
-            modelo.put("exito", "Usuario registrado correcamente !");
+            modelo.put("exito", "Usuario registrado correctamente !");
 
             String rubroSeleccionado = rubro;
             if (rubroSeleccionado.equals("Otro")) {
@@ -48,8 +48,6 @@ public class proveedorControlador {
             }
             return "index.html";
         } catch (MiException ex) {
-            // Logger.getLogger(proveedorControlador.class.getName()).log(Level.SEVERE,
-            // null, ex);
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
@@ -57,28 +55,14 @@ public class proveedorControlador {
             return "registroProveedor.html";
 
         }
-
-        // return "redirect:/";
     }
 
-    @GetMapping("/")
-    public String index() {
-
-        return "index.html";
-    }
-
-    @GetMapping("/buscador")
-    public String buscarProveedorPorRubro() {
-        return "Buscador.html";
-    }
-
-    @PostMapping(value = "/buscador") // localhost:8080/proveedor/buscarProveedorPorRubro -> busca al
-                                      // proveedor
-                                      // por rubro
+    @GetMapping("/buscarProveedorPorRubro") // localhost:8080/proveedor/buscarProveedorPorRubro -> busca al proveedor
+    // por rubro
     public String buscarProveedorPorRubro(@RequestParam String rubro, ModelMap model) {
         List<Proveedor> proveedores = proveedorRepositorio.buscarProveedorPorRubro(rubro);
         model.addAttribute("proveedores", proveedores);
-        return "Buscador.html";
+        return "Buscador";
     }
 
 }
