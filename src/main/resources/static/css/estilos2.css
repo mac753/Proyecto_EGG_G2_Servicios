@@ -146,7 +146,7 @@ h3{
     height: 100vh;
     
   }
-  
+    
   
   .left-side {
     border-radius: 10px;
@@ -154,19 +154,25 @@ h3{
     padding: 20px;
     background-color: #000;
     margin-right: 10px;
+           
   }
-  
+     
   .right-side {
+    height: 322px;
     border-radius: 10px;
     width: 50%;
     padding: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 6px;
     background-color: #000;
     margin-left: 10px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+   
+  }
+  .right-side form{
+    margin-top: 5%;
   }
   .card-title{
     color: white;
@@ -174,7 +180,7 @@ h3{
   
   #botonr {
     display:flex;
-    margin: 10px;
+    margin: 100px;
     border-radius: 5px;
     background:linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
   }
@@ -186,21 +192,25 @@ h3{
     background-color: #000;
     padding: 20px;
     border: 1px solid #000;
+    margin-left: 25%;
   }
   
   h4 {
     font-size: 18px;
     margin-bottom: 10px;
     color: white;
+    
   }
   
   button {
     display: block;
     margin: 10px 0;
+    
   }
   
   .btn {
     background:linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+   
   }
 
   .textobox{
@@ -231,8 +241,12 @@ h3{
   .container3 h5 {
     text-align: center;
     margin-bottom: 20px; 
-    color:white;
+    color: white;
   }
+  .container3 button{
+    margin-left: 35%;
+  }
+  
 
   #pres{
     color: white;
@@ -273,6 +287,10 @@ h3{
   margin-top: 4%;
   text-align: justify;
   background-color: #000;
+  margin: 0 auto; 
+  padding: 20px;
+
+ 
 }
 .regUsuario h1{
   margin-top: 10%;
@@ -282,7 +300,7 @@ h3{
 }
 
 .regUsuario button{
-  margin-left: 35%;
+  margin-left: 40%;
   margin-bottom: 5%;
   
 }
