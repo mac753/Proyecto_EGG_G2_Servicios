@@ -18,6 +18,7 @@ public class OrdenTrabajo {
     private Long id;
     private String rubro;
     private Integer puntaje;
+    private double valor;
 
     @Enumerated(EnumType.STRING)
     private EstadoOrdenTrabajo estadOrden;
@@ -32,18 +33,27 @@ public class OrdenTrabajo {
 
 
 
-    public OrdenTrabajo(Long id, String rubro, Integer puntaje, EstadoOrdenTrabajo estadOrden, Proovedor proveedor,
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor,EstadoOrdenTrabajo estadOrden, Proovedor proveedor,
             Usuario usuario, String comentario) {
         this.id = id;
         this.rubro = rubro;
         this.puntaje = puntaje;
+        this.valor = valor;
         this.estadOrden = estadOrden;
         this.proveedor = proveedor;
         this.usuario = usuario;
         this.comentario = comentario;
     }
 
+    public double getValor() {
+        return valor;
+    }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
+    
 
     public Long getId() {
         return id;
