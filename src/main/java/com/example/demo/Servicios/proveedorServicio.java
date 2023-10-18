@@ -1,5 +1,6 @@
 package com.example.demo.Servicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
+import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,10 +32,14 @@ public class proveedorServicio implements UserDetailsService {
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
 
+    @Autowired
+    ImagenServicio imagenServicio;
+
     @Transactional
-    public void crearProveedor(String nombre, String email, String password, String password2, Long telefono,
+    public void crearProveedor(MultipartFile archivo, String nombre, String email, String password, String password2,
+            Long telefono,
             String direccion, float honorarioHoras, String rubro, String presentacion)
-            throws MiException {
+            throws MiException, IOException {
 
         validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion);
         Proveedor proveedor = new Proveedor();
@@ -46,6 +53,9 @@ public class proveedorServicio implements UserDetailsService {
         proveedor.setHonorarioHora(honorarioHoras);
         proveedor.setRubro(rubro);
         proveedor.setPresentacion(presentacion);
+
+        Imagen imagen = imagenServicio.guardarImagenProveedor(archivo);
+        proveedor.setImagen(imagen);
 
         proveedorRepositorio.save(proveedor);
     }
@@ -126,6 +136,10 @@ public class proveedorServicio implements UserDetailsService {
             throw new MiException("La presentacion no puede estar vacia");
         }
 
+    }
+
+    public Proveedor BuscarPorId(String id) {
+        return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
 
     @Override

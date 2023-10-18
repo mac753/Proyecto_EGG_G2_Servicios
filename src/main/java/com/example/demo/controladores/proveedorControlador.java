@@ -1,5 +1,6 @@
 package com.example.demo.Controladores;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
@@ -35,10 +37,10 @@ public class proveedorControlador {
     public String registro(String nombre, String email, @RequestParam String password,
             Long telefono, String password2,
             String direccion, float honorarioHoras, String rubro, String presentacion, ModelMap modelo,
-            String rubroOtro) {
+            String rubroOtro, MultipartFile archivo) throws IOException {
 
         try {
-            proveedorServicio.crearProveedor(nombre, email, password, password2, telefono, direccion,
+            proveedorServicio.crearProveedor(archivo, nombre, email, password, password2, telefono, direccion,
                     honorarioHoras, rubro, presentacion);
             modelo.put("exito", "Usuario registrado correcamente !");
 

@@ -63,4 +63,9 @@ public class portalControlador {
         return "vistaUsuario.html";
     }
 
+    @GetMapping("/conocenos")
+    public String conocenos() {
+
+        return "conocenos.html";
+    }
 }
