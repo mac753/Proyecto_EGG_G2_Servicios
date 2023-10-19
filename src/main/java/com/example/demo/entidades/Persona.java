@@ -3,6 +3,8 @@ package com.example.demo.entidades;
 import com.example.demo.enume.Rol;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +17,7 @@ public abstract class Persona {
     protected Long id;
     protected String nombre;
     protected String email;
+    @Enumerated(EnumType.STRING)
     protected Rol rol;
     protected String password;
     protected Long telefono;

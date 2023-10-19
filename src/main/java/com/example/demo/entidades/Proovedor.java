@@ -1,34 +1,31 @@
 package com.example.demo.entidades;
 
+import java.util.List;
+
+import com.example.demo.enume.Rol;
+
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Proovedor extends Persona {
 
-    private String comentarios;
     private String direccion;
     private float honorarioHora;
-    private Integer cantidadContactos;
+    private String rubro;
+    private String presentacion;
 
     public Proovedor() {
 
     }
 
-    public Proovedor(String comentarios, String direccion, float honorarioHora, Integer cantidadContactos) {
-
+    public Proovedor(String nombre, String email, Rol rol, String password, Long telefono, String direccion,
+            float honorarioHora, String rubro, String presentacion) {
         super();
-        this.comentarios = comentarios;
         this.direccion = direccion;
         this.honorarioHora = honorarioHora;
-        this.cantidadContactos = cantidadContactos;
-    }
-
-    public String getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+        this.rubro = rubro;
+        this.presentacion = presentacion;
     }
 
     public String getDireccion() {
@@ -47,18 +44,26 @@ public class Proovedor extends Persona {
         this.honorarioHora = honorarioHora;
     }
 
-    public Integer getCantidadContactos() {
-        return cantidadContactos;
+    public String getRubro() {
+        return rubro;
     }
 
-    public void setCantidadContactos(Integer cantidadContactos) {
-        this.cantidadContactos = cantidadContactos;
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
+
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
     }
 
     @Override
     public String toString() {
-        return "Proovedor [comentarios=" + comentarios + ", direccion=" + direccion + ", honorarioHora=" + honorarioHora
-                + ", cantidadContactos=" + cantidadContactos + "]";
+        return "Proovedor [direccion=" + direccion + ", honorarioHora=" + honorarioHora + ", rubro=" + rubro
+                + ", presentacion=" + presentacion + "]";
     }
 
 }

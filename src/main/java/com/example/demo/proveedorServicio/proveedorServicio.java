@@ -3,59 +3,77 @@ package com.example.demo.proveedorServicio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.entidades.Proovedor;
+import com.example.demo.entidades.Usuario;
 import com.example.demo.enume.Rol;
 import com.example.demo.personaRepo.proveedorRepositorio;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-public class proveedorServicio {
+public class proveedorServicio implements UserDetailsService {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
 
     @Transactional
-    public void crearProveedor(String nombre, String email, String password, Long telefono,
-            String comentarios, String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
+    public void crearProveedor(String nombre, String email, String password, String password2, Long telefono,
+            String direccion, float honorarioHoras, String rubro, String presentacion)
+            throws MiException {
 
-        validar(nombre, email, password, telefono, comentarios, direccion, honorarioHoras, cantidadContactos);
+        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion);
         Proovedor proveedor = new Proovedor();
-        // proveedor.setId(id);
+
         proveedor.setNombre(nombre);
         proveedor.setEmail(email);
         proveedor.setRol(Rol.PROVEEDOR);
-        proveedor.setPassword(password);
+        proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setTelefono(telefono);
-        proveedor.setComentarios(comentarios);
         proveedor.setDireccion(direccion);
         proveedor.setHonorarioHora(honorarioHoras);
-        proveedor.setCantidadContactos(cantidadContactos);
+        proveedor.setRubro(rubro);
+        proveedor.setPresentacion(presentacion);
 
         proveedorRepositorio.save(proveedor);
     }
 
     public List<Proovedor> listarProveedor() {
 
-        List<Proovedor> proveedores = new ArrayList();
+        List<Proovedor> proveedores = new ArrayList<Proovedor>();
 
         proveedores = proveedorRepositorio.findAll();
+        return proveedores;
+    }
+
+    public List<Proovedor> listarProveedorPorRubro(String rubro) {
+
+        List<Proovedor> proveedores = new ArrayList<Proovedor>();
+        proveedores = (List<Proovedor>) proveedorRepositorio.buscarProveedorPorRubro(rubro);
         return proveedores;
     }
 
     /*
      * public void modificarProveedor(String nombre, String email, String password,
      * Integer telefono,
-     * String comentarios, String direccion, float honorarioHoras, Integer
-     * cantidadContactos) throws MiException {
+     * String direccion, float honorarioHoras,
+     * ) throws MiException {
      * 
      * validar(nombre, email, password, telefono, comentarios, direccion,
-     * honorarioHoras, cantidadContactos);
+     * honorarioHoras);
      * Optional<Proovedor> respuesta = proveedorRepositorio.findById(id);
      * 
      * if (respuesta.isPresent()) {
@@ -76,8 +94,9 @@ public class proveedorServicio {
      * }
      * }
      */
-    private void validar(String nombre, String email, String password, Long telefono,
-            String comentarios, String direccion, float honorarioHoras, Integer cantidadContactos) throws MiException {
+    private void validar(String nombre, String email, String password, String password2, Long telefono,
+            String direccion, float honorarioHoras, String rubro, String presentacion)
+            throws MiException {
 
         if (nombre.isEmpty()) {
             throw new MiException("El nombre no puede estar vacio");
@@ -88,21 +107,47 @@ public class proveedorServicio {
         if (password.isEmpty()) {
             throw new MiException("El password no puede estar vacio");
         }
+        if (!password.equals(password2)) {
+            throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        }
         if (telefono == null) {
             throw new MiException("El telfono no puede ser nulo");
         }
-        if (comentarios.isEmpty()) {
-            throw new MiException("El comentario no puede estar vacio");
-        }
+
         if (direccion.isEmpty()) {
             throw new MiException("La direccion no puede estar vacia");
         }
         if (honorarioHoras < 0) {
             throw new MiException("debes actualizar a un honorario por hora valido");
         }
-        if (cantidadContactos == null) {
-            throw new MiException("Ingrese la cantidad de contactos");
+        if (rubro.isEmpty()) {
+            throw new MiException("El rubro no puede estar vacia");
+        }
+        if (presentacion.isEmpty()) {
+            throw new MiException("La presentacion no puede estar vacia");
         }
 
     }
+
+    @Override
+      public UserDetails loadUserByUsername(String email) throws
+      UsernameNotFoundException {
+      Proovedor proveedor = proveedorRepositorio.buscarProveedorPorEmail(email);
+      if (proveedor != null) {
+      List<GrantedAuthority> permisos = new ArrayList();
+      GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" +
+      proveedor.getRol().toString());
+      permisos.add(p);
+       ServletRequestAttributes attr = (ServletRequestAttributes)
+       RequestContextHolder.currentRequestAttributes();
+       HttpSession session = attr.getRequest().getSession(true);
+       session.setAttribute("proveedorsession", proveedor);
+      // return (UserDetails) new User(usuario.getEmail(), usuario.getPassword(),
+      // permisos);
+      return new User(proveedor.getEmail(), proveedor.getPassword(), permisos);
+      } else {
+      return null;
+      }
+      }
+
 }
