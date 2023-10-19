@@ -2,11 +2,11 @@
 package com.example.demo.Servicios;
 
 
+import com.example.demo.Enumeraciones.EstadoOrdenTrabajo;
 import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.OrdenTrabajo;
-import com.example.demo.enume.EstadoOrdenTrabajo;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;

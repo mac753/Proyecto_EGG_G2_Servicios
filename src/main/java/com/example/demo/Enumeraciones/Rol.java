@@ -1,4 +1,4 @@
-package com.example.demo.enume;
+package com.example.demo.Enumeraciones;
 
 public enum Rol {
 
