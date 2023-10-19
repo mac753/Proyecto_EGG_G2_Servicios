@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entidades.Persona;
 
 @Repository
-public interface personaRepositorio extends JpaRepository<Persona, Long> {
+public interface personaRepositorio extends JpaRepository<Persona, String> {
 
-    @Query("SELECT u FROM Persona u WHERE u.nombre =:nombre")
-    public Persona buscarPorNombrePersona(@Param("nombre") String nombre);
+    @Query("SELECT u FROM Persona u WHERE u.email =:email")
+    public Persona buscarPersonarPorEmail(@Param("email") String email);
+
 }

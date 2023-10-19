@@ -67,4 +67,10 @@ public class proveedorControlador {
         return "Buscador";
     }
 
+    @GetMapping("/vistaProveedor")
+    public String panelProveedor() {
+
+        return "vistaProveedor.html";
+    }
+
 }

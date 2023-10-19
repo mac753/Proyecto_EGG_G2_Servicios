@@ -26,7 +26,7 @@ public class ImagenControlador {
         byte[] imagen = proveedor.getImagen().getContenido();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentType(MediaType.ALL);
 
         return new ResponseEntity<byte[]>(imagen, headers, HttpStatus.OK);
 

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Servicios.UsuarioServicio;
+import com.example.demo.entidades.Persona;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
@@ -58,9 +61,24 @@ public class portalControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_PROVEEDOR')")
     @GetMapping("/inicio")
+    public String inicio(HttpSession session) {
+
+        Persona logueado = (Persona) session.getAttribute("personasession");
+
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin/dashboard";
+        }
+        if (logueado.getRol().toString().equals("PROVEEDOR")) {
+            return "redirect:/proveedor/panelProveedor";
+        }
+        return "Buscador.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_PROVEEDOR')")
+    @GetMapping("/buscador")
     public String inicio() {
 
-        return "buscador.html";
+        return "Buscador.html";
     }
 
     @GetMapping("/conocenos")
