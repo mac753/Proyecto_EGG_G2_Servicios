@@ -127,6 +127,11 @@ public class proveedorServicio implements UserDetailsService {
         }
 
     }
+    
+    public Proveedor buscarPorid(Long id){
+        Proveedor proveedor =proveedorRepositorio.findById(id).get();
+        return proveedor;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

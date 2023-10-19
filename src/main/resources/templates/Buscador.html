@@ -68,6 +68,7 @@
                         <p class="card-text" th:text="${proveedor.direccion}">direccion:</p>
                         <p class="card-text" th:text="${proveedor.honorarioHora}">honorarios por hora:</p>
                         <p class="card-text">Cantidad de estrellas: 5</p>
+                        <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary" style="margin:10px" >Contactar</a>
                     </div>
                 </div>
             </div>
