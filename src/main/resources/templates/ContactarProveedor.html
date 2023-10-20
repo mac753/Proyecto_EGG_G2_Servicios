@@ -11,9 +11,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
               
-        
-         
-                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre</li>
+                             <form th:action="@{/orden/crearOrden}"method="POST">
+                                    
+                                 <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre</li>
                             <li th:text="${proveedor.nombre}"></li>
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Direccion</li>
                             <li th:text="${proveedor.direccion}"></li>
@@ -24,10 +24,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Presentacion</li>
                             <li th:text="${proveedor.presentacion}"></li>
                             <p> Ingresa una descripcion completa del trabajo que requieres</p>
-                                
-                            <input type="text"> </input>  
+                            <input type="text" class="form-control p-4" placeholder="comentario" name="comentario" required="required" />
+                            <input hidden th:value="${proveedor.id}" name="idproveedor">   
                             
-                            <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary" style="margin:10px" >Solicitar cotizacion</a>
+                                <button class="btn btn-primary btn-block py-3" type="submit">Enviarr</button>
+                            
+                            </form>
+         
+                            
                             
                             
                            

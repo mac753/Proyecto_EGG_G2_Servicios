@@ -4,7 +4,9 @@ package com.example.demo.controladores;
 import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.OrdenTrabajo;
+import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +35,11 @@ public String contactar(@PathVariable Long idproveedor, ModelMap modelo){
 
 
 @PostMapping("/crearOrden")    
-public String crearOrden(@RequestParam Long idusuario,@RequestParam Long idproveedor,@RequestParam String comentario){
+public String crearOrden(HttpSession session,@RequestParam Long idproveedor,@RequestParam String comentario){
+    Persona logueado = (Persona) session.getAttribute("personasession");
+    Long idusuario= logueado.getId();
     ots.crearOt(idproveedor, idusuario, comentario);    
-    return "inicio.html";
+    return "MisOrdenes.html";
 }
 
 @GetMapping("/ordenes")

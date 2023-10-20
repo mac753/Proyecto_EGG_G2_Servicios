@@ -19,6 +19,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.personaRepositorio;
+import com.example.demo.entidades.Persona;
 
 import com.example.demo.entidades.Usuario;
 
@@ -31,6 +33,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    
+    @Autowired
+    private personaRepositorio personaRepositorio;
 
     @Transactional
     public void crearUsuario(String nombre, String email, String password, String password2, Long telefono,
@@ -77,21 +82,22 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.BuscarUsuarioPorEmail(email);
-        if (usuario != null) {
+        Persona persona = personaRepositorio.buscarPorEmail(email);
+        if (persona !=null) {
             List<GrantedAuthority> permisos = new ArrayList();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+persona.getRol().toString());
             permisos.add(p);
-            // ServletRequestAttributes attr = (ServletRequestAttributes)
-            // RequestContextHolder.currentRequestAttributes();
-            // HttpSession session = attr.getRequest().getSession(true);
-            // session.setAttribute("usuariosession", usuario);
-            // return (UserDetails) new User(usuario.getEmail(), usuario.getPassword(),
-            // permisos);
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-        } else {
+            
+            ServletRequestAttributes attr=(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("personasession", persona);
+            
+            
+            return new User (persona.getEmail(),persona.getPassword(),permisos);
+        }else{
             return null;
         }
-    }
+        
+        }
 
 }
