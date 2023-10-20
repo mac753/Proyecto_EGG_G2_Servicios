@@ -69,7 +69,7 @@ public class portalControlador {
             return "redirect:/admin/dashboard";
         }
         if (logueado.getRol().toString().equals("PROVEEDOR")) {
-            return "redirect:/proveedor/panelProveedor";
+            return "redirect:/proveedor/vistaProveedor";
         }
         return "Buscador.html";
     }

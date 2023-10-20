@@ -59,9 +59,14 @@ public class proveedorControlador {
         }
     }
 
-    @GetMapping("/buscarProveedorPorRubro") // localhost:8080/proveedor/buscarProveedorPorRubro -> busca al proveedor
+    @GetMapping("/buscador")
+    public String buscador() {
+        return "Buscador";
+    }
+
+    @PostMapping("/buscador") // localhost:8080/proveedor/buscarProveedorPorRubro -> busca al proveedor
     // por rubro
-    public String buscarProveedorPorRubro(@RequestParam String rubro, ModelMap model) {
+    public String buscador(@RequestParam String rubro, ModelMap model) {
         List<Proveedor> proveedores = proveedorRepositorio.buscarProveedorPorRubro(rubro);
         model.addAttribute("proveedores", proveedores);
         return "Buscador";
@@ -70,7 +75,7 @@ public class proveedorControlador {
     @GetMapping("/vistaProveedor")
     public String panelProveedor() {
 
-        return "vistaProveedor.html";
+        return "panelProveedor.html";
     }
 
 }

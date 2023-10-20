@@ -13,7 +13,7 @@ public class Imagen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String mime;
     private String nombre;
 
@@ -24,18 +24,18 @@ public class Imagen {
     public Imagen() {
     }
 
-    public Imagen(String id, String mime, String nombre, byte[] contenido) {
+    public Imagen(Long id, String mime, String nombre, byte[] contenido) {
         this.id = id;
         this.mime = mime;
         this.nombre = nombre;
         this.contenido = contenido;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
