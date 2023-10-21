@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Repositorio.UsuarioRepositorio;
+import com.example.demo.Repositorio.personaRepositorio;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.entidades.Persona;
 
 import com.example.demo.entidades.Usuario;
-
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -32,9 +34,12 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private personaRepositorio personaRepositorio;
+
     @Transactional
     public void crearUsuario(String nombre, String email, String password, String password2, Long telefono,
-                             String direccion)
+            String direccion)
             throws MiException {
         validar(nombre, email, password, password2, telefono, direccion);
 
@@ -51,7 +56,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     private void validar(String nombre, String email, String password, String password2, Long telefono,
-                         String direccion)
+            String direccion)
             throws MiException {
 
         if (nombre.isEmpty()) {
@@ -77,21 +82,19 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.BuscarUsuarioPorEmail(email);
-        if (usuario != null) {
-            List<GrantedAuthority> permisos = new ArrayList();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
+        if (persona != null) {
+            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
             permisos.add(p);
-            // ServletRequestAttributes attr = (ServletRequestAttributes)
-            // RequestContextHolder.currentRequestAttributes();
-            // HttpSession session = attr.getRequest().getSession(true);
-            // session.setAttribute("usuariosession", usuario);
-            // return (UserDetails) new User(usuario.getEmail(), usuario.getPassword(),
-            // permisos);
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("personasession", persona);
+            return new User(persona.getEmail(), persona.getPassword(), permisos);
         } else {
             return null;
         }
+
     }
 
 }

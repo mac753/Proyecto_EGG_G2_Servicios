@@ -31,7 +31,6 @@ public class SeguridadWeb {
                 http
                                 .csrf((csrf) -> csrf.disable())
                                 .authorizeHttpRequests((requests) -> requests
-                                                .requestMatchers("/usuario").hasRole("USER")
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .requestMatchers("/css/*", "/js/*", "/img/*", "/**")
                                                 .permitAll())
