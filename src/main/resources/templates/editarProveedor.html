@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" >
+<html lang="es" xmlns:th="http://www.t<input type=">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,37 +10,19 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand">
-            <img src="logos/casacasa.png" width="30" height="30" class="d-inline-block align-top">
-        </a>
-        <a class="navbar-brand" href="logos/casacasa.png"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="/">Inicio</a>
-                <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-                <!-- <a class="nav-link" href="/registrar">RegUsuario</a>
-            <a class="nav-link" href="/proveedor/registrar">RegProv</a> -->
-                <a class="nav-link" href="/login">Login</a>
-            </div>
-        </div>
-    </div>
-</nav>
+    <nav th:replace="fragments/navbar::nav"></nav>
+
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="text-center">Bienvenido a tu panel de proveedor</h1>
+            <h1 class="text-center">Edita tus datos de perfil</h1>
         </div>
     </div>
 </div>
 
 <ul>
-    <th:block th:each="proveedor : ${proveedores}">
+    <th:block th:each="proveedor: ${proveedores}">
         <div class="col-md-4">
             <div class="card" style="background-color: #000; width: 300px;">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="card-img-top" alt="Proveedor 1">
@@ -55,29 +37,41 @@
     </th:block>
 </ul>
 
-<div class="container">
-    <div class="card" class="card" style="background-color: #000; width: 300px; color: white;">
-        <div class="card-header">Orden De Trabajo</div>
-        <div class="card-body">
-            <h5 class="card-title">Texto enviado por el usuario</h5>
-            <p class="card-text">Este es el texto que el usuario envió el usuario que tiene la orden de trabajo.</p>
-            <input type="text" class="form-control" placeholder="Ingrese el monto">
+<div class="col-md-4">
+    <div class="card" style="background-color: #000; width: 400px;">
+        <div class="formulario-flotante" id="formulario-editar">
+            <h5 style="color: white;">Editar datos del proveedor</h5>
 
+            <form th:action="@{/editarProveedor/__${proveedor.id}__}" method="POST">
+                <div class="mb-3">
+                    <label style="color: white;" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" th:value ="${proveedor.nombre}" placeholder="nombre a editar">
+                </div>
+                <div class="mb-3">
+                    <label style="color: white;" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" rows="3" name="direccion" th:value ="${proveedor.direccion}" placeholder="direccion a editar">
+                </div>
+                <div class="mb-3">
+                    <label style="color: white;" class="form-label">Numero de telefono</label>
+                    <input type="text" class="form-control" rows="3" name="numero" th:value ="${proveedor.numero}" placeholder="numero a editar">
+                </div>
+                <div class="mb-3">
+                    <label style="color: white;" class="form-label">Honorarios por hora</label>
+                    <input type="text" class="form-control" rows="3" name="honorarioHora" th:value ="${proveedor.honorarioHora}" placeholder="honorarios a editar">
+                </div>
+                <div class="mb-3">
+                    <label style="color: white;" class="form-label">Foto de perfil</label>
+                    <input style="color: white;" type="file" name="foto" th:value="${foto.proveedor}">
+                </div>
+            </form>
             <div class="botones">
-                <button class="btn btn-danger" id="aceptar">Aceptar</button>
-                <button class="btn btn-success" id="cancelar">Denegar</button>
+                <br>
+                <button class="btn btn-danger" id="cancelar">Cancelar</button>
+                <button class="btn btn-success" id="guardar">Guardar</button>
             </div>
         </div>
     </div>
 </div>
-
-<section class="text-center container">
-    <div class="row mt-3">
-        <div class="divVolver">
-            <a href="/editarProveedor" class="btn btn-secondary my-2 botonVolver botones">Editar Perfil</a>
-        </div>
-    </div>
-</section>
 
 <footer class="pie">
     <div class="texto-pie">
