@@ -21,7 +21,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.entidades.Persona;
+
 import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
@@ -93,6 +95,7 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             return null;
         }
+
     }
 
 }
