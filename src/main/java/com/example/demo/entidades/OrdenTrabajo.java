@@ -10,8 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class OrdenTrabajo {
@@ -34,7 +32,8 @@ public class OrdenTrabajo {
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden, Proveedor proveedor, Usuario usuario, String comentario) {
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden,
+            Proveedor proveedor, Usuario usuario, String comentario) {
         this.id = id;
         this.rubro = rubro;
         this.puntaje = puntaje;
@@ -108,6 +107,5 @@ public class OrdenTrabajo {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-
 
 }

@@ -1,7 +1,6 @@
 
 package com.example.demo.Servicios;
 
-
 import com.example.demo.Enumeraciones.EstadoOrdenTrabajo;
 import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
@@ -16,19 +15,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrdenTrabajoServicio {
-    
- @Autowired
+
+    @Autowired
     OrdenTrabajoRepositorio otRepositorio;
- 
- @Autowired
+
+    @Autowired
     UsuarioRepositorio usuarioRepositorio;
- 
- @Autowired
+
+    @Autowired
     proveedorRepositorio proveedorRepositorio;
 
-    @Transactional// crear orden de trabajo en estado cotizando para el contacto.
+    @Transactional // crear orden de trabajo en estado cotizando para el contacto.
     public void crearOt(Long idProveedor, Long idUsuario, String comentario) {
-        OrdenTrabajo ordentrabajo = new OrdenTrabajo();  
+        OrdenTrabajo ordentrabajo = new OrdenTrabajo();
         ordentrabajo.setProveedor(proveedorRepositorio.findById(idProveedor).get());
         ordentrabajo.setUsuario(usuarioRepositorio.findById(idUsuario).get());
         ordentrabajo.setEstadOrden(EstadoOrdenTrabajo.COTIZANDO);
@@ -36,7 +35,7 @@ public class OrdenTrabajoServicio {
         otRepositorio.save(ordentrabajo);
     }
 
-    @Transactional //Servicio para asignar el valor por parte del proveedor
+    @Transactional // Servicio para asignar el valor por parte del proveedor
     public void asignarValor(Long idOrdenTrabajo, Long idProveedor, double valor) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
@@ -46,9 +45,8 @@ public class OrdenTrabajoServicio {
             otRepositorio.save(ordentrabajo);
         }
     }
-    
-    
-    @Transactional //El usuario acepta la cotizacion e inicia la orden
+
+    @Transactional // El usuario acepta la cotizacion e inicia la orden
     public void aceptarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
@@ -59,9 +57,8 @@ public class OrdenTrabajoServicio {
             otRepositorio.save(ordentrabajo);
         }
     }
-    
-    
-    @Transactional //El usuario cancela orden de servicio
+
+    @Transactional // El usuario cancela orden de servicio
     public void cancelarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
@@ -72,8 +69,8 @@ public class OrdenTrabajoServicio {
             otRepositorio.save(ordentrabajo);
         }
     }
-    
-    @Transactional //El proveedor confirma la finalizacion del servicio
+
+    @Transactional // El proveedor confirma la finalizacion del servicio
     public void finalizarOrdenTrabajo(Long idOrdenTrabajo, Long idProveedor) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
@@ -84,9 +81,9 @@ public class OrdenTrabajoServicio {
             otRepositorio.save(ordentrabajo);
         }
     }
-    
-    @Transactional //El usuario califica la orden del servicio
-    public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario,String comentario,Integer puntaje) {
+
+    @Transactional // El usuario califica la orden del servicio
+    public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario, String comentario, Integer puntaje) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
         // agregar condicional si se califica solo si está finalizada
         if (respuesta.isPresent()) {
@@ -94,22 +91,16 @@ public class OrdenTrabajoServicio {
             OrdenTrabajo ordentrabajo = respuesta.get();
             ordentrabajo.setComentario(comentario);
             ordentrabajo.setPuntaje(puntaje);
-            //ordentrabajo.getProveedor().setPuntaje
+            // ordentrabajo.getProveedor().setPuntaje
             otRepositorio.save(ordentrabajo);
         }
     }
-    
+
     public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
 
-        List<OrdenTrabajo> ordenesTrabajo = new ArrayList();
+        List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
         ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
-        return ordenesTrabajo;   }
-
-    
-
+        return ordenesTrabajo;
+    }
 
 }
-   
- 
-    
-

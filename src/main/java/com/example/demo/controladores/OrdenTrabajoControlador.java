@@ -5,7 +5,6 @@ import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Persona;
-import com.example.demo.entidades.Proveedor;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +20,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/orden")
 public class OrdenTrabajoControlador {
 
-@Autowired    
-OrdenTrabajoServicio ots;
+    @Autowired
+    OrdenTrabajoServicio ots;
 
-@Autowired
-proveedorServicio ps;
+    @Autowired
+    proveedorServicio ps;
 
-@GetMapping("/contacto/{idproveedor}")    
-public String contactar(@PathVariable Long idproveedor, ModelMap modelo){    
-    modelo.addAttribute("proveedor", ps.buscarPorid(idproveedor));
-    return "ContactarProveedor.html";
-}
+    @GetMapping("/contacto/{idproveedor}")
+    public String contactar(@PathVariable Long idproveedor, ModelMap modelo) {
+        modelo.addAttribute("proveedor", ps.buscarPorid(idproveedor));
+        return "ContactarProveedor.html";
+    }
 
+    @PostMapping("/crearOrden")
+    public String crearOrden(HttpSession session, @RequestParam Long idproveedor, @RequestParam String comentario) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.crearOt(idproveedor, idusuario, comentario);
+        return "MisOrdenes.html";
+    }
 
-@PostMapping("/crearOrden")    
-public String crearOrden(HttpSession session,@RequestParam Long idproveedor,@RequestParam String comentario){
-    Persona logueado = (Persona) session.getAttribute("personasession");
-    Long idusuario= logueado.getId();
-    ots.crearOt(idproveedor, idusuario, comentario);    
-    return "MisOrdenes.html";
-}
+    @GetMapping("/ordenes")
+    public String listarOrdenes(@RequestParam Long idpersona, ModelMap modelo) {
+        List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idpersona);
+        modelo.addAttribute("listaOrdenes", listaOrdenes);
+        return "inicio.html";
+    }
 
-@GetMapping("/ordenes")
-public String listarOrdenes(@RequestParam Long idpersona, ModelMap modelo){
-    List <OrdenTrabajo> listaOrdenes= ots.ListarOrdenesTrabajo(idpersona);
-    modelo.addAttribute("listaOrdenes",listaOrdenes);
-    return "inicio.html";
-}
-
-    
 }
