@@ -30,7 +30,7 @@ public class ImagenServicio {
     }
 
     // modifica la imagen en el perfil del proveedor
-    public Imagen modificarImagenProveedor(MultipartFile archivo, String idImagen) throws MiException, IOException {
+    public Imagen modificarImagenProveedor(MultipartFile archivo, Long idImagen) throws MiException, IOException {
         if (archivo != null) {
             Imagen imagen = new Imagen();
             if (idImagen != null) {
