@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Aqui iría la logica de edicion del usuario</h1>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Perfil
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
+            <li>
+                <hr class="dropdown-divider" />
+            </li>
+
+            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </li>
+</body>
+
+</html>

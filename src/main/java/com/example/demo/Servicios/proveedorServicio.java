@@ -1,5 +1,6 @@
 package com.example.demo.Servicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
+import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,10 +32,14 @@ public class proveedorServicio implements UserDetailsService {
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
 
+    @Autowired
+    ImagenServicio imagenServicio;
+
     @Transactional
-    public void crearProveedor(String nombre, String email, String password, String password2, Long telefono,
+    public void crearProveedor(MultipartFile archivo, String nombre, String email, String password, String password2,
+            Long telefono,
             String direccion, float honorarioHoras, String rubro, String presentacion)
-            throws MiException {
+            throws MiException, IOException {
 
         validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion);
         Proveedor proveedor = new Proveedor();
@@ -47,15 +54,18 @@ public class proveedorServicio implements UserDetailsService {
         proveedor.setRubro(rubro);
         proveedor.setPresentacion(presentacion);
 
+        Imagen imagen = imagenServicio.guardarImagenProveedor(archivo);
+        proveedor.setImagen(imagen);
+
         proveedorRepositorio.save(proveedor);
     }
 
     public List<Proveedor> listarProveedor() {
 
-        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        List<Proveedor> listaProveedores = new ArrayList<Proveedor>();
 
-        proveedores = proveedorRepositorio.findAll();
-        return proveedores;
+        listaProveedores = proveedorRepositorio.findAll();
+        return listaProveedores;
     }
 
     public List<Proveedor> listarProveedorPorRubro(String rubro) {
@@ -65,34 +75,6 @@ public class proveedorServicio implements UserDetailsService {
         return proveedores;
     }
 
-    /*
-     * public void modificarProveedor(String nombre, String email, String password,
-     * Integer telefono,
-     * String direccion, float honorarioHoras,
-     * ) throws MiException {
-     * 
-     * validar(nombre, email, password, telefono, comentarios, direccion,
-     * honorarioHoras);
-     * Optional<Proovedor> respuesta = proveedorRepositorio.findById(id);
-     * 
-     * if (respuesta.isPresent()) {
-     * 
-     * Proovedor proovedor = respuesta.get();
-     * 
-     * // proovedor.setId(id);
-     * proovedor.setNombre(nombre);
-     * proovedor.setEmail(email);
-     * proovedor.setRol(Rol.PROVEEDOR);
-     * proovedor.setPassword(password);
-     * proovedor.setTelefono(telefono);
-     * proovedor.setComentarios(comentarios);
-     * proovedor.setDireccion(direccion);
-     * proovedor.setHonorarioHora(honorarioHoras);
-     * proovedor.setCantidadContactos(cantidadContactos);
-     * proveedorRepositorio.save(proovedor);
-     * }
-     * }
-     */
     private void validar(String nombre, String email, String password, String password2, Long telefono,
             String direccion, float honorarioHoras, String rubro, String presentacion)
             throws MiException {
@@ -126,6 +108,15 @@ public class proveedorServicio implements UserDetailsService {
             throw new MiException("La presentacion no puede estar vacia");
         }
 
+    }
+
+    public Proveedor buscarPorid(Long id) {
+        Proveedor proveedor = proveedorRepositorio.findById(id).get();
+        return proveedor;
+    }
+
+    public Proveedor BuscarPorId(String id) {
+        return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
 
     @Override

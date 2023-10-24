@@ -1,174 +1,214 @@
 * {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 /*header es del boostrap*/
 
 /*Footer*/
 
 .pie {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #000;
-  }
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #000;
+}
 
 .texto-pie {
-    font-family: 'Maven Pro', sans-serif;
-    text-align: center;
-    color: rgb(212, 205, 205);
-  }
+  font-family: 'Maven Pro', sans-serif;
+  text-align: center;
+  color: rgb(212, 205, 205);
+}
 
 .redes-sociales {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+}
 
 
-  #redes {
-    font-size: x-large;
+#redes {
+  font-size: x-large;
 
-    color: yellow;
-    padding: 0px;
-  }
+  color: yellow;
+  padding: 0px;
+}
 
-  .redes-sociales img:hover {
-    transform: scale(1.2);
-  }
+.redes-sociales img:hover {
+  transform: scale(1.2);
+}
 
 /*Body*/
-body{
+body {
   background: linear-gradient(90deg, rgb(255, 239, 122) 0%, rgb(229, 113, 5) 100%);
   ;
 }
 
 /*index*/
-h1{
+h1 {
   margin-top: 15px;
   text-align: center;
 }
-h3{
+
+h3 {
   margin-top: 30px;
   text-align: center;
 
 }
 
-.transicion, .transicion1 {
+.transicion,
+.transicion1 {
 
-    width: 70%;
-    height: auto;
-    position: relative;
-    margin: 30px auto;
-    overflow: hidden;
-    border-radius: 30px;
-    border: 5px solid orange/*rgb(255, 215, 0)*/;
+  width: 70%;
+  height: auto;
+  position: relative;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 5px solid orange
+    /*rgb(255, 215, 0)*/
+  ;
 }
 
-.transicion ul, .transicion1 ul {
-    display: flex;
-    padding: 0;
-    width: 800%;
-    animation: slide 15s infinite alternate ease-in-out;
+.transicion ul,
+.transicion1 ul {
+  display: flex;
+  padding: 0;
+  width: 800%;
+  animation: slide 15s infinite alternate ease-in-out;
 }
 
-.transicion li, .transicion1 li{
-    width: 16.67%;
-    list-style: none;
+.transicion li,
+.transicion1 li {
+  width: 16.67%;
+  list-style: none;
 }
 
-.transicion img, .transicion1 img{
-    width: 100%;
-    height: 120%;
-    object-fit: cover;
+.transicion img,
+.transicion1 img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
 }
 
 .transicion h5 {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding-bottom: 20px;
-    text-align: center;
-    top: 50%;
-    left: 15%;
-    right: 15%;
-  }
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding-bottom: 20px;
+  text-align: center;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+}
 
 @keyframes slide {
-    0% {margin-left: 0;}
-    16.67% {margin-left: 0;}
-
-    20% {margin-left: -100%;}
-    33.33% {margin-left: -100%;}
-
-    33.33% {margin-left: -200%;}
-    50% {margin-left: -200%;}
-
-    50% {margin-left: -300%;}
-    66.67% {margin-left: -300%;}
-
-    66.67% {margin-left: -400%;}
-    83.33% {margin-left: -400%;}
-
-    83.33% {margin-left: -500%;}
-    100% {margin-left: -500%;}
-}
-.button-container {
-    text-align: center;
+  0% {
+    margin-left: 0;
   }
+
+  16.67% {
+    margin-left: 0;
+  }
+
+  20% {
+    margin-left: -100%;
+  }
+
+  33.33% {
+    margin-left: -100%;
+  }
+
+  33.33% {
+    margin-left: -200%;
+  }
+
+  50% {
+    margin-left: -200%;
+  }
+
+  50% {
+    margin-left: -300%;
+  }
+
+  66.67% {
+    margin-left: -300%;
+  }
+
+  66.67% {
+    margin-left: -400%;
+  }
+
+  83.33% {
+    margin-left: -400%;
+  }
+
+  83.33% {
+    margin-left: -500%;
+  }
+
+  100% {
+    margin-left: -500%;
+  }
+}
+
+.button-container {
+  text-align: center;
+}
 
 .button {
-    display: inline-block;
-    margin: 10px  ;
-    padding: 10px 10px;
-    background:linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-    color:white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center
-  }
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 10px;
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center
+}
 
-  .button:hover {
-    color:red;
-  }
+.button:hover {
+  color: red;
+}
 
 /* conocenos*/
 
 
-.titulo1{
+.titulo1 {
   margin-top: 5%;
   font-size: 28px;
-  color:#000;
+  color: #000;
   margin-left: 15%;
   margin-right: 15%;
   margin-bottom: 10%;
 
 }
-.titulo2{
+
+.titulo2 {
   font-size: 23px;
   margin-bottom: 5%;
   margin-top: 5%;
 }
 
-.subtit{
+.subtit {
   font-size: 20px;
-  color:#000;
+  color: #000;
   margin-left: 15%;
   margin-right: 15%;
   text-decoration: underline black;
 
 }
 
-.textcono{
+.textcono {
   font-size: 18px;
   margin-left: 15%;
   margin-right: 15%;
 }
 
-.textfin{
+.textfin {
   font-size: 25px;
   text-align: center;
   margin: 0;
@@ -183,75 +223,77 @@ h3{
 /*login*/
 
 .container2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-  }
+}
 
 
-  .left-side {
-    border-radius: 10px;
-    width: 50%;
-    padding: 20px;
-    background-color: #000;
-    margin-right: 5%;
-    margin-left: 10%;
-  }
+.left-side {
+  border-radius: 10px;
+  width: 50%;
+  padding: 20px;
+  background-color: #000;
+  margin-right: 5%;
+  margin-left: 10%;
+}
 
-  .right-side {
-    border-radius: 10px;
-    width: 50%;
-    padding: 14px;
-    margin-bottom: 15px;
-    background-color: #000;
-    margin-left: 5%;
-    margin-right: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .card-title{
-    color: white;
-  }
+.right-side {
+  border-radius: 10px;
+  width: 50%;
+  padding: 14px;
+  margin-bottom: 15px;
+  background-color: #000;
+  margin-left: 5%;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  #botonr {
-    display:flex;
-    margin: 10%;
-    border-radius: 5px;
-    background:linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+.card-title {
+  color: white;
+}
 
-  }
+#botonr {
+  display: flex;
+  margin: 10%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
 
-  #botonr:hover {
-    color:red;
-  }
-  .box {
-    background-color: #000;
-    padding: 20px;
-    border: 1px solid #000;
-  }
+}
 
-  h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: white;
-  }
+#botonr:hover {
+  color: red;
+}
 
-  button {
-    display: block;
-    margin: 10px 0;
-  }
+.box {
+  background-color: #000;
+  padding: 20px;
+  border: 1px solid #000;
+}
 
-  .btn {
-    background:linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-  }
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+}
 
-  .textobox{
-    color: white;
-  }
+button {
+  display: block;
+  margin: 10px 0;
+}
+
+.btn {
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+}
+
+.textobox {
+  color: white;
+}
 
 
 
@@ -262,52 +304,54 @@ h3{
     font-size: 20px;
     color:rgb(16, 16, 16);}*/
 
-  /*Registro Proveedor*/
+/*Registro Proveedor*/
 
 
-  .container3 {
-    width: 440px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 5px solid orange;
-    background-color: #000;
-    border-radius: 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.container3 {
+  width: 440px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 5px solid orange;
+  background-color: #000;
+  border-radius: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .container3 h5 {
-    text-align: center;
-    margin-bottom: 20px;
-    color:white;
-  }
+.container3 h5 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
 
-  #pres{
-    color: white;
-    vertical-align: top;
-  }
+#pres {
+  color: white;
+  vertical-align: top;
+}
 
-  .textofp{
-    color:white;
-    align-items: center;
-  }
+.textofp {
+  color: white;
+  align-items: center;
+}
 
-  input, select, textarea{
-    width: 100%;
-  }
+input,
+select,
+textarea {
+  width: 100%;
+}
 
-  .container3 button{
-    margin-left: 35%;
-  }
+.container3 button {
+  margin-left: 35%;
+}
 
 /*buscar proveedor*/
-.botonBus{
+.botonBus {
 
   margin-left: 50%;
 }
 
-#servicio{
+#servicio {
   display: flex;
   margin-top: 5%;
   margin-left: 30%;
@@ -315,7 +359,7 @@ h3{
 
 /*registro usuario*/
 
-.regUsuario{
+.regUsuario {
   width: 555px;
   border: 5px solid orange;
   border-radius: 2%;
@@ -324,23 +368,26 @@ h3{
   text-align: justify;
   background-color: #000;
 }
-.regUsuario h1{
+
+.regUsuario h1 {
   margin-top: 10%;
   margin-bottom: 5%;
   text-align: center;
   color: white;
 }
 
-.regUsuario button{
+.regUsuario button {
   margin-left: 35%;
   margin-bottom: 5%;
 
 }
-.regUsuario input{
+
+.regUsuario input {
   margin-left: 10%;
   width: 80%;
 }
-.textRegU{
+
+.textRegU {
   margin-top: 10px;
   font-size: 25px;
   text-align: center;
@@ -373,14 +420,14 @@ h3{
   height: auto;
 }
 
-.botonbus{
+.botonbus {
   margin-left: 57%;
   border-radius: 5px;
   border: 1px solid #000;
   width: 7%;
 }
 
-.seleb{
+.seleb {
   display: flex;
   margin-top: 5%;
   margin-left: 35%;
@@ -389,13 +436,122 @@ h3{
   height: 100%;
 }
 
+/*  Contactar Proveedor */
+
+
+.pantalla {
+  display: flex;
+}
+
+/* Estilo para la columna izquierda (1/3 de ancho), foto perfil y datos provedor*/
+.izquierda {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.unTercio {
+  border: 2px solid orange;
+  padding: 20px;
+  display: flex;
+  width: 120%;
+}
+
+.fotoPerfil {
+
+  width: 33vh;
+  height: 200px;
+  background-image: url(img/perfil.jpg);
+  margin-right: 20px;
+  align-items: center;
+
+}
+
+/* Estilo para la columna derecha (2/3 de ancho) */
+.derecha {
+  flex: 2;
+  padding: 20px;
+}
+
+/* Estilo para la sección de fotos de trabajos realizados */
+.fotoTrabajo {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para el campo de comentario y botón de enviar */
+
+.comentario {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+}
+
+.enviarComentario {
+  display: block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+
+/* Estilo para la columna derecha (Orden de Trabajo) */
+.encabezadoCP {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.texCP {
+  margin: 30px;
+  padding: 30px;
+  text-align: center;
+
+}
+
+.textoOT {
+  text-align: center;
+  border: 3px solid orange;
+  width: 60%;
+  padding: 10px;
+  box-sizing: border-box;/
+}
+
+/* Estilo para el campo de comentario en la Orden de Trabajo */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid yellow;
+  margin-bottom: 10px;
+}
+
+
+/* Estilo para el botón de enviar en la Orden de Trabajo */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+
+}
+
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 768px) {
 
   header {
     flex-direction: column;
     text-align: center;
-    }
+  }
 
   .transicion h5 {
     left: 10%;
@@ -407,22 +563,23 @@ h3{
     display: flex;
   }
 
-  .logo{
-   width:20%;
+  .logo {
+    width: 20%;
 
   }
 
-  #servicio{
-    margin-left:20% ;
-    width:66% ;
-}
+  #servicio {
+    margin-left: 20%;
+    width: 66%;
+  }
 }
 
-@media screen and (max-width: 991px){
-  .logo{
+@media screen and (max-width: 991px) {
+  .logo {
     width: 10%;
   }
-  .barraSuperior .texto{
+
+  .barraSuperior .texto {
     display: flex;
     flex-direction: column;
     font-size: 10px;

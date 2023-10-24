@@ -1,6 +1,7 @@
 package com.example.demo.entidades;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Proveedor extends Persona {
@@ -9,6 +10,9 @@ public class Proveedor extends Persona {
     private float honorarioHora;
     private String rubro;
     private String presentacion;
+
+    @OneToOne
+    private Imagen imagen;
 
     public Proveedor() {
 
@@ -52,6 +56,14 @@ public class Proveedor extends Persona {
 
     public void setPresentacion(String presentacion) {
         this.presentacion = presentacion;
+    }
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 
     @Override
