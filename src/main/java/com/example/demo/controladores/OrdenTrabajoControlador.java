@@ -10,9 +10,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,14 +39,44 @@ public class OrdenTrabajoControlador {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
         ots.crearOt(idproveedor, idusuario, comentario);
-        return "MisOrdenes.html";
+        return "redirect:/orden/ordenes";
     }
 
     @GetMapping("/ordenes")
-    public String listarOrdenes(@RequestParam Long idpersona, ModelMap modelo) {
-        List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idpersona);
+    public String listarOrdenes(HttpSession session, ModelMap modelo) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+       List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
+         
         modelo.addAttribute("listaOrdenes", listaOrdenes);
-        return "inicio.html";
+        
+        
+                return "MisOrdenes.html";
     }
+    
+    @GetMapping("/cancelar/{id}")
+    public String cancelarOrden(@PathVariable Long id){
+        ots.cancelarOrdenTrabajo(id);
+        return "redirect:/orden/ordenes";
+    }
+    
+    @GetMapping("/aceptar/{id}")
+    public String aceptarOrden(@PathVariable Long id){
+        ots.aceptarOrdenTrabajo(id);
+        return "redirect:/orden/ordenes";
+    }
+    
+    @GetMapping("/calificar/{id}")
+    public String calificarOrden(@PathVariable Long id){
+        //ots.aceptarOrdenTrabajo(id);
+        return "Calificar.html";
+    }
+    
+    
+//    @PostMapping("/cancelar/{id}")
+//    public String cancelarOrdene(@PathVariable Long id){
+//        ots.cancelarOrdenTrabajo(id);
+//        return "redirect:/orden/ordenes";
+//    }
 
 }
