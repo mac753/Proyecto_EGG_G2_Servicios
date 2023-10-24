@@ -436,6 +436,115 @@ textarea {
   height: 100%;
 }
 
+/*  Contactar Proveedor */
+
+
+.pantalla {
+  display: flex;
+}
+
+/* Estilo para la columna izquierda (1/3 de ancho), foto perfil y datos provedor*/
+.izquierda {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.unTercio {
+  border: 2px solid orange;
+  padding: 20px;
+  display: flex;
+  width: 120%;
+}
+
+.fotoPerfil {
+
+  width: 33vh;
+  height: 200px;
+  background-image: url(img/perfil.jpg);
+  margin-right: 20px;
+  align-items: center;
+
+}
+
+/* Estilo para la columna derecha (2/3 de ancho) */
+.derecha {
+  flex: 2;
+  padding: 20px;
+}
+
+/* Estilo para la sección de fotos de trabajos realizados */
+.fotoTrabajo {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para el campo de comentario y botón de enviar */
+
+.comentario {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+}
+
+.enviarComentario {
+  display: block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+
+/* Estilo para la columna derecha (Orden de Trabajo) */
+.encabezadoCP {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.texCP {
+  margin: 30px;
+  padding: 30px;
+  text-align: center;
+
+}
+
+.textoOT {
+  text-align: center;
+  border: 3px solid orange;
+  width: 60%;
+  padding: 10px;
+  box-sizing: border-box;/
+}
+
+/* Estilo para el campo de comentario en la Orden de Trabajo */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid yellow;
+  margin-bottom: 10px;
+}
+
+
+/* Estilo para el botón de enviar en la Orden de Trabajo */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+
+}
+
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 768px) {
 

@@ -80,6 +80,12 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    public List<Usuario> listarUsuarios(Rol rol) {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        usuarios = (List<Usuario>) usuarioRepositorio.buscarUsuarios(rol);
+        return usuarios;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Persona persona = personaRepositorio.buscarPersonarPorEmail(email);

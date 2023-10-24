@@ -47,38 +47,4 @@ public class ImagenServicio {
         return null;
     }
 
-    /*
-     * //Metodo para subir una foto
-     * public Imagen guardarImagen(MultipartFile archivo) throws MiException,
-     * IOException {
-     * if (archivo != null) {
-     * Imagen imagen = new Imagen();
-     * imagen.setMime(archivo.getContentType());
-     * imagen.setNombre(archivo.getName());
-     * imagen.setContenido(archivo.getBytes());
-     * return imagenRepositorio.save(imagen);
-     * }
-     * return null;
-     * }
-     * //Metodo para cambiar una foto por otra
-     * public Imagen modificarImagen(MultipartFile archivo, String idImagen) throws
-     * MiException, IOException {
-     * 
-     * if (archivo != null) {
-     * Imagen imagen = new Imagen();
-     * if (idImagen != null) {
-     * Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
-     * if (respuesta.isPresent()) {
-     * imagen = respuesta.get();
-     * }
-     * }
-     * imagen.setMime(archivo.getContentType());
-     * imagen.setNombre(archivo.getName());
-     * imagen.setContenido(archivo.getBytes());
-     * return imagenRepositorio.save(imagen);
-     * }
-     * return null;
-     * }
-     */
-
 }

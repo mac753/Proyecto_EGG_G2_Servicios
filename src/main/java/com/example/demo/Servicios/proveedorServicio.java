@@ -62,10 +62,10 @@ public class proveedorServicio implements UserDetailsService {
 
     public List<Proveedor> listarProveedor() {
 
-        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        List<Proveedor> listaProveedores = new ArrayList<Proveedor>();
 
-        proveedores = proveedorRepositorio.findAll();
-        return proveedores;
+        listaProveedores = proveedorRepositorio.findAll();
+        return listaProveedores;
     }
 
     public List<Proveedor> listarProveedorPorRubro(String rubro) {
@@ -75,34 +75,6 @@ public class proveedorServicio implements UserDetailsService {
         return proveedores;
     }
 
-    /*
-     * public void modificarProveedor(String nombre, String email, String password,
-     * Integer telefono,
-     * String direccion, float honorarioHoras,
-     * ) throws MiException {
-     * 
-     * validar(nombre, email, password, telefono, comentarios, direccion,
-     * honorarioHoras);
-     * Optional<Proovedor> respuesta = proveedorRepositorio.findById(id);
-     * 
-     * if (respuesta.isPresent()) {
-     * 
-     * Proovedor proovedor = respuesta.get();
-     * 
-     * // proovedor.setId(id);
-     * proovedor.setNombre(nombre);
-     * proovedor.setEmail(email);
-     * proovedor.setRol(Rol.PROVEEDOR);
-     * proovedor.setPassword(password);
-     * proovedor.setTelefono(telefono);
-     * proovedor.setComentarios(comentarios);
-     * proovedor.setDireccion(direccion);
-     * proovedor.setHonorarioHora(honorarioHoras);
-     * proovedor.setCantidadContactos(cantidadContactos);
-     * proveedorRepositorio.save(proovedor);
-     * }
-     * }
-     */
     private void validar(String nombre, String email, String password, String password2, Long telefono,
             String direccion, float honorarioHoras, String rubro, String presentacion)
             throws MiException {
@@ -137,9 +109,9 @@ public class proveedorServicio implements UserDetailsService {
         }
 
     }
-    
-    public Proveedor buscarPorid(Long id){
-        Proveedor proveedor =proveedorRepositorio.findById(id).get();
+
+    public Proveedor buscarPorid(Long id) {
+        Proveedor proveedor = proveedorRepositorio.findById(id).get();
         return proveedor;
     }
 

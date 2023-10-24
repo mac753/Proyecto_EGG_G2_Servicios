@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PAnel Admin</title>
 </head>
 
 <body>
-    <h1>Aqui deberían ir todas las funciones del admin, crear, eliminar, modificar, pasar de usuario a proveedor, hay
-        que darle la logica</h1>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -23,6 +21,54 @@
             <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
         </ul>
     </li>
+
+    <h2>Panel Administrador</h2>
+    <div>
+        <table>
+            <h3>Listado usuarios</h3>
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Direccion</th>
+                </tr>
+            </thead>
+            <tbody th:each="usuario : ${usuarios}">
+                <th scope="row" th:text="${usuario.id}"></th>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.rol}"></td>
+                <td th:text="${usuario.telefono}"></td>
+                <td th:text="${usuario.direccion}"></td>
+            </tbody>
+        </table>
+    </div>
+    <h3>Listado Proveedores</h3>
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion</th>
+        </tr>
+    </thead>
+    <tbody th:each="proveedor : ${proveedores}">
+        <th scope="row" th:text="${proveedor.id}"></th>
+        <td th:text="${proveedor.nombre}"></td>
+        <td th:text="${proveedor.email}"></td>
+        <td th:text="${proveedor.rol}"></td>
+        <td th:text="${proveedor.telefono}"></td>
+        <td th:text="${proveedor.direccion}"></td>
+    </tbody>
+    </table>
+    <div>
+
+    </div>
 </body>
 
 </html>
