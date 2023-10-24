@@ -46,12 +46,26 @@ public class OrdenTrabajoControlador {
     public String listarOrdenes(HttpSession session, ModelMap modelo) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
-       List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
-         
-        modelo.addAttribute("listaOrdenes", listaOrdenes);
+        System.out.println(logueado.getRol().toString());
         
+        if (logueado.getRol().toString().equals("USER")) {
+            System.out.println("entre en el user");
+            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
+             modelo.addAttribute("listaOrdenes", listaOrdenes);
+            
+        } 
+        if (logueado.getRol().toString().equals("PROVEEDOR")) {
+            System.out.println("entre en el proveedor");
+            System.out.println(logueado.getId().toString());
+            List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
+            modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
+            
+        }
+
         
-                return "MisOrdenes.html";
+       return "MisOrdenes.html";
+        
+                
     }
     
     @GetMapping("/cancelar/{id}")

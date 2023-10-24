@@ -25,6 +25,7 @@ import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class proveedorServicio implements UserDetailsService {
@@ -118,6 +119,82 @@ public class proveedorServicio implements UserDetailsService {
     public Proveedor BuscarPorId(String id) {
         return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
+    
+    @Transactional
+    public void actualizar(MultipartFile archivo, Long id, String nombre, String email, String password,
+            String password2,
+            Long telefono, String direccion, float honorarioHoras, String rubro, String presentacion)
+
+            throws MiException {
+        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion, archivo);
+
+        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            try {
+                Proveedor proveedor = respuesta.get();
+                proveedor.setNombre(nombre);
+                proveedor.setEmail(email);
+                proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+                proveedor.setDireccion(direccion);
+                proveedor.setHonorarioHora(honorarioHoras);
+                proveedor.setRubro(rubro);
+                proveedor.setPresentacion(presentacion);
+                proveedor.setRol(Rol.PROVEEDOR);
+                Long idImagen = null;
+
+                if (proveedor.getImagen() != null) {
+                    idImagen = proveedor.getImagen().getId();
+                }
+
+                Imagen imagen = imagenServicio.modificarImagenProveedor(archivo, idImagen);
+
+                proveedor.setImagen(imagen);
+
+                proveedorRepositorio.save(proveedor);
+            } catch (IOException ex) {
+                System.out.println("No se encuentra la imagen");
+            }
+        }
+    }
+    
+    private void validar(String nombre, String email, String password, String password2, Long telefono,
+            String direccion, float honorarioHoras, String rubro, String presentacion, MultipartFile archivo)
+            throws MiException {
+
+        if (nombre.isEmpty()) {
+            throw new MiException("El nombre no puede estar vacio");
+        }
+        if (email.isEmpty()) {
+            throw new MiException("El email no puede estar vacio");
+        }
+        if (password.isEmpty()) {
+            throw new MiException("El password no puede estar vacio");
+        }
+        if (!password.equals(password2)) {
+            throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        }
+        if (telefono == null) {
+            throw new MiException("El telfono no puede ser nulo");
+        }
+
+        if (direccion.isEmpty()) {
+            throw new MiException("La direccion no puede estar vacia");
+        }
+        if (honorarioHoras < 0) {
+            throw new MiException("debes actualizar a un honorario por hora valido");
+        }
+        if (rubro.isEmpty()) {
+            throw new MiException("El rubro no puede estar vacia");
+        }
+        if (presentacion.isEmpty()) {
+            throw new MiException("La presentacion no puede estar vacia");
+        }
+        if (archivo == null) {
+            throw new MiException("El archivo no puede ser nulo");
+        }
+
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
