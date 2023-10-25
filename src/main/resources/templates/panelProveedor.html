@@ -40,5 +40,11 @@
       </li>
       <li><hr class="dropdown-divider" /></li>
     </ul>
+    <a
+      th:if="${session.personasession != null}"
+      th:href="@{/logout}"
+      class="nav-link"
+      >Cerrar Sesión</a
+    >
   </body>
 </html>

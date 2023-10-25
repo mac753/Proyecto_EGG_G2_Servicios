@@ -26,12 +26,26 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" href="/">Inicio</a>
                     <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-                    <!-- <a class="nav-link" href="/registrar">RegUsuario</a>
-            <a class="nav-link" href="/proveedor/registrar">RegProv</a> -->
+                   
                     <a class="nav-link" href="/login">Login</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        sec:authorize="hasRole('USER')" th:href="@{/usuario}" > Perfil </a>
+                            
+                        
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Ver mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+
+                            <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
                 </div>
             </div>
         </div>
+        
     </nav>
 
     <div class="container">
@@ -41,7 +55,14 @@
             </div>
         </div>
     </div>
+    
+    
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Editar Perfil</a></li>
+        <li><hr class="dropdown-divider"></li>
 
+        <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+    </ul>
     <div class="row justify-content-center">
         <form action="/proveedor/buscador" method="post">
             <div class="col-md-8">
@@ -74,7 +95,12 @@
                             <p class="card-text" th:text="${proveedor.honorarioHora}">honorarios por hora:</p>
                             <p class="card-text">Cantidad de estrellas: 5</p>
                             <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary"
+                               th:if="${session.personasession != null}"
                                 style="margin:10px">Contactar</a>
+
+                                <a th:href="@{/login}" class="btn btn-primary"
+                               th:if="${session.personasession == null}"
+                                style="margin:10px">Registrate</a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,9 @@
 package com.example.demo.Servicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Repositorio.UsuarioRepositorio;
@@ -19,10 +21,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Persona;
-
+import com.example.demo.entidades.Proveedor;
 import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
@@ -53,6 +57,29 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.USER);
         usuarioRepositorio.save(usuario);
 
+    }
+
+    @Transactional
+    public void actualizar(Long id, String nombre, String email, String password,
+            String password2,
+            Long telefono, String direccion) throws MiException {
+
+        validar(nombre, email, password, password2, telefono, direccion);
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+            usuario.setNombre(nombre);
+            usuario.setEmail(email);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+            usuario.setDireccion(direccion);
+
+            usuario.setRol(Rol.USER);
+
+            usuarioRepositorio.save(usuario);
+
+        }
     }
 
     private void validar(String nombre, String email, String password, String password2, Long telefono,

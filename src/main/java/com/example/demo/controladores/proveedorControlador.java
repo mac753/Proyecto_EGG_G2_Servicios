@@ -128,4 +128,10 @@ public class proveedorControlador {
         }
 
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityContextHolder.clearContext();
+        return "redirect:/index";
+    }
 }
