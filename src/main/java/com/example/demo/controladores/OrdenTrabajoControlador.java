@@ -41,10 +41,51 @@ public class OrdenTrabajoControlador {
     }
 
     @GetMapping("/ordenes")
-    public String listarOrdenes(@RequestParam Long idpersona, ModelMap modelo) {
-        List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idpersona);
-        modelo.addAttribute("listaOrdenes", listaOrdenes);
-        return "inicio.html";
+    public String listarOrdenes(HttpSession session, ModelMap modelo) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        System.out.println(logueado.getRol().toString());
+
+        if (logueado.getRol().toString().equals("USER")) {
+            System.out.println("entre en el user");
+            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
+            modelo.addAttribute("listaOrdenes", listaOrdenes);
+
+        }
+        if (logueado.getRol().toString().equals("PROVEEDOR")) {
+            System.out.println("entre en el proveedor");
+            System.out.println(logueado.getId().toString());
+            List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
+            modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
+
+        }
+
+        return "MisOrdenes.html";
+
     }
+
+    @GetMapping("/cancelar/{id}")
+    public String cancelarOrden(@PathVariable Long id) {
+        ots.cancelarOrdenTrabajo(id, id);// OJO Victor agregué id, id para que funcionara
+        return "redirect:/orden/ordenes";
+    }
+
+    @GetMapping("/aceptar/{id}")
+    public String aceptarOrden(@PathVariable Long id) {
+        ots.aceptarOrdenTrabajo(id, id); // OJO Victor agregué id, id para que funcionara
+        return "redirect:/orden/ordenes";
+    }
+
+    @GetMapping("/calificar/{id}")
+    public String calificarOrden(@PathVariable Long id) {
+        // ots.aceptarOrdenTrabajo(id);
+        return "Calificar.html";
+    }
+
+    // @PostMapping("/cancelar/{id}")
+    // public String cancelarOrdene(@PathVariable Long id){
+    // ots.cancelarOrdenTrabajo(id);
+    // return "redirect:/orden/ordenes";
+    // }
 
 }

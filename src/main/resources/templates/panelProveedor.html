@@ -33,6 +33,18 @@
       <li>
         <a
           th:if="${session.personasession != null}"
+          th:href="@{/orden/ordenes}"
+          class="nav-link"
+          >Ver mis ordenes
+        </a>
+      </li>
+      <li><hr class="dropdown-divider" /></li>
+    </ul>
+
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+        <a
+          th:if="${session.personasession != null}"
           th:href="@{perfil}"
           class="nav-link"
           >Editar Perfil</a
