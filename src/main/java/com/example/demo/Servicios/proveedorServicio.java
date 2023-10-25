@@ -3,6 +3,7 @@ package com.example.demo.Servicios;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +42,7 @@ public class proveedorServicio implements UserDetailsService {
             String direccion, float honorarioHoras, String rubro, String presentacion)
             throws MiException, IOException {
 
-        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion);
+        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion, archivo);
         Proveedor proveedor = new Proveedor();
 
         proveedor.setNombre(nombre);
@@ -75,8 +76,45 @@ public class proveedorServicio implements UserDetailsService {
         return proveedores;
     }
 
+    @Transactional
+    public void actualizar(MultipartFile archivo, Long id, String nombre, String email, String password,
+            String password2,
+            Long telefono, String direccion, float honorarioHoras, String rubro, String presentacion)
+
+            throws MiException {
+        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion, archivo);
+
+        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            try {
+                Proveedor proveedor = respuesta.get();
+                proveedor.setNombre(nombre);
+                proveedor.setEmail(email);
+                proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+                proveedor.setDireccion(direccion);
+                proveedor.setHonorarioHora(honorarioHoras);
+                proveedor.setRubro(rubro);
+                proveedor.setPresentacion(presentacion);
+                proveedor.setRol(Rol.PROVEEDOR);
+                Long idImagen = null;
+
+                if (proveedor.getImagen() != null) {
+                    idImagen = proveedor.getImagen().getId();
+                }
+
+                Imagen imagen = imagenServicio.modificarImagenProveedor(archivo, idImagen);
+
+                proveedor.setImagen(imagen);
+
+                proveedorRepositorio.save(proveedor);
+            } catch (IOException ex) {
+                System.out.println("No se encuentra la imagen");
+            }
+        }
+    }
+
     private void validar(String nombre, String email, String password, String password2, Long telefono,
-            String direccion, float honorarioHoras, String rubro, String presentacion)
+            String direccion, float honorarioHoras, String rubro, String presentacion, MultipartFile archivo)
             throws MiException {
 
         if (nombre.isEmpty()) {
@@ -106,6 +144,9 @@ public class proveedorServicio implements UserDetailsService {
         }
         if (presentacion.isEmpty()) {
             throw new MiException("La presentacion no puede estar vacia");
+        }
+        if (archivo == null) {
+            throw new MiException("El archivo no puede ser nulo");
         }
 
     }

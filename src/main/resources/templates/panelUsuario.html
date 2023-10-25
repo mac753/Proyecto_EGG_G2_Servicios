@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Mi Perfil</h1>
+    <div class="col-md-4">
+      <div class="container">
+        <p>
+          BIENVENIDO
+          <span
+            th:if="${session.personasession != null}"
+            th:text=" ${session.personasession.nombre} + ' aqui podrás gestionar tu cuenta' "
+          ></span>
+        </p>
+      </div>
+    </div>
 
-</body>
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      id="navbarDropdown"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Perfil
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+        <a
+          th:if="${session.personasession != null}"
+          th:href="@{perfilUsuario}"
+          class="nav-link"
+          >Editar Perfil</a
+        >
+      </li>
+      <li><hr class="dropdown-divider" /></li>
+    </ul>
+    <a
+      th:if="${session.personasession != null}"
+      th:href="@{/logout}"
+      class="nav-link"
+      >Cerrar Sesión</a
+    >
+  </body>
 </html>
