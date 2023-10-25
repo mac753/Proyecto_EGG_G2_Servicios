@@ -1,33 +1,35 @@
-<nav th:fragment="navb" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand"> <img th:src="@{/logos/casacasa.png}" width="30" height="40" class="d-inline-block align-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand">
+          <img src="logos/casacasa.png" width="30" height="30" class="d-inline-block align-top">
       </a>
-      <a class="navbar-brand" th:href="@{/logos/casacasa.png}"></a>
-  
+      <a class="navbar-brand" href="logos/casacasa.png"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" href="/">Inicio</a>
-          <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-          <a class="nav-link" href="/proveedor/vistaProveedor">Perfil</a>
-          <!-- <a class="nav-link" href="/proveedor/registrar">RegProv</a>-->
-          <a class="nav-link" href="/login">Login</a>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Perfil
-            </a>
+          <div class="navbar-nav">
+              <a class="nav-link active" href="/">Inicio</a>
+              <a class="nav-link" href="/proveedor/buscador">Buscar</a>
 
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Ver mi Perfil</a></li>
-                <li><hr class="dropdown-divider"></li>
+              <a class="nav-link" href="/login">Login</a>
 
-                <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
-            </ul>
-        </li>
-        </div>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  sec:authorize="hasRole('USER')" th:href="@{/usuario}" > Perfil </a>
+
+
+
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Ver mi Perfil</a></li>
+                      <li><hr class="dropdown-divider"></li>
+
+                      <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+                  </ul>
+              </li>
+          </div>
       </div>
-    </div>
-  </nav>
+  </div>
+  
+</nav>
