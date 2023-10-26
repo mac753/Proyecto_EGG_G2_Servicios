@@ -47,12 +47,12 @@
                 <div class="izqAb">
 
                     <p><input type="text" class="comen" placeholder="comentario" name="comentario"
-                        required="required" /></p>
-                    <a href="#">
-                    <imput type="button" class="enviarComentario" onclick="alert('el boton enviar funciona')" value="">
-                        Enviar</button>
-                    </a>
+                        required="required"></p>
 
+                        <a class="" href="#">
+                            <imput type="button" class="btn btn-primary btn-block py-3" id="enviarComentario"
+                                onclick="alert('el boton Enviar OT funciona')">Enviar</imput>
+                        </a>
                 </div>
 
 
@@ -62,24 +62,24 @@
 
             <div class="encabezadoCP">
 
-                <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION
-                    PARA QUE NO SEA DENEGADA! </h6>
-
                 <div class="textoOT">
 
                     <h4>ORDEN DE TRABAJO</h4>
-                    <p><input type="text" class="form-control p-4" placeholder="comentario" name="comentario"
-                            required="required"></p>
 
-                    <div class="boton">
+                    <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION </h6>
 
-                        <a href="#">
-                            <imput type="button" class="btn btn-primary btn-block py-3"
-                                onclick="alert('el boton Enviar OT funciona')">Enviar OT</imput>
-                        </a>
-                    </div>
+
+                    <form th:action="@{/orden/crearOrden}" method="POST">
+                        <div>
+                            <input hidden th:value="${proveedor.id}" name="idproveedor">
+
+                            <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario" name="comentario" required="required"></p>
+                        </div>
+                        <div class="boton">
+                                 <button class="btn btn-primary btn-block py-3" type="submit">Enviar</button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
 
 
