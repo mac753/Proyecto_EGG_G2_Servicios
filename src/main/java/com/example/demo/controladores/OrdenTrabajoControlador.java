@@ -86,6 +86,12 @@ public class OrdenTrabajoControlador {
         return "Calificar.html";
     }
     
+     @GetMapping("/cotizacion/{id}")
+    public String cotizar(@PathVariable Long id, Long valor){
+        //ots.aceptarOrdenTrabajo(id);
+        return "Calificar.html";
+    }
+    
     
 //    @PostMapping("/cancelar/{id}")
 //    public String cancelarOrdene(@PathVariable Long id){
