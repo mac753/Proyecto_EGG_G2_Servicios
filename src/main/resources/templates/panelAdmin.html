@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAnel Admin</title>
+    <title>Panel Admin</title>
 </head>
 
 <body>
@@ -15,9 +15,6 @@
             Perfil
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
-        </ul>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
         </ul>
     </li>
@@ -25,7 +22,7 @@
     <h2>Panel Administrador</h2>
     <div>
         <table>
-            <h3>Listado usuarios</h3>
+            <h3>Listado de Usuarios</h3>
             <thead>
                 <tr>
                     <th scope="col">id</th>
@@ -46,27 +43,30 @@
             </tbody>
         </table>
     </div>
-    <h3>Listado Proveedores</h3>
-    <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Direccion</th>
-        </tr>
-    </thead>
-    <tbody th:each="proveedor : ${proveedores}">
-        <th scope="row" th:text="${proveedor.id}"></th>
-        <td th:text="${proveedor.nombre}"></td>
-        <td th:text="${proveedor.email}"></td>
-        <td th:text="${proveedor.rol}"></td>
-        <td th:text="${proveedor.telefono}"></td>
-        <td th:text="${proveedor.direccion}"></td>
-    </tbody>
-    </table>
+
     <div>
+        <table>
+            <h3>Listado de Proveedores</h3>
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Direccion</th>
+                </tr>
+            </thead>
+            <tbody th:each="proveedor : ${proveedores}">
+                <th scope="row" th:text="${proveedor.id}"></th>
+                <td th:text="${proveedor.nombre}"></td>
+                <td th:text="${proveedor.email}"></td>
+                <td th:text="${proveedor.rol}"></td>
+                <td th:text="${proveedor.telefono}"></td>
+                <td th:text="${proveedor.direccion}"></td>
+            </tbody>
+        </table>
+    </div>
 
     </div>
 </body>
