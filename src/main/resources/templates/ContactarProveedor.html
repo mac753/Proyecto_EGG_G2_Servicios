@@ -11,97 +11,76 @@
 </head>
 
 <body>
+
     <nav th:replace="fragments/navbar::nav"></nav>
+    <h1>ENVIALE UN MENSAJE A TU PROVEEDOR</h1>
+    <div class="container2">
 
-    <div class="pantalla">
-
-        <div class="izquierda">
-
-            <div class="unTercio">
-
-                <div class="fotoPerfil">
-                    <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg" class="fotoPerfil" alt="">
-                </div>
-
-
-                <div class="InfoProv">
-
-                    <form th:action="@{/orden/crearOrden}" method="POST">
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre</li>
-                        <li th:text="${proveedor.nombre}"></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Direccion</li>
-                        <li th:text="${proveedor.direccion}"></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Honorarios por hora</li>
-                        <li th:text="${proveedor.honorarioHora}"></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Telefono</li>
-                        <li th:text="${proveedor.telefono}"></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Presentacion</li>
-                        <li th:text="${proveedor.presentacion}"></li>
-                    </form>
-
-                </div>
-
-            </div>
-
-
-            <div class="dosTercio">
+                <ul>
+                    <th:block th:each="proveedor : ${proveedores}">
+                        <div class="col-md-4">
+                            <div class="card1" style="background-color: #000; width: 300px;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="card-img-top" alt="Proveedor 1">
+                                <div class="card-body" >
+                                    <h5 style="font-weight: bold; color: white;">Nombre:  <span class="card-text" th:text="${proveedor.nombre}"></span></h5>
+                                    <h5 style="color: white;">Direccion:  <span class="card-text" th:text="${proveedor.direccion}"></span></h5>
+                                    <h5 style="color: white;">Honorarios por hora:  <span class="card-text" th:text="${proveedor.honorarioHora}"></span></h5>
+                                    <h5 class="card-text" style="color: white;">Cantidad de estrellas:  5</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </ul>
 
                 <div class="fotoTrabajo">
 
                     <p>Imagenes de Trabajos Realizados</p>
-                    <img src="https://th.bing.com/th/id/OIP.VNbxMxKtA769S4M6mghyQgHaEI?pid=ImgDet&rs=1" class="fotoTrabRea">
-                    <img src="https://th.bing.com/th/id/OIP.qU-V3d8GbJpjRrt-UvVd6QAAAA?pid=ImgDet&rs=1" class="fotoTrabRea">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="fotoTrabRea">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="fotoTrabRea">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="fotoTrabRea">
 
+
+
+
+                <div class="card" style="background-color: #000; width: 683px;">
+                    <input type="text" class="form-control" placeholder="Ingresa tu comentario" name="comentario" required="required">
+                    <br>
+                    <div class="enviarComentario">
+                        <button type="button" class="btn btn-primary btn-block py-3" onclick="alert('el boton enviar funciona')">Enviar</button>
+                    </div>
                 </div>
-
-            </div>
-
-            <div class="tresTercio">
-
-                <p><input type="text" class="comentario" placeholder="comentario" name="comentario"
-                        required="required" /></p>
-                <a href="#">
-                    <imput type="button" class="enviarComentario" onclick="alert('el boton enviar funciona')" value="">
-                        Enviar</button>
-                </a>
-
-            </div>
-
-
+                </div>
         </div>
+    <div class="container3">
 
-        <div class="derecha">
-
-            <div class="encabezadoCP">
-
-                <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION
-                    PARA QUE NO SEA DENEGADA! </h6>
-
+                <h6 class="texCP">Ingresa tu orden de trabajo para el Proveedor, por favor SER CLARO CON TU PETICION para que no sea denegada!</h6>
                 <div class="textoOT">
-
-                    <h4>ORDEN DE TRABAJO</h4>
-                    <p><input type="text" class="form-control p-4" placeholder="comentario" name="comentario"
-                            required="required"></p>
-
-                    <div class="boton">
-
-                        <a href="#">
-                            <input type="button" class="btn btn-primary btn-block py-3"
-                                onclick="alert('el boton Enviar OT funciona')">Enviar OT</input>
-                        </a>
+                    <div class="card3" style="background-color: #000; width: 1600px;">
+                        <h4 style="color: white;">Orden de trabajo</h4>
+                        <input type="text" class="form-control p-4" placeholder="Ingresa tu orden de trabajo" name="comentario" required="required" >
+                        <br>
+                        <div class="boton">
+                            <button type="button" class="btn btn-primary btn-block py-3" onclick="alert('el boton Enviar OT funciona')">Enviar</button>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-
-
-        </div>
-
     </div>
+
+    <section class="text-center container">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+            </div>
+        </div>
+      </section>
+
+
     <footer class="pie">
         <div th:replace="fragments/footer::foot"></div>
         <div th:replace="fragments/redesS::red_soc"></div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
