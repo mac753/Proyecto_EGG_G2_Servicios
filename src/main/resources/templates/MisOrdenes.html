@@ -22,10 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th scope="col">Nombre Proveedor</th>
                     <th scope="col">Descripcion del trabajo</th>
                     <th scope="col">Estado</th>
-                    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Ingresar valor de la cotizacion</th>
-                    
-                    
-                    
+                    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Ingresar valor de la cotizacion</th> 
                     <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Acciones</th>
                     
                     
@@ -38,7 +35,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <td th:text="${orden.proveedor.nombre}"></td>
                 <td th:text="${orden.comentario}"></td>
                 <td th:text="${orden.estadOrden}"></td>
-                <td th:if="${session.usuariosession != null}" ><input type="text"></input><button>enviar</button></td>
+                <td  ><input type="text"></input><button>enviar</button></td>
                 <td> 
                     <a th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
                     <a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>
@@ -57,32 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
     </body>
 
-=======
-    <table>
-      <h3>Listado de orden</h3>
-      <thead>
-        <tr>
-          <th scope="col">id Orden</th>
-          <th scope="col">Nombre Usuario</th>
-          <th scope="col">Nombre Proveedor</th>
-          <th scope="col">Comentario</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody th:each="orden : ${listaOrdenes}">
-        <th th:text="${orden.id}"></th>
-        <td th:text="${orden.usuario.nombre}"></td>
-        <td th:text="${orden.proveedor.nombre}"></td>
-        <td th:text="${orden.comentario}"></td>
-        <td th:text="${orden.estadOrden}"></td>
-        <td>
-          <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-          <a th:href="@{/orden/aceptar/__${orden.id}__}">Aceptar cotizacion</a>
-          <a th:href="@{/orden/calificar/__${orden.id}__}">Calificar</a>
-        </td>
-      </tbody>
-    </table>
+
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
     </ul>
