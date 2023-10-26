@@ -1,6 +1,5 @@
 package com.example.demo.Servicios;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +20,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.demo.Excepciones.MiException;
-import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Persona;
-import com.example.demo.entidades.Proveedor;
 import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;

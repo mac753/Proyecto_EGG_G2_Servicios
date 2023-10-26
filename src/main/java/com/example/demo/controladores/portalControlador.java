@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
-import com.example.demo.entidades.Proveedor;
 import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;

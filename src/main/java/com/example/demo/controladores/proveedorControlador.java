@@ -21,8 +21,6 @@ import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.Servicios.proveedorServicio;
 
 import com.example.demo.entidades.Proveedor;
-import com.example.demo.entidades.Usuario;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
