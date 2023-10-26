@@ -85,17 +85,12 @@ public class OrdenTrabajoControlador {
         ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
-<<<<<<< HEAD
-    
-    @GetMapping("/calificar/{id}")
-    public String calificarOrden(@PathVariable Long id){
-        //ots.aceptarOrdenTrabajo(id);
-=======
+
 
     @GetMapping("/calificar")
     public String calificarOrden(@PathVariable Long id) {
         // ots.aceptarOrdenTrabajo(id);
->>>>>>> abell
+
         return "Calificar.html";
     }
     
@@ -104,34 +99,30 @@ public class OrdenTrabajoControlador {
         //ots.aceptarOrdenTrabajo(id);
         return "Calificar.html";
     }
-    
 
-
-    
-
-    @PostMapping("/calificar/{id}")
-    public String calificarOrden(@PathVariable Long id, ModelMap modelo) {
-        // Recuperar la orden de trabajo por su ID utilizando el servicio
-        OrdenTrabajo ordenTrabajo = otr.buscarOtPorid(id);
-
-        if (ordenTrabajo != null) {
-            // Verificar que la orden de trabajo esté en estado FINALIZADA
-            if (ordenTrabajo.getEstadOrden() == EstadoOrdenTrabajo.FINALIZADA) {
-                // Pasar la orden de trabajo al modelo para mostrar los detalles
-                modelo.addAttribute("ordenTrabajo", ordenTrabajo);
-                return "Calificar.html";
-            } else {
-                // La orden de trabajo no está en estado FINALIZADA, muestra un mensaje de error
-                modelo.addAttribute("error", "No puedes calificar esta orden de trabajo hasta que esté finalizada.");
-            }
-        } else {
-            // La orden de trabajo no se encontró, muestra un mensaje de error
-            modelo.addAttribute("error", "La orden de trabajo no existe.");
-        }
-
-        // Redirige de nuevo a la lista de órdenes de trabajo
-        return "redirect:/orden/ordenes";
-    }
+//    @PostMapping("/calificar/{id}")
+//    public String calificarOrden(@PathVariable Long id, ModelMap modelo) {
+//        // Recuperar la orden de trabajo por su ID utilizando el servicio
+//        OrdenTrabajo ordenTrabajo = otr.findById(id);
+//
+//        if (ordenTrabajo != null) {
+//            // Verificar que la orden de trabajo esté en estado FINALIZADA
+//            if (ordenTrabajo.getEstadOrden() == EstadoOrdenTrabajo.FINALIZADA) {
+//                // Pasar la orden de trabajo al modelo para mostrar los detalles
+//                modelo.addAttribute("ordenTrabajo", ordenTrabajo);
+//                return "Calificar.html";
+//            } else {
+//                // La orden de trabajo no está en estado FINALIZADA, muestra un mensaje de error
+//                modelo.addAttribute("error", "No puedes calificar esta orden de trabajo hasta que esté finalizada.");
+//            }
+//        } else {
+//            // La orden de trabajo no se encontró, muestra un mensaje de error
+//            modelo.addAttribute("error", "La orden de trabajo no existe.");
+//        }
+//
+//        // Redirige de nuevo a la lista de órdenes de trabajo
+//        return "redirect:/orden/ordenes";
+//    }
 
     // @PostMapping("/cancelar/{id}")
     // public String cancelarOrdene(@PathVariable Long id){
