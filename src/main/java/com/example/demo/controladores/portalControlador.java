@@ -2,16 +2,23 @@ package com.example.demo.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
+import com.example.demo.entidades.Proveedor;
+import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +28,8 @@ public class portalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
 
     @GetMapping("/")
     public String index() {
@@ -51,6 +60,20 @@ public class portalControlador {
         }
     }
 
+    @GetMapping("/panelUsuario")
+    public String panelUsuario(HttpSession session, ModelMap modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("personasession");
+
+        if (usuario != null) {
+            // Aquí tienes acceso al proveedor y sus datos
+            modelo.addAttribute("usuario", usuario);
+        } else {
+            // Manejar la situación en la que el proveedor no está en la sesión
+        }
+
+        return "panelUsuario.html";
+    }
+
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         if (error != null) {
@@ -70,11 +93,16 @@ public class portalControlador {
         }
         if (logueado.getRol().toString().equals("PROVEEDOR")) {
             return "redirect:/proveedor/panelProveedor";
+
+        }
+        if (logueado.getRol().toString().equals("USER")) {
+            return "redirect:/buscador";
+
         }
         return "Buscador.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_PROVEEDOR')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/buscador")
     public String inicio() {
 
@@ -85,5 +113,39 @@ public class portalControlador {
     public String conocenos() {
 
         return "conocenos.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')") // ver si lo podemos sacar
+    @GetMapping("/perfilUsuario")
+    public String perfilUsuario(ModelMap modelo) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario logueado = usuarioRepositorio.BuscarUsuarioPorEmail(authentication.getName());
+        modelo.put("usuario", logueado);
+        return "modificarUsuario.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PostMapping("/perfilUsuario/{id}")
+    public String actualizar(@PathVariable Long id, String nombre, String email,
+            @RequestParam String password,
+            @RequestParam String password2,
+            Long telefono, String direccion, ModelMap modelo) {
+
+        try {
+            usuarioServicio.actualizar(id, nombre, email, password, password2, telefono, direccion);
+
+            modelo.put("exito", "Usuario actualizado correctamente!");
+
+            return "index.html";
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+            System.out.println("No se esta modificando");
+            return "modificarUsuario.html";
+        }
+
     }
 }

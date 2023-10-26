@@ -3,6 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
+<<<<<<< HEAD
 <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>TODO supply a title</title>
@@ -22,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th scope="col">Nombre Proveedor</th>
                     <th scope="col">Descripcion del trabajo</th>
                     <th scope="col">Estado</th>
-                    <th th:if="${session.usuariosession != null}" scope="col">Ingresar valor de la cotizacion</th>
+                    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Ingresar valor de la cotizacion</th>
                     
                     
                     
@@ -56,4 +57,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         
     </body>
+
 </html>

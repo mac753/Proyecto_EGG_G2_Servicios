@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrdenTrabajoRepositorio extends JpaRepository<OrdenTrabajo,Long> {
+public interface OrdenTrabajoRepositorio extends JpaRepository<OrdenTrabajo, Long> {
+
 
  @Query("SELECT o FROM OrdenTrabajo o WHERE o.usuario.id =:id")
     public List<OrdenTrabajo> buscarPorid(@Param("id") Long id);
@@ -18,5 +19,5 @@ public interface OrdenTrabajoRepositorio extends JpaRepository<OrdenTrabajo,Long
     public List<OrdenTrabajo> buscarPoridProveedor(@Param("id") Long id);   
     
    
-    
+
 }

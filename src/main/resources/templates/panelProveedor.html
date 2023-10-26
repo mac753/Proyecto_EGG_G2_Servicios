@@ -1,3 +1,6 @@
+
+<!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -27,13 +30,13 @@
     >
       Perfil
     </a>
-    
-    
+
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
         <a
           th:if="${session.personasession != null}"
           th:href="@{/orden/ordenes}"
+<<<<<<< HEAD
           
           class="nav-link"
           >Ver mis ordenes </a
@@ -42,6 +45,12 @@
       <li><hr class="dropdown-divider" /></li>
     </ul>
     
+
+        </a>
+      </li>
+      <li><hr class="dropdown-divider" /></li>
+    </ul>
+
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
         <a
@@ -53,5 +62,13 @@
       </li>
       <li><hr class="dropdown-divider" /></li>
     </ul>
+
+    <a
+      th:if="${session.personasession != null}"
+      th:href="@{/logout}"
+      class="nav-link"
+      >Cerrar Sesión</a
+    >
+
   </body>
 </html>

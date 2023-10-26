@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <title>Modificar proveedor</title>
+    <title>Modificar usuario</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,15 +15,14 @@
     <div class="container-fluid m-5 contenedor">
       <form
         class="formulario"
-        th:object="${proveedor}"
-        th:action="@{/proveedor/perfil/__${proveedor.id}__}"
+        th:object="${usuario}"
+        th:action="@{/perfilUsuario/__${usuario.id}__}"
         method="POST"
-        enctype="multipart/form-data"
       >
         <input hidden th:value="${id}" name="id" />
 
         <div class="form-group my-3">
-          <h3 class="card-title">Editar Proveedor</h3>
+          <h3 class="card-title">Editar Usuario</h3>
         </div>
 
         <br />
@@ -33,7 +32,7 @@
           type="text"
           id="nombre"
           name="nombre"
-          th:value="${proveedor.nombre}"
+          th:value="${usuario.nombre}"
           required
         /><br />
 
@@ -42,7 +41,7 @@
           type="email"
           id="email"
           name="email"
-          th:value="${proveedor.email}"
+          th:value="${usuario.email}"
           required
         /><br />
 
@@ -57,7 +56,7 @@
           type="number"
           id="telefono"
           name="telefono"
-          th:value="${proveedor.telefono}"
+          th:value="${usuario.telefono}"
           required
         /><br />
 
@@ -66,52 +65,9 @@
           type="text"
           id="direccion"
           name="direccion"
-          th:value="${proveedor.direccion}"
+          th:value="${usuario.direccion}"
           required
         /><br />
-
-        <label class="textofp" for="honorarioHora">Honorario por Horas:</label>
-        <input
-          type="number"
-          id="honorarioHora"
-          name="honorarioHora"
-          th:value="${proveedor.honorarioHora}"
-          required
-        /><br />
-
-        <label class="textofp" for="rubro">selecciona un rubro:</label>
-        <select id="rubro" name="rubro" th:field="*{rubro}">
-          <option value="Jardinero">Jardinero</option>
-          <option value="Chapista">Chapista</option>
-          <option value="Piletero">Piletero</option>
-          <option value="Salidor">Salidor</option>
-          <option value="Limpieza">Limpieza</option>
-        </select>
-
-        <!--
-        <label class="textofp" for="rubro">rubro:</label>
-        <input
-          type="text"
-          id="rubro"
-          name="rubro"
-          th:value="${proveedor.rubro}"
-          required
-        />
-        <br />
--->
-        <br />
-        <label for="presentacion" id="pres">presentacion:</label>
-        <textarea
-          id="presentacion"
-          name="presentacion"
-          rows="4"
-          th:value="${proveedor.presentacion}"
-          required
-        ></textarea>
-
-        <label class="textofp" type="file">Foto de perfil</label>
-        <input class="textofp" type="file" name="archivo" />
-        <br />
 
         <button type="submit" class="btn btn-primary mt-3 botones">
           Actualizar

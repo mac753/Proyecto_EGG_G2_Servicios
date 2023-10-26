@@ -3,6 +3,7 @@ package com.example.demo.Servicios;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
+import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,10 +31,13 @@ import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-public class proveedorServicio implements UserDetailsService {
+public class proveedorServicio {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
+    
+    @Autowired
+    personaRepositorio personaRepositorio;
 
     @Autowired
     ImagenServicio imagenServicio;
@@ -42,7 +48,7 @@ public class proveedorServicio implements UserDetailsService {
             String direccion, float honorarioHoras, String rubro, String presentacion)
             throws MiException, IOException {
 
-        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion);
+        validar(nombre, email, password, password2, telefono, direccion, honorarioHoras, rubro, presentacion, archivo);
         Proveedor proveedor = new Proveedor();
 
         proveedor.setNombre(nombre);
@@ -76,50 +82,6 @@ public class proveedorServicio implements UserDetailsService {
         return proveedores;
     }
 
-    private void validar(String nombre, String email, String password, String password2, Long telefono,
-            String direccion, float honorarioHoras, String rubro, String presentacion)
-            throws MiException {
-
-        if (nombre.isEmpty()) {
-            throw new MiException("El nombre no puede estar vacio");
-        }
-        if (email.isEmpty()) {
-            throw new MiException("El email no puede estar vacio");
-        }
-        if (password.isEmpty()) {
-            throw new MiException("El password no puede estar vacio");
-        }
-        if (!password.equals(password2)) {
-            throw new MiException("Las contraseñas ingresadas deben ser iguales");
-        }
-        if (telefono == null) {
-            throw new MiException("El telfono no puede ser nulo");
-        }
-
-        if (direccion.isEmpty()) {
-            throw new MiException("La direccion no puede estar vacia");
-        }
-        if (honorarioHoras < 0) {
-            throw new MiException("debes actualizar a un honorario por hora valido");
-        }
-        if (rubro.isEmpty()) {
-            throw new MiException("El rubro no puede estar vacia");
-        }
-        if (presentacion.isEmpty()) {
-            throw new MiException("La presentacion no puede estar vacia");
-        }
-
-    }
-
-    public Proveedor buscarPorid(Long id) {
-        Proveedor proveedor = proveedorRepositorio.findById(id).get();
-        return proveedor;
-    }
-
-    public Proveedor BuscarPorId(String id) {
-        return proveedorRepositorio.buscarPorNombreProveedor(id);
-    }
-    
     @Transactional
     public void actualizar(MultipartFile archivo, Long id, String nombre, String email, String password,
             String password2,
@@ -156,7 +118,7 @@ public class proveedorServicio implements UserDetailsService {
             }
         }
     }
-    
+
     private void validar(String nombre, String email, String password, String password2, Long telefono,
             String direccion, float honorarioHoras, String rubro, String presentacion, MultipartFile archivo)
             throws MiException {
@@ -195,23 +157,34 @@ public class proveedorServicio implements UserDetailsService {
 
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Proveedor proveedor = proveedorRepositorio.buscarProveedorPorEmail(email);
-        if (proveedor != null) {
-            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + proveedor.getRol().toString());
-            permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", proveedor);
-            return new User(proveedor.getNombre(), proveedor.getPassword(), permisos);
-
-        } else {
-            return null;
-        }
+    public Proveedor buscarPorid(Long id) {
+        Proveedor proveedor = proveedorRepositorio.findById(id).get();
+        return proveedor;
     }
+
+    public Proveedor BuscarPorId(String id) {
+        return proveedorRepositorio.buscarPorNombreProveedor(id);
+    }
+    
+    
+    
+    
+
+
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
+//        if (persona != null) {
+//            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
+//            permisos.add(p);
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//            HttpSession session = attr.getRequest().getSession(true);
+//            session.setAttribute("personasession", persona);
+//            return new User(persona.getEmail(), persona.getPassword(), permisos);
+//        } else {
+//            return null;
+//        }
+//    }
 
 }

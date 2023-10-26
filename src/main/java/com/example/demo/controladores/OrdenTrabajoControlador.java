@@ -8,6 +8,7 @@ import com.example.demo.entidades.Persona;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +42,8 @@ public class OrdenTrabajoControlador {
         ots.crearOt(idproveedor, idusuario, comentario);
         return "redirect:/orden/ordenes";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVEEDOR')")
     @GetMapping("/ordenes")
     public String listarOrdenes(HttpSession session, ModelMap modelo) {
         Persona logueado = (Persona) session.getAttribute("personasession");
@@ -59,14 +61,11 @@ public class OrdenTrabajoControlador {
             System.out.println(logueado.getId().toString());
             List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
-            
+        }
+       return "MisOrdenes.html";
+
         }
 
-        
-       return "MisOrdenes.html";
-        
-                
-    }
     
     @GetMapping("/cancelar/{id}")
     public String cancelarOrden(@PathVariable Long id){
@@ -92,11 +91,14 @@ public class OrdenTrabajoControlador {
         return "Calificar.html";
     }
     
+
+
     
-//    @PostMapping("/cancelar/{id}")
-//    public String cancelarOrdene(@PathVariable Long id){
-//        ots.cancelarOrdenTrabajo(id);
-//        return "redirect:/orden/ordenes";
-//    }
+
+    // @PostMapping("/cancelar/{id}")
+    // public String cancelarOrdene(@PathVariable Long id){
+    // ots.cancelarOrdenTrabajo(id);
+    // return "redirect:/orden/ordenes";
+    // }
 
 }

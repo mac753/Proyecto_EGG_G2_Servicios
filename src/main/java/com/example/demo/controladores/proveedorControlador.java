@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +21,17 @@ import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.Servicios.proveedorServicio;
 
 import com.example.demo.entidades.Proveedor;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.entidades.Usuario;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/proveedor") // localhost:8080/proveedor
@@ -77,6 +87,7 @@ public class proveedorControlador {
         return "Buscador";
     }
 
+
    @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
         Proveedor proveedor = (Proveedor) session.getAttribute("proveedorsession");
@@ -108,7 +119,7 @@ public class proveedorControlador {
             @RequestParam String password2,
             Long telefono, String direccion, float honorarioHora, String rubro, String presentacion,
             ModelMap modelo) {
-            
+
         try {
             proveedorServicio.actualizar(archivo, id, nombre, email, password, password2, telefono, direccion,
                     honorarioHora, rubro, presentacion);
@@ -127,4 +138,11 @@ public class proveedorControlador {
 
     }
 
+
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityContextHolder.clearContext();
+        return "redirect:/index";
+    }
 }
+
