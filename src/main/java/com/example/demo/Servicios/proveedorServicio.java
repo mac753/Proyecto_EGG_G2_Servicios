@@ -6,16 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
@@ -23,19 +15,16 @@ import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
-import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class proveedorServicio {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
-    
+
     @Autowired
     personaRepositorio personaRepositorio;
 
@@ -165,26 +154,24 @@ public class proveedorServicio {
     public Proveedor BuscarPorId(String id) {
         return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
-    
-    
-    
-    
 
-
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
-//        if (persona != null) {
-//            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
-//            permisos.add(p);
-//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//            HttpSession session = attr.getRequest().getSession(true);
-//            session.setAttribute("personasession", persona);
-//            return new User(persona.getEmail(), persona.getPassword(), permisos);
-//        } else {
-//            return null;
-//        }
-//    }
+    // @Override
+    // public UserDetails loadUserByUsername(String email) throws
+    // UsernameNotFoundException {
+    // Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
+    // if (persona != null) {
+    // List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+    // GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" +
+    // persona.getRol().toString());
+    // permisos.add(p);
+    // ServletRequestAttributes attr = (ServletRequestAttributes)
+    // RequestContextHolder.currentRequestAttributes();
+    // HttpSession session = attr.getRequest().getSession(true);
+    // session.setAttribute("personasession", persona);
+    // return new User(persona.getEmail(), persona.getPassword(), permisos);
+    // } else {
+    // return null;
+    // }
+    // }
 
 }

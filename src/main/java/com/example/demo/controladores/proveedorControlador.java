@@ -23,14 +23,6 @@ import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import com.example.demo.entidades.Usuario;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/proveedor") // localhost:8080/proveedor
