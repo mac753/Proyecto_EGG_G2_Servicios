@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>aca vamos a calificar la orden</div>
-        
-        
-    </body>
+<html xmlns:th="http://www.thymeleaf.org" html lang="es">
+  <head>
+    <title>Calificar Orden de Trabajo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1>Calificar Orden de Trabajo</h1>
+    <div>
+      <p>Califica tu experiencia con esta orden de trabajo:</p>
+      <form
+        class="formulario"
+        th:object="${orden}"
+        th:action="@{/orden/calificar/__${orden.id}__}"
+        method="POST"
+      >
+        <input type="hidden" name="id" th:value="{id}" />
+
+        <label for="puntaje">Puntaje:</label>
+        <select name="puntaje" id="puntaje" th:field="*{puntaje}">
+          <option value="1">1 (Muy malo)</option>
+          <option value="2">2 (Malo)</option>
+          <option value="3">3 (Regular)</option>
+          <option value="4">4 (Bueno)</option>
+          <option value="5">5 (Excelente)</option>
+        </select>
+
+        <label for="comentario">Comentario:</label>
+        <textarea
+          name="comentario"
+          id="comentario"
+          rows="4"
+          cols="50"
+          th:value="${orden.comentario}"
+        ></textarea>
+
+        <button type="submit">Enviar Calificación</button>
+      </form>
+    </div>
+  </body>
 </html>
