@@ -14,6 +14,9 @@ public interface OrdenTrabajoRepositorio extends JpaRepository<OrdenTrabajo, Lon
     @Query("SELECT o FROM OrdenTrabajo o WHERE o.id =:id")
     public List<OrdenTrabajo> buscarPorid(@Param("id") Long id);
 
+    @Query("SELECT o FROM OrdenTrabajo o WHERE o.id =:id")
+    public OrdenTrabajo buscarOtPorid(@Param("id") Long id);
+
     @Query("SELECT o FROM OrdenTrabajo o WHERE o.proveedor.id =:id")
     public List<OrdenTrabajo> buscarPoridProveedor(@Param("id") Long id);
 

@@ -14,6 +14,11 @@
             th:if="${session.personasession != null}"
             th:text=" ${session.personasession.nombre} + ' aqui podrás gestionar tu cuenta' "
           ></span>
+          <img
+            alt="foto"
+            class="logo"
+            th:src="@{/imagen/perfil/__${session.personasession.id}__}"
+          />
         </p>
       </div>
     </div>
