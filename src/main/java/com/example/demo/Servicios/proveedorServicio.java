@@ -20,18 +20,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
+import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 
 @Service
-public class proveedorServicio implements UserDetailsService {
+public class proveedorServicio {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
+    
+    @Autowired
+    personaRepositorio personaRepositorio;
 
     @Autowired
     ImagenServicio imagenServicio;
@@ -159,23 +165,26 @@ public class proveedorServicio implements UserDetailsService {
     public Proveedor BuscarPorId(String id) {
         return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
+    
+    
+    
+    
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Proveedor proveedor = proveedorRepositorio.buscarProveedorPorEmail(email);
-        if (proveedor != null) {
-            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + proveedor.getRol().toString());
-            permisos.add(p);
 
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", proveedor);
-            return new User(proveedor.getNombre(), proveedor.getPassword(), permisos);
-
-        } else {
-            return null;
-        }
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
+//        if (persona != null) {
+//            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
+//            permisos.add(p);
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//            HttpSession session = attr.getRequest().getSession(true);
+//            session.setAttribute("personasession", persona);
+//            return new User(persona.getEmail(), persona.getPassword(), permisos);
+//        } else {
+//            return null;
+//        }
+//    }
 
 }

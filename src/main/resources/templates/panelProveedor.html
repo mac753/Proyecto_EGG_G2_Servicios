@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -14,6 +16,11 @@
             th:if="${session.personasession != null}"
             th:text=" ${session.personasession.nombre} + ' aqui podrás gestionar tu cuenta' "
           ></span>
+          <img
+            alt="foto"
+            class="logo"
+            th:src="@{/imagen/perfil/__${session.personasession.id}__}"
+          />
         </p>
       </div>
     </div>
@@ -34,8 +41,16 @@
         <a
           th:if="${session.personasession != null}"
           th:href="@{/orden/ordenes}"
+<<<<<<< HEAD
+          
           class="nav-link"
-          >Ver mis ordenes
+          >Ver mis ordenes </a
+        >
+      </li>
+      <li><hr class="dropdown-divider" /></li>
+    </ul>
+    
+
         </a>
       </li>
       <li><hr class="dropdown-divider" /></li>
@@ -52,11 +67,13 @@
       </li>
       <li><hr class="dropdown-divider" /></li>
     </ul>
+
     <a
       th:if="${session.personasession != null}"
       th:href="@{/logout}"
       class="nav-link"
       >Cerrar Sesión</a
     >
+
   </body>
 </html>

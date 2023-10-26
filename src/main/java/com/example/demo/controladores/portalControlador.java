@@ -90,9 +90,11 @@ public class portalControlador {
         }
         if (logueado.getRol().toString().equals("PROVEEDOR")) {
             return "redirect:/proveedor/panelProveedor";
+
         }
         if (logueado.getRol().toString().equals("USER")) {
             return "redirect:/buscador";
+
         }
         return "Buscador.html";
     }
