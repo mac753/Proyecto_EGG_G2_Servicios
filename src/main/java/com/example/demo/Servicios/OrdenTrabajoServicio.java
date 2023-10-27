@@ -102,21 +102,19 @@ public class OrdenTrabajoServicio {
         ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
         return ordenesTrabajo;
     }
-    
-     public List<OrdenTrabajo> ListarOrdenesTrabajoProveedor(Long idPersona) {
+
+    public List<OrdenTrabajo> ListarOrdenesTrabajoProveedor(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
         ordenesTrabajo = otRepositorio.buscarPoridProveedor(idPersona);
         return ordenesTrabajo;
     }
-    
+
     public List<OrdenTrabajo> ListarTodasOrdenesTrabajo() {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
         ordenesTrabajo = otRepositorio.findAll();
         return ordenesTrabajo;
     }
-
-   
 
 }

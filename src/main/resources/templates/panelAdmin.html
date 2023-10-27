@@ -31,6 +31,7 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Direccion</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody th:each="usuario : ${usuarios}">
@@ -54,6 +55,7 @@
                 <th scope="col">Rol</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col">Dirección</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
 
@@ -65,16 +67,30 @@
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.direccion}"></td>
         </tbody>
-        <!-- Aquí deberías tener las filas de datos de tus proveedores -->
-        <!--</table>
-    <tbody th:each="proveedor : ${proveedores}">
-        <th scope="row" th:text="${proveedor.id}"></th>
-        <td th:text="${proveedor.nombre}"></td>
-        <td th:text="${proveedor.email}"></td>
-        <td th:text="${proveedor.rol}"></td>
-        <td th:text="${proveedor.telefono}"></td>
-        <td th:text="${proveedor.direccion}"></td>
-    </tbody>-->
+    </table>
+
+    <h3>Lista de Ordenes de Trabajo</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descripción del trabajo</th>
+                <th scope="col">Puntaje</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">(Rubro Proveedor)</th>
+                <th scope="col">(Nombre Usuario)</th>
+            </tr>
+        </thead>
+        <tbody th:each="lista : ${listaOt}">
+            <th scope="row" th:text="${lista.id}"></th>
+            <td th:text="${lista.comentario}"></td>
+            <td th:text="${lista.puntaje}"></td>
+            <td th:text="${lista.estadOrden}"></td>
+            <td th:text="${lista.proveedor.nombre}"></td>
+            <td th:text="${lista.proveedor.rubro}"></td>
+            <td th:text="${lista.usuario.nombre}"></td>
+        </tbody>
     </table>
     <div>
 
