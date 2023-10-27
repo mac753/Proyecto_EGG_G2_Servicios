@@ -77,7 +77,7 @@ public class OrdenTrabajoControlador {
 
     @GetMapping("/aceptar")
     public String aceptarOrdenn(@PathVariable Long id) {
-        ots.aceptarOrdenTrabajo(id, id);
+        ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 
@@ -85,7 +85,7 @@ public class OrdenTrabajoControlador {
     public String aceptarOrden(@PathVariable Long id, HttpSession session) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
-        ots.aceptarOrdenTrabajo(id, idusuario);
+        ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 
