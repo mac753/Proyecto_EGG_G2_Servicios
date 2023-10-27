@@ -55,7 +55,7 @@ body {
 
 
 
-.textind{
+.textind {
   margin-top: 15px;
   text-align: center;
 }
@@ -108,7 +108,7 @@ body {
   left: 15%;
   right: 15%;
 
-  
+
 }
 
 @keyframes slide {
@@ -379,11 +379,13 @@ textarea {
   margin-bottom: 5%;
 
 }
-.ruh3{
+
+.ruh3 {
   margin-top: 15px;
   color: white;
   text-align: center;
 }
+
 .regUsuario input {
   margin-left: 10%;
   width: 80%;
@@ -418,7 +420,7 @@ textarea {
   height: auto;
 }
 
-.textbusq{
+.textbusq {
   margin-top: 50px;
   text-align: center;
   font-size: 30px;
@@ -437,7 +439,8 @@ textarea {
   width: 10%;
   background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
 }
-.botonbus:hover{
+
+.botonbus:hover {
   color: red;
 }
 
@@ -451,26 +454,28 @@ textarea {
   height: 35%;
 }
 
-.col-md-4{
-display: inline-block;
-margin: 0;
-width: 25%; 
-margin: 3%;
+.col-md-4 {
+  display: inline-block;
+  margin: 0;
+  width: 25%;
+  margin: 3%;
 
 }
-#contac, #regist{
+
+#contac,
+#regist {
   width: 50%;
   height: auto;
   margin-left: 10px;
 }
 
-#textbien{
- width: 15%;
- border-radius: 5px;
- background-color:  rgba(0, 0, 0, 0.3);
- color: white;
- font-weight: bold;
- text-align: center;
+#textbien {
+  width: 15%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: bold;
+  text-align: center;
 }
 
 /*  Contactar Proveedor */
@@ -480,6 +485,7 @@ margin: 3%;
   height: auto;
 
 }
+
 .izquiercon {
   flex: 1;
   padding: 10px;
@@ -488,12 +494,13 @@ margin: 3%;
   margin-left: 5%;
 
 }
+
 .derecha {
   flex: 2;
   padding: 20px
-
 }
-.izqAb{
+
+.izqAb {
   margin-top: 20%;
   border: 2px solid orange;
   align-items: center;
@@ -503,13 +510,14 @@ margin: 3%;
   background-color: #333;
 
 }
-.comen{
-    width: 100%;
-    padding: 5px;
-    border: 1px solid orange;
-    margin-bottom: 2px;
-    border-radius: 10px;
-  }
+
+.comen {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid orange;
+  margin-bottom: 2px;
+  border-radius: 10px;
+}
 
 
 .encabezadoCP {
@@ -541,7 +549,7 @@ margin: 3%;
 
 
 
-   
+
 
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 768px) {
@@ -575,99 +583,103 @@ margin: 3%;
 
     width: 70%;
     height: 70%;
-  
+
   }
 
   .card-deck {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
+  }
 
-.col-md-4 {
+  .col-md-4 {
     flex: 0 0 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
-}
+  }
 
-.seleb{
-  margin-left: 25%;
-}
+  .seleb {
+    margin-left: 25%;
+  }
 
-.botonbus{
- margin-left: 45%;
- width: 10%;
-}
-
-#textbien{
-  width: 30%;
-  border-radius: 5px;
-  background-color:  rgba(0, 0, 0, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
-
-}
-
-.regUsuario {
-  margin-left: 15%;
-  width: 70%;
-}
-.izqAb{
-  margin-top: 80%;
-  border: 2px solid orange;
-  align-items: center;
-  margin-left: 5%;
-  width: 150%;
-  border-radius: 5px;
-
-}
-.enviarComentario {
-  width: 30%;
-}
-
-@media screen and (max-width: 991px) {
-  .logo {
+  .botonbus {
+    margin-left: 45%;
     width: 10%;
   }
 
-  .barraSuperior .texto {
-    display: flex;
-    flex-direction: column;
-    font-size: 10px;
-    width: 100%;
+  #textbien {
+    width: 30%;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+
   }
 
-  .navbar .navbar-toggler {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translate(0, -50%);
-    display: block;
-  }
-  .fotoPerfil {
-
+  .regUsuario {
+    margin-left: 15%;
     width: 70%;
-    height: 70%;
-  
   }
-  
-.seleb{
-  margin-left: 25%;
-}
 
-.botonbus{
- margin-left: 45%;
- width: 10%;
-}
+  .izqAb {
+    margin-top: 80%;
+    border: 2px solid orange;
+    align-items: center;
+    margin-left: 5%;
+    width: 150%;
+    border-radius: 5px;
 
-#textbien{
-  width: 30%;
-  border-radius: 5px;
-  background-color:  rgba(0, 0, 0, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
+  }
 
-}
+  .enviarComentario {
+    width: 30%;
+  }
 
+  @media screen and (max-width: 991px) {
+    .logo {
+      width: 10%;
+    }
+
+    .barraSuperior .texto {
+      display: flex;
+      flex-direction: column;
+      font-size: 10px;
+      width: 100%;
+    }
+
+    .navbar .navbar-toggler {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate(0, -50%);
+      display: block;
+    }
+
+    .fotoPerfil {
+
+      width: 70%;
+      height: 70%;
+
+    }
+
+    .seleb {
+      margin-left: 25%;
+    }
+
+    .botonbus {
+      margin-left: 45%;
+      width: 10%;
+    }
+
+    #textbien {
+      width: 30%;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      font-weight: bold;
+      text-align: center;
+
+    }
+
+  }
 }
