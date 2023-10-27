@@ -79,6 +79,7 @@ public class portalControlador {
         if (error != null) {
             modelo.put("error", "Usuario o contraseña incorrectos!");
         }
+
         return "LoginUsuario.html";
     }
 

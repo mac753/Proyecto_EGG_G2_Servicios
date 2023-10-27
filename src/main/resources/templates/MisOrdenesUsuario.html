@@ -16,6 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
   <body>
     <div>Orden creada</div>
     <div>aca van todas las ordenes</div>
+    <div>USUARIOOOOOOOOO</div>
 
     <table>
       <h3>Listado de orden</h3>
@@ -26,7 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           <th scope="col">Nombre Proveedor</th>
           <th scope="col">Descripcion del trabajo</th>
           <th scope="col">Estado</th>
-          <th scope="col">Puntaje que le dio el usuario</th>
+          <th scope="col">Valor cotizado por el proveedor</th>
           <!--<th sec:authorize="hasRole('PROVEEDOR')" scope="col">Acciones</th>-->
         </tr>
       </thead>
@@ -36,36 +37,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <td th:text="${orden.proveedor.nombre}"></td>
         <td th:text="${orden.comentario}"></td>
         <td th:text="${orden.estadOrden}"></td>
-        <td th:text="${orden.puntaje}"></td>
+        <td th:text=" ' $ ' + ${orden.valor}"></td>
 
-        <form th:action="@{/orden/cotizacion/__${orden.id}__}" method="POST">
-          <div class="textoOT">
-            <h4>Cotización</h4>
-            <p>
-              <input
-                type="number"
-                class="form-control p-4"
-                placeholder="Ingresa el valor de la cotización"
-                name="valor"
-                required="required"
-              />
-            </p>
-            <div class="boton">
-              <button class="btn btn-primary btn-block py-3" type="submit">
-                Enviar Cotización
-              </button>
-            </div>
-          </div>
-        </form>
         <td>
           <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
           <!--<a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>-->
           <a sec:authorize="hasRole('USER')">
-            <form th:action="@{/orden/aceptar}" method="post">
+            <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
               <input type="hidden" name="ordenId" th:value="${orden.id}" />
               <button type="submit">Aceptar cotización</button>
             </form>
           </a>
+          <a th:href="@{/orden/calificar/__${orden.id}__}">Calificar</a>
+
+          <form th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+            <input type="hidden" name="ordenId" th:value="${orden.id}" />
+            <p>
+              <input
+                type="number"
+                class="form-control p-4"
+                placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
+                name="puntaje"
+                required="required"
+              />
+            </p>
+            <p>
+              <input
+                type="text"
+                class="form-control p-4"
+                placeholder="Si quiere agrega comentarios"
+                name="comentario"
+                required="required"
+              />
+            </p>
+            <button type="submit">Calificar</button>
+          </form>
+
+          <form th:action="@{/orden/finalizar/__${orden.id}__}" method="post">
+            <input type="hidden" name="ordenId" th:value="${orden.id}" />
+            <button type="submit">Terminar</button>
+          </form>
         </td>
       </tbody>
     </table>
