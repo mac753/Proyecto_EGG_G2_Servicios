@@ -38,6 +38,17 @@
           >Editar Perfil</a
         >
       </li>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <a
+            th:if="${session.personasession != null}"
+            th:href="@{/orden/ordenes}"
+            class="nav-link"
+            >Ver mis ordenes
+          </a>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+      </ul>
       <li><hr class="dropdown-divider" /></li>
     </ul>
     <a
