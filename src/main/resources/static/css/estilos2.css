@@ -624,6 +624,7 @@ margin: 3%;
 .enviarComentario {
   width: 30%;
 }
+}
 
 @media screen and (max-width: 991px) {
   .logo {
