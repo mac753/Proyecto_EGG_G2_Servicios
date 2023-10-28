@@ -40,43 +40,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <td th:text=" ' $ ' + ${orden.valor}"></td>
 
         <td>
-          <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-          <!--<a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>-->
-          <a sec:authorize="hasRole('USER')">
-            <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
+          <div>
+            <form
+              th:if="${orden.valor != 0}"
+              th:action="@{/orden/aceptar/__${orden.id}__}"
+              method="post"
+            >
               <input type="hidden" name="ordenId" th:value="${orden.id}" />
               <button type="submit">Aceptar cotización</button>
             </form>
-          </a>
-          <a th:href="@{/orden/calificar/__${orden.id}__}">Calificar</a>
+          </div>
 
-          <form th:action="@{/orden/calificar/__${orden.id}__}" method="post">
-            <input type="hidden" name="ordenId" th:value="${orden.id}" />
-            <p>
-              <input
-                type="number"
-                class="form-control p-4"
-                placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
-                name="puntaje"
-                required="required"
-              />
-            </p>
-            <p>
-              <input
-                type="text"
-                class="form-control p-4"
-                placeholder="Si quiere agrega comentarios"
-                name="comentario"
-                required="required"
-              />
-            </p>
-            <button type="submit">Calificar</button>
-          </form>
-
+          <div>
+            <form
+              th:if="${orden.estadOrden != 'COTIZANDO'}"
+              th:action="@{/orden/calificar/__${orden.id}__}"
+              method="post"
+            >
+              <input type="hidden" name="ordenId" th:value="${orden.id}" />
+              <p>
+                <input
+                  type="number"
+                  class="form-control p-4"
+                  placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
+                  name="puntaje"
+                  required="required"
+                />
+              </p>
+              <p>
+                <input
+                  type="text"
+                  class="form-control p-4"
+                  placeholder="Si quiere agrega comentarios"
+                  name="comentario"
+                  required="required"
+                />
+              </p>
+              <button type="submit">Finalizar/Calificar</button>
+            </form>
+          </div>
+          <div></div>
+          <!--
           <form th:action="@{/orden/finalizar/__${orden.id}__}" method="post">
             <input type="hidden" name="ordenId" th:value="${orden.id}" />
             <button type="submit">Terminar</button>
-          </form>
+          </form>-->
         </td>
       </tbody>
     </table>
