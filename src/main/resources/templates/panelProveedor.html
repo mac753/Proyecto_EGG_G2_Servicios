@@ -22,7 +22,7 @@
           BIENVENIDO
           <span
             th:if="${session.personasession != null}"
-            th:text=" ${session.personasession.nombre} + ' aqui podrás gestionar tu cuenta' "
+            th:text=" ${session.personasession.nombre} "
           ></span>
         </p>
       </div>
@@ -30,7 +30,7 @@
 
     <div class="container4">
       <ul>
-          <th:block th:each="proveedor: ${proveedores}">
+          <th:block th:each="proveedor: ${proveedor}">
             <div class="col-md-4">
                 <div class="card1" style="background-color: #000; width: 300px;">
                     <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg" class="card-img-top" alt="Proveedor 1">

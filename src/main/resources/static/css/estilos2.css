@@ -490,6 +490,14 @@ margin: 3%;
   padding: 20px
 
 }
+
+.enviar{
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+width: 15%;
+border-radius: 5px;
+
+}
+
 .izqAb{
   margin-top: 20%;
   border: 2px solid orange;
@@ -654,7 +662,9 @@ margin: 10%;
   margin-left:43%;
 }
 
-
+.enviar{
+  width: 35%;
+}
 
 
 }
