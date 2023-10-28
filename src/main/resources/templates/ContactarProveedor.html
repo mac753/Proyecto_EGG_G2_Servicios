@@ -15,8 +15,10 @@
 <body>
 
     <nav th:replace="fragments/navbar::nav"></nav>
+    <h1 class="text-center">ProSkillFinder</h1>
 
-    <h1 class="titulo1">ENVIALE UN MENSAJE A TU PROVEEDOR</h1>
+    <h1 class="titulo1"> "No dejes pasar esta oportunidad. Obtén un presupuesto personalizado sin compromiso. Solo
+        tienes que contactar a tu proveedor seleccionado."</h1>
     <div class="pantalla">
 
         <div class="izquiercon">
@@ -46,17 +48,6 @@
 
 
 
-            <div class="izqAb">
-
-                <p><input type="text" class="comen" placeholder="comentario" name="comentario" required="required"></p>
-
-                <a class="" href="#">
-                    <imput type="button" class="btn btn-primary btn-block py-3" id="enviarComentario"
-                        onclick="alert('el boton Enviar OT funciona')">Enviar</imput>
-                </a>
-            </div>
-
-
         </div>
 
         <div class="derecha">
@@ -71,29 +62,40 @@
                     <div class="textoOT">
 
                         <h4>ORDEN DE TRABAJO</h4>
-                        <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario"
-                                name="comentario" required="required"></p>
 
-                        <div class="boton">
-
+                        <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU
+                            PETICION </h6>
 
 
-                            <button class="btn btn-primary btn-block py-3" type="submit">Enviar</button>
+                        <form th:action="@{/orden/crearOrden}" method="POST">
+                            <div>
+                                <input hidden th:value="${proveedor.id}" name="idproveedor">
 
-
-
-                        </div>
+                                <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario"
+                                        name="comentario" required="required"></p>
+                            </div>
+                            <div class="boton">
+                                <button class="enviar btn-primary btn-block py-3" type="submit">Enviar</button>
+                            </div>
                     </div>
 
                 </form>
 
 
             </div>
-
-
         </div>
-
     </div>
+
+
+    <section class="">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+            </div>
+        </div>
+    </section>
+
+
     <footer class="pie">
         <div th:replace="fragments/footer::foot"></div>
         <div th:replace="fragments/redesS::red_soc"></div>

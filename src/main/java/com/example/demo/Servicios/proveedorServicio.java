@@ -155,23 +155,22 @@ public class proveedorServicio {
         return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
 
-    // @Override
-    // public UserDetails loadUserByUsername(String email) throws
-    // UsernameNotFoundException {
-    // Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
-    // if (persona != null) {
-    // List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-    // GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" +
-    // persona.getRol().toString());
-    // permisos.add(p);
-    // ServletRequestAttributes attr = (ServletRequestAttributes)
-    // RequestContextHolder.currentRequestAttributes();
-    // HttpSession session = attr.getRequest().getSession(true);
-    // session.setAttribute("personasession", persona);
-    // return new User(persona.getEmail(), persona.getPassword(), permisos);
-    // } else {
-    // return null;
-    // }
-    // }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Proveedor proveedor = proveedorRepositorio.buscarProveedorPorEmail(email);
+        if (proveedor != null) {
+            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + proveedor.getRol().toString());
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("personasession", proveedor);
+            return new User(proveedor.getNombre(), proveedor.getPassword(), permisos);
+
+        } else {
+            return null;
+        }
+    }
 
 }
