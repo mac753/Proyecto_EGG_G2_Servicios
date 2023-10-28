@@ -25,7 +25,8 @@ import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
-
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import java.util.Optional;

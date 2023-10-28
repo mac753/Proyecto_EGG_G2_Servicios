@@ -73,35 +73,20 @@
         <div class="derecha">
 
             <div class="encabezadoCP">
-
                 <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION
                     PARA QUE NO SEA DENEGADA! </h6>
                 <form th:action="@{/orden/crearOrden}" method="POST">
-                    <input hidden th:value="${proveedor.id}" name="idproveedor">
-                    
+                    <input hidden th:value="${proveedor.id}" name="idproveedor">                    
                     <div class="textoOT">
-
                     <h4>ORDEN DE TRABAJO</h4>
                     <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario" name="comentario"
                             required="required"></p>
-
                     <div class="boton">
-
-
-                        
                              <button class="btn btn-primary btn-block py-3" type="submit">Enviar</button>
-                      
-
-                        
                     </div>
-                </div>
-                    
-                </form>
-                
-
+                </div>                    
+                </form>  
             </div>
-
-
         </div>
 
     </div>

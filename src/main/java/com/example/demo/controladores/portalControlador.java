@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.UsuarioRepositorio;
+import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
@@ -30,6 +31,8 @@ public class portalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private personaRepositorio personaRepositorio;
 
     @GetMapping("/")
     public String index() {
@@ -62,11 +65,12 @@ public class portalControlador {
 
     @GetMapping("/panelUsuario")
     public String panelUsuario(HttpSession session, ModelMap modelo) {
-        Usuario usuario = (Usuario) session.getAttribute("personasession");
+        Persona persona = (Usuario) session.getAttribute("personasession");
+        
 
-        if (usuario != null) {
+        if (persona != null) {
             // Aquí tienes acceso al proveedor y sus datos
-            modelo.addAttribute("usuario", usuario);
+            modelo.addAttribute("persona", persona);
         } else {
             // Manejar la situación en la que el proveedor no está en la sesión
         }
@@ -120,7 +124,7 @@ public class portalControlador {
     public String perfilUsuario(ModelMap modelo) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Usuario logueado = usuarioRepositorio.BuscarUsuarioPorEmail(authentication.getName());
+        Persona logueado = personaRepositorio.buscarPersonarPorEmail(authentication.getName());
         modelo.put("usuario", logueado);
         return "modificarUsuario.html";
     }

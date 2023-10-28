@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Servicios.ServicioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,11 @@ import com.example.demo.Servicios.UsuarioServicio;
 public class SeguridadWeb {
 
         @Autowired
-        UsuarioServicio usuarioServicio;
+        ServicioPersona personaServicio;
 
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-                auth.userDetailsService(usuarioServicio)
+                auth.userDetailsService(personaServicio)
                                 .passwordEncoder(new BCryptPasswordEncoder());
         }
 

@@ -28,12 +28,14 @@ import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
 import com.example.demo.entidades.Usuario;
-
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
+
 @Service
-public class UsuarioServicio implements UserDetailsService {
+public class UsuarioServicio  {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -113,21 +115,21 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarios;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
-        if (persona != null) {
-            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
-            permisos.add(p);
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("personasession", persona);
-            return new User(persona.getEmail(), persona.getPassword(), permisos);
-        } else {
-            return null;
-        }
-
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
+//        if (persona != null) {
+//            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
+//            permisos.add(p);
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//            HttpSession session = attr.getRequest().getSession(true);
+//            session.setAttribute("personasession", persona);
+//            return new User(persona.getEmail(), persona.getPassword(), permisos);
+//        } else {
+//            return null;
+//        }
+//
+//    }
 
 }

@@ -12,50 +12,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         <div>Orden creada</div>
         <div>aca van todas las ordenes</div>
+
+        <span
+            th:if="${session.personasession != null}"
+            th:text=" 'BIENVENIDO ' + ${ session.personasession.nombre } + ' rol '+ ${ session.personasession.rol } "
+            ></span>
         
+        <span sec:authorize="hasRole('PROVEEDOR')">
+            hola
+            </span>
         <table>
             <h3>Listado de orden</h3>
             <thead>
                 <tr>
-                    <th scope="col">id Orden</th>
-                    <th scope="col">Nombre Usuario</th>
+                    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">id Orden</th>
+                    <th sec:authorize="hasRole('ROLE_USER')"scope="col">Nombre Usuario</th>
+                    <th sec:authorize="hasRole('ROLE.USER')"scope="col">Nombre Usuario</th>
                     <th scope="col">Nombre Proveedor</th>
                     <th scope="col">Descripcion del trabajo</th>
-                    <th scope="col">Estado</th>
-                    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Ingresar valor de la cotizacion</th> 
+                    <th scope="col">Estado</th> 
+                    <div>   </div>
                     <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Acciones</th>
-                    
-                    
-                    
+
                 </tr>
             </thead>
             <tbody th:each="orden : ${listaOrdenes}">
-                <th th:text="${orden.id}"></th>
-                <td th:text="${orden.usuario.nombre}"></td>
-                <td th:text="${orden.proveedor.nombre}"></td>
-                <td th:text="${orden.comentario}"></td>
-                <td th:text="${orden.estadOrden}"></td>
-                <td  ><input type="text"></input><button>enviar</button></td>
-                <td> 
-                    <a th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
-                    <a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>
-                    <a th:href="@{/orden/calificar/__${orden.id}__}" >Calificar</a>
-                    <a th:href="@{/orden/calificar/__${orden.id}__}" >Terminar</a>
-                    
-                    
-                    
-                </td>
-                
-                
-                
-            </tbody>
+            <th th:text="${orden.id}"></th>
+            <td th:text="${orden.usuario.nombre}"></td>
+            <td th:text="${orden.proveedor.nombre}"></td>
+            <td th:text="${orden.comentario}"></td>
+            <td th:text="${orden.estadOrden}"></td>
+           <td
+                <a th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+                <a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>
+                <a th:href="@{/orden/calificar/__${orden.id}__}" >Calificar</a>
+                <a th:href="@{/orden/calificar/__${orden.id}__}" >Terminar</a>
+            </td>
+        </tbody>
         </table>
-        
-        
     </body>
 
 
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
-    </ul>
-  </body>
+<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+</ul>
+
+</html>

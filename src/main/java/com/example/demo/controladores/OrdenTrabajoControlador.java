@@ -50,7 +50,7 @@ public class OrdenTrabajoControlador {
         return "redirect:/orden/ordenes";
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVEEDOR')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR')")
     @GetMapping("/ordenes")
     public String listarOrdenes(HttpSession session, ModelMap modelo) {
         Persona logueado = (Persona) session.getAttribute("personasession");
@@ -69,7 +69,8 @@ public class OrdenTrabajoControlador {
             List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
         }
-       return "MisOrdenes.html";
+       //return "MisOrdenes.html";
+       return "MisOrdenes2.html";
 
         }
 
