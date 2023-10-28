@@ -13,10 +13,10 @@
   </head>
   <body>
     <nav th:replace="fragments/navbar::nav"></nav>
-
-    <div class="container-fluid m-5 contenedor">
+    <h1 class="text-center">ProSkillFinder</h1>
+    <div class="modUsuario">
       <form
-        class="formulario"
+        class="formularioUsua"
         th:object="${proveedor}"
         th:action="@{/proveedor/perfil/__${proveedor.id}__}"
         method="POST"
@@ -24,11 +24,11 @@
       >
         <input hidden th:value="${id}" name="id" >
 
-        <div class="form-group my-3">
-          <h3 class="card-title">Editar Proveedor</h3>
+        <div class="">
+          <h3 class="ruh3">Editar Proveedor</h3>
         </div>
 
-        <br />
+        <br>
 
         <label class="textofp" for="nombre">Nombre:</label>
         <input
@@ -113,12 +113,12 @@
         <input class="textofp" type="file" name="archivo" >
         <br >
 
-        <button type="submit" class="btn btn-primary mt-3 botones">
+        <button type="submit" class="btn btn-primary mt-3 botones" id="botforUs">
           Actualizar
         </button>
       </form>
-
-      <section class="text-center container">
+    </div>
+      <section class="">
         <div class="row mt-3">
           <div class="divVolver">
             <a
@@ -129,7 +129,7 @@
           </div>
         </div>
       </section>
-    </div>
+    
 
     <footer class="pie">
       <div th:replace="fragments/footer::foot"></div>

@@ -33,19 +33,22 @@
           <th:block th:each="proveedor: ${proveedores}">
             <div class="col-md-4">
                 <div class="card1" style="background-color: #000; width: 300px;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzhK86EovE1pAkcsj0G7ptzdV5-Cs35zSWnA&usqp=CAU" class="card-img-top" alt="Proveedor 1">
+                    <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg" class="card-img-top" alt="Proveedor 1">
                     <div class="card-body" >
                       <h5 style="font-weight: bold; color: white;">Nombre:  <span class="card-text" th:text="${proveedor.nombre}"></span></h5>
                       <h5 style="color: white;">Direccion:  <span class="card-text" th:text="${proveedor.direccion}"></span></h5>
-
                       <h5 style="color: white;">Honorarios por hora:  <span class="card-text" th:text="${proveedor.honorarioHora}"></span></h5>
-                      <h5 class="card-text" style="color: white;">Cantidad de estrellas:  5</h5>
+                      <h5 class="card-text" style="color: white;">Cantidad de estrellas: <span th:text="${proveedor.presentacion}"></span></h5>
+                      <h5>Presentación: </h5>
                     </div>
                 </div>
             </div>
           </th:block>
       </ul>
   </div>
+
+
+
         <a
           th:if="${session.personasession != null}"
           th:href="@{/orden/ordenes}"
@@ -70,7 +73,7 @@
 
 
 
-  <section class="text-center container">
+  <section class="">
     <div class="row mt-3">
         <div class="divVolver">
             <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>

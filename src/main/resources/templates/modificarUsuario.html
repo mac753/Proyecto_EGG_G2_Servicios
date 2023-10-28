@@ -12,22 +12,22 @@
   <body>
 
     <nav th:replace="fragments/navbar::nav"></nav>
+    <h1 class="text-center">ProSkillFinder</h1>
 
-
-    <div class="container-fluid m-5 contenedor">
+    <div class="modUsuario">
       <form
-        class="formulario"
+        class="formularioUsua"
         th:object="${usuario}"
         th:action="@{/perfilUsuario/__${usuario.id}__}"
-        method="POST"
-      >
-        <input hidden th:value="${id}" name="id" />
+        method="POST">
 
-        <div class="form-group my-3">
-          <h3 class="card-title">Editar Usuario</h3>
+        <input hidden th:value="${id}" name="id">
+
+        <div class="">
+          <h3 class="ruh3">Editar Usuario</h3>
         </div>
 
-        <br />
+        <br>
 
         <label class="textofp" for="nombre">Nombre:</label>
         <input
@@ -35,8 +35,7 @@
           id="nombre"
           name="nombre"
           th:value="${usuario.nombre}"
-          required
-        /><br />
+          required><br >
 
         <label class="textofp" for="email">Email:</label>
         <input
@@ -44,14 +43,13 @@
           id="email"
           name="email"
           th:value="${usuario.email}"
-          required
-        /><br />
+          required><br>
 
         <label class="textofp" for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required /><br />
+        <input type="password" id="password" name="password" required><br>
 
         <label class="textofp" for="password2">Repita su contraseña:</label>
-        <input type="password" id="password2" name="password2" required /><br />
+        <input type="password" id="password2" name="password2" required><br>
 
         <label class="textofp" for="telefono">Telefono:</label>
         <input
@@ -59,8 +57,7 @@
           id="telefono"
           name="telefono"
           th:value="${usuario.telefono}"
-          required
-        /><br />
+          required><br>
 
         <label class="textofp" for="direccion">Direccion:</label>
         <input
@@ -68,15 +65,14 @@
           id="direccion"
           name="direccion"
           th:value="${usuario.direccion}"
-          required
-        /><br />
+          required><br >
 
-        <button type="submit" class="btn btn-primary mt-3 botones">
+        <button type="submit" class="btn btn-primary mt-3 botones" id="botforUs">
           Actualizar
         </button>
       </form>
 </div>
-      <section class="text-center container">
+      <section class="">
         <div class="row mt-3">
           <div class="divVolver">
             <a
