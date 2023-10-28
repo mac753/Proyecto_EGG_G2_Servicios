@@ -54,7 +54,7 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "index.html";
+            return "/";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
