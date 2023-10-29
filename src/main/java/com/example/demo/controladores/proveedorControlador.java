@@ -81,9 +81,10 @@ public class proveedorControlador {
 
     @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
-        Proveedor proveedor = (Proveedor) session.getAttribute("proveedorsession");
+        Proveedor proveedor = (Proveedor) session.getAttribute("personasession");
 
         if (proveedor != null) {
+            
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {

@@ -15,7 +15,7 @@ header.innerHTML = `
       <div class="navbar-nav">
         <a class="nav-link active" href="/">Inicio</a>
         <a class="nav-link" href="/proveedor/buscador">Buscar</a>
-        <a class="nav-link" href="/panel">Panel de Control</a>
+       <!-- <a class="nav-link" href="/panel">Panel de Control</a>-->
        <!-- <a class="nav-link" href="/proveedor/registrar">RegProv</a>-->
         <a class="nav-link" href="/login">Login</a>
     </div>

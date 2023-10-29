@@ -170,7 +170,7 @@ public class proveedorServicio implements UserDetailsService {
 
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", proveedor);
+            session.setAttribute("personasession", proveedor);
             return new User(proveedor.getNombre(), proveedor.getPassword(), permisos);
 
         } else {
