@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <nav th:replace="fragments/navbar::nav"></nav>
+  <nav th:replace="fragments/navbarprov::navp"></nav>
   <h1 class="text-center">ProSkillFinder</h1>
   <div class="modUsuario">
     <form class="formularioUsua" th:object="${proveedor}" th:action="@{/proveedor/perfil/__${proveedor.id}__}"
@@ -81,7 +81,7 @@
   <section class="">
     <div class="row mt-3">
       <div class="divVolver">
-        <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+        <a th:href="@{/panelProveedor}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
       </div>
     </div>
   </section>

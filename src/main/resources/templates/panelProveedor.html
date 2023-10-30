@@ -15,7 +15,7 @@
 <body>
 
 
-  <nav th:replace="fragments/navbar::nav"></nav>
+  <nav th:replace="fragments/navbarprov::navp"></nav>
 
   <h1>Mi Perfil</h1>
   <div class="col-md-4">
@@ -50,7 +50,7 @@
     </ul>
   </div>
 
-
+  <h5>Si necesita contactar algun servicio debe registrarse como usuario</h5>
 
   <a th:if="${session.personasession != null}" th:href="@{/orden/ordenes}" class="nav-link">Ver mis ordenes
   </a>
@@ -65,7 +65,7 @@
   <section class="">
     <div class="row mt-3">
       <div class="divVolver">
-        <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+        <a th:href="@{/proveedor/panelProveedor}" class="btn btn-secondary my-2 botonVolver botones">Ir Arriba</a>
       </div>
     </div>
   </section>

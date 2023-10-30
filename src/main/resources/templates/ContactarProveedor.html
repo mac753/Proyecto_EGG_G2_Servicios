@@ -17,8 +17,6 @@
     <nav th:replace="fragments/navbar::nav"></nav>
     <h1 class="text-center">ProSkillFinder</h1>
 
-    <h1 class="titulo1"> "No dejes pasar esta oportunidad. Obtén un presupuesto personalizado sin compromiso. Solo
-        tienes que contactar a tu proveedor seleccionado."</h1>
     <div class="pantalla">
 
         <div class="izquiercon">
@@ -53,9 +51,7 @@
         <div class="derecha">
 
             <div class="encabezadoCP">
-
-                <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION
-                    PARA QUE NO SEA DENEGADA! </h6>
+                >
                 <form th:action="@{/orden/crearOrden}" method="POST">
                     <input hidden th:value="${proveedor.id}" name="idproveedor">
 

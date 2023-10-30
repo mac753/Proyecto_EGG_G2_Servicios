@@ -31,7 +31,7 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Direccion</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col">Estado</th>
                 </tr>
             </thead>
             <tbody th:each="usuario : ${usuarios}">
@@ -41,6 +41,8 @@
                 <td th:text="${usuario.rol}"></td>
                 <td th:text="${usuario.telefono}"></td>
                 <td th:text="${usuario.direccion}"></td>
+                <td th:text="${usuario.estado}"></td>
+                <td><a th:href="@{/admin/cambiarEstado/__${usuario.id}__}" role="button">Cambiar Estado</a></td>
             </tbody>
         </table>
     </div>
@@ -55,7 +57,7 @@
                 <th scope="col">Rol</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col">Dirección</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Cambiar estado</th>
             </tr>
         </thead>
 
@@ -66,6 +68,8 @@
             <td th:text="${proveedor.rol}"></td>
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.direccion}"></td>
+            <td th:text="${proveedor.estado}"></td>
+            <td><a th:href="@{/admin/cambiarEstado/__${proveedor.id}__}" role="button"></a>Cambiar estado</td>
         </tbody>
     </table>
 

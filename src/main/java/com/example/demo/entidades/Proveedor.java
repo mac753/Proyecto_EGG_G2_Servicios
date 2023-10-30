@@ -20,6 +20,7 @@ public class Proveedor extends Persona {
 
     public Proveedor(String direccion, float honorarioHora, String rubro,
             String presentacion) {
+        super();
         this.direccion = direccion;
         this.honorarioHora = honorarioHora;
         this.rubro = rubro;

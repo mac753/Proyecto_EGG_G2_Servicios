@@ -54,7 +54,7 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "/";
+            return "/index";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -83,7 +83,7 @@ public class proveedorControlador {
         Proveedor proveedor = (Proveedor) session.getAttribute("personasession");
 
         if (proveedor != null) {
-            
+
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {

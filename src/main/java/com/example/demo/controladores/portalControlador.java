@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.ImagenRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
@@ -27,6 +28,8 @@ public class portalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    ImagenRepositorio imagenRepositorio;
 
     @GetMapping("/")
     public String index() {
@@ -46,7 +49,7 @@ public class portalControlador {
 
         try {
             usuarioServicio.crearUsuario(nombre, email, password, password2, telefono, direccion);
-            modelo.put("exito", "Usuario registrado correcamente !");
+            modelo.put("exito", "Usuario registrado correctamente!");
 
             return "index.html";
         } catch (MiException ex) {
@@ -146,4 +149,15 @@ public class portalControlador {
         }
 
     }
+
+    /*
+     * @GetMapping("/cargar/{id}")
+     * public ResponseEntity<byte[]> cargarImagen(@PathVariable Long id) {
+     * Imagen imagen = (Imagen) imagenRepositorio.getById(id);
+     * HttpHeaders headers = new HttpHeaders();
+     * headers.setContentType(MediaType.IMAGE_JPEG);
+     * return new ResponseEntity<>(imagen.getContenido(), headers, HttpStatus.OK);
+     * }
+     */
+
 }

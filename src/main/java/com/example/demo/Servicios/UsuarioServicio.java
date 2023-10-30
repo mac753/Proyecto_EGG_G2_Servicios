@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Repositorio.personaRepositorio;
@@ -50,6 +51,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setTelefono(telefono);
         usuario.setDireccion(direccion);
         usuario.setRol(Rol.USER);
+        usuario.setEstado(Estado.ACTIVO);
         usuarioRepositorio.save(usuario);
 
     }
@@ -71,6 +73,8 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setDireccion(direccion);
 
             usuario.setRol(Rol.USER);
+            // Estado indica que el usuario estara activo por defecto
+            usuario.setEstado(Estado.ACTIVO);
 
             usuarioRepositorio.save(usuario);
 
