@@ -49,8 +49,8 @@ public class OrdenTrabajoControlador {
         ots.crearOt(idproveedor, idusuario, comentario);
         return "redirect:/orden/ordenes";
     }
-    
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR')")
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVEEDOR')")
     @GetMapping("/ordenes")
     public String listarOrdenes(HttpSession session, ModelMap modelo) {
         Persona logueado = (Persona) session.getAttribute("personasession");
@@ -60,7 +60,8 @@ public class OrdenTrabajoControlador {
         if (logueado.getRol().toString().equals("USER")) {
             System.out.println("entre en el user");
             List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
-             modelo.addAttribute("listaOrdenes", listaOrdenes);
+            modelo.addAttribute("listaOrdenes", listaOrdenes);
+            return "MisOrdenesUsuario.html"; // Vista para usuarios      
             
         } 
         if (logueado.getRol().toString().equals("PROVEEDOR")) {
@@ -68,30 +69,31 @@ public class OrdenTrabajoControlador {
             System.out.println(logueado.getId().toString());
             List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
+            return "MisOrdenes.html"; // Vista para proveedores}
+            
         }
-       //return "MisOrdenes.html";
-       return "MisOrdenes2.html";
-
-        }
-
     
-    @GetMapping("/cancelar/{id}")
+        // Manejar cualquier otro caso si es necesario
+        return "error.html";
+    }
+
+@GetMapping("/cancelar/{id}")
     public String cancelarOrden(@PathVariable Long id){
         ots.cancelarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
-    }
+        }
+
     
     @GetMapping("/aceptar/{id}")
     public String aceptarOrden(@PathVariable Long id){
         ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
-    }
-
+         }
+    
 
     @GetMapping("/calificar")
     public String calificarOrden(@PathVariable Long id) {
         // ots.aceptarOrdenTrabajo(id);
-
         return "Calificar.html";
     }
     
@@ -101,34 +103,34 @@ public class OrdenTrabajoControlador {
         return "Calificar.html";
     }
 
-//    @PostMapping("/calificar/{id}")
-//    public String calificarOrden(@PathVariable Long id, ModelMap modelo) {
-//        // Recuperar la orden de trabajo por su ID utilizando el servicio
-//        OrdenTrabajo ordenTrabajo = otr.findById(id);
-//
-//        if (ordenTrabajo != null) {
-//            // Verificar que la orden de trabajo esté en estado FINALIZADA
-//            if (ordenTrabajo.getEstadOrden() == EstadoOrdenTrabajo.FINALIZADA) {
-//                // Pasar la orden de trabajo al modelo para mostrar los detalles
-//                modelo.addAttribute("ordenTrabajo", ordenTrabajo);
-//                return "Calificar.html";
-//            } else {
-//                // La orden de trabajo no está en estado FINALIZADA, muestra un mensaje de error
-//                modelo.addAttribute("error", "No puedes calificar esta orden de trabajo hasta que esté finalizada.");
-//            }
-//        } else {
-//            // La orden de trabajo no se encontró, muestra un mensaje de error
-//            modelo.addAttribute("error", "La orden de trabajo no existe.");
-//        }
-//
-//        // Redirige de nuevo a la lista de órdenes de trabajo
-//        return "redirect:/orden/ordenes";
-//    }
 
-    // @PostMapping("/cancelar/{id}")
-    // public String cancelarOrdene(@PathVariable Long id){
-    // ots.cancelarOrdenTrabajo(id);
-    // return "redirect:/orden/ordenes";
-    // }
 
+    @PostMapping("/aceptar/{id}")
+    public String aceptarOrden(@PathVariable Long id, HttpSession session) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        //ots.aceptarOrdenTrabajo(id, idusuario);
+        return "redirect:/orden/ordenes";
+    }
+
+    @GetMapping("/finalizar")
+    public String finalizarOrden(@PathVariable Long id) {
+        ots.finalizarOrdenTrabajo(id, id);
+        return "redirect:/orden/ordenes";
+    }
+
+    @PostMapping("/finalizar/{id}")
+    public String finalizarOrden(@PathVariable Long id, HttpSession session) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.finalizarOrdenTrabajo(id, idusuario);
+        return "redirect:/orden/ordenes";
+    }
+
+
+    
 }
+
+    
+
+    

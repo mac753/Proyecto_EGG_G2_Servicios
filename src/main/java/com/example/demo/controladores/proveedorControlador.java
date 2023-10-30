@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.Servicios.proveedorServicio;
+import com.example.demo.entidades.Persona;
 
 import com.example.demo.entidades.Proveedor;
 
@@ -86,18 +87,21 @@ public class proveedorControlador {
         return "Buscador";
     }
 
+//       @GetMapping("/contacto/{idproveedor}")
+//    public String contactar(@PathVariable Long idproveedor, ModelMap modelo) {
+//        modelo.addAttribute("proveedor", ps.buscarPorid(idproveedor));
+//        return "ContactarProveedor.html";
+//    }
 
    @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
-        Proveedor proveedor = (Proveedor) session.getAttribute("proveedorsession");
-
+        Persona proveedor = (Persona) session.getAttribute("personasession");
         if (proveedor != null) {
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {
             // Manejar la situación en la que el proveedor no está en la sesión
         }
-
         return "panelProveedor.html";
     }
 

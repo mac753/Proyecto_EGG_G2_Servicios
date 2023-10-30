@@ -41,7 +41,7 @@ public class OrdenTrabajoServicio {
 
         if (respuesta.isPresent()) {
             OrdenTrabajo ordentrabajo = respuesta.get();
-            ordentrabajo.setValor(0);
+            ordentrabajo.setValor(valor);
             otRepositorio.save(ordentrabajo);
         }
     }
