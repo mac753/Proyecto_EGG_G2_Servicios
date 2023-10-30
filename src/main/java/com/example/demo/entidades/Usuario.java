@@ -13,7 +13,7 @@ public class Usuario extends Persona {
     }
 
     public Usuario(String direccion, Long id, String nombre, String email, Rol rol, String password, Long telefono) {
-        super(id, nombre, email, rol, password, telefono);
+        super();
         this.direccion = direccion;
     }
 

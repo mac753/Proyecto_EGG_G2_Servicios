@@ -54,7 +54,7 @@ body {
 
 
 
-.textind{
+.textind {
   margin-top: 15px;
   text-align: center;
 }
@@ -107,7 +107,7 @@ body {
   left: 15%;
   right: 15%;
 
-  
+
 }
 
 @keyframes slide {
@@ -296,7 +296,7 @@ h4 {
 
 .btn {
   background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-  margin-left:48%;
+  margin-left: 48%;
 }
 
 .textobox {
@@ -376,11 +376,13 @@ textarea {
   margin-bottom: 5%;
 
 }
-.ruh3{
+
+.ruh3 {
   margin-top: 15px;
   color: white;
   text-align: center;
 }
+
 .regUsuario input {
   margin-left: 10%;
   width: 80%;
@@ -415,7 +417,7 @@ textarea {
   height: auto;
 }
 
-.textbusq{
+.textbusq {
   margin-top: 50px;
   text-align: center;
   font-size: 30px;
@@ -434,7 +436,8 @@ textarea {
   width: 10%;
   background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
 }
-.botonbus:hover{
+
+.botonbus:hover {
   color: red;
 }
 
@@ -448,26 +451,28 @@ textarea {
   height: 35%;
 }
 
-.col-md-4{
-display: inline-block;
-margin: 0;
-width: 25%; 
-margin: 3%;
+.col-md-4 {
+  display: inline-block;
+  margin: 0;
+  width: 25%;
+  margin: 3%;
 
 }
-#contac, #regist{
+
+#contac,
+#regist {
   width: 50%;
   height: auto;
   margin-left: 10px;
 }
 
-#textbien{
- width: 15%;
- border-radius: 5px;
- background-color:  rgba(0, 0, 0, 0.3);
- color: white;
- font-weight: bold;
- text-align: center;
+#textbien {
+  width: 15%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: bold;
+  text-align: center;
 }
 
 /*  Contactar Proveedor */
@@ -477,6 +482,7 @@ margin: 3%;
   height: auto;
 
 }
+
 .izquiercon {
   flex: 1;
   padding: 10px;
@@ -485,20 +491,20 @@ margin: 3%;
   margin-left: 5%;
 
 }
+
 .derecha {
   flex: 2;
   padding: 20px
-
 }
 
-.enviar{
+.enviar {
   background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-width: 15%;
-border-radius: 5px;
+  width: 15%;
+  border-radius: 5px;
 
 }
 
-.izqAb{
+.izqAb {
   margin-top: 20%;
   border: 2px solid orange;
   align-items: center;
@@ -508,13 +514,14 @@ border-radius: 5px;
   background-color: #333;
 
 }
-.comen{
-    width: 100%;
-    padding: 5px;
-    border: 1px solid orange;
-    margin-bottom: 2px;
-    border-radius: 10px;
-  }
+
+.comen {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid orange;
+  margin-bottom: 2px;
+  border-radius: 10px;
+}
 
 
 .encabezadoCP {
@@ -545,7 +552,7 @@ border-radius: 5px;
 /*Modificar Usuario*/
 
 
-.modUsuario{
+.modUsuario {
   border: 3px solid orange;
   background-color: #333;
   width: 50%;
@@ -555,18 +562,19 @@ border-radius: 5px;
   margin-left: 24%;
 }
 
-.formularioUsua{
-width: 80%;
-margin: 10%;
+.formularioUsua {
+  width: 80%;
+  margin: 10%;
 }
 
-#botforUs{
+#botforUs {
   margin-top: 5%;
-  margin:5%;
+  margin: 5%;
   margin-left: 40%;
 
 }
-.text-center{
+
+.text-center {
   margin: 5%;
 }
 
@@ -603,68 +611,70 @@ margin: 10%;
 
     width: 70%;
     height: 70%;
-  
+
   }
 
   .card-deck {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
+  }
 
-.col-md-4 {
+  .col-md-4 {
     flex: 0 0 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
-}
+  }
 
-.seleb{
-  margin-left: 25%;
-}
+  .seleb {
+    margin-left: 25%;
+  }
 
-.botonbus{
- margin-left: 45%;
- width: 10%;
-}
+  .botonbus {
+    margin-left: 45%;
+    width: 10%;
+  }
 
-#textbien{
-  width: 30%;
-  border-radius: 5px;
-  background-color:  rgba(0, 0, 0, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
+  #textbien {
+    width: 30%;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+    text-align: center;
 
-}
+  }
 
-.regUsuario {
-  margin-left: 15%;
-  width: 70%;
-}
-.izqAb{
-  margin-top: 80%;
-  border: 2px solid orange;
-  align-items: center;
-  margin-left: 5%;
-  width: 150%;
-  border-radius: 5px;
+  .regUsuario {
+    margin-left: 15%;
+    width: 70%;
+  }
 
-}
-.enviarComentario {
-  width: 30%;
-}
+  .izqAb {
+    margin-top: 80%;
+    border: 2px solid orange;
+    align-items: center;
+    margin-left: 5%;
+    width: 150%;
+    border-radius: 5px;
 
-#botforUs{
-  margin:5%;
-  margin-left: 24%;
-}
+  }
 
-.btn {
-  margin-left:43%;
-}
+  .enviarComentario {
+    width: 30%;
+  }
 
-.enviar{
-  width: 35%;
-}
+  #botforUs {
+    margin: 5%;
+    margin-left: 24%;
+  }
+
+  .btn {
+    margin-left: 43%;
+  }
+
+  .enviar {
+    width: 35%;
+  }
 
 
 }
@@ -688,30 +698,31 @@ margin: 10%;
     transform: translate(0, -50%);
     display: block;
   }
+
   .fotoPerfil {
 
     width: 70%;
     height: 70%;
-  
+
   }
-  
-.seleb{
-  margin-left: 25%;
-}
 
-.botonbus{
- margin-left: 45%;
- width: 10%;
-}
+  .seleb {
+    margin-left: 25%;
+  }
 
-#textbien{
-  width: 30%;
-  border-radius: 5px;
-  background-color:  rgba(0, 0, 0, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
+  .botonbus {
+    margin-left: 45%;
+    width: 10%;
+  }
 
-}
+  #textbien {
+    width: 30%;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+
+  }
 
 }

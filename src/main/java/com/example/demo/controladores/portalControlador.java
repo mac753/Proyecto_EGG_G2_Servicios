@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.ImagenRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
-import com.example.demo.entidades.Proveedor;
 import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +28,8 @@ public class portalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    ImagenRepositorio imagenRepositorio;
 
     @GetMapping("/")
     public String index() {
@@ -49,7 +49,7 @@ public class portalControlador {
 
         try {
             usuarioServicio.crearUsuario(nombre, email, password, password2, telefono, direccion);
-            modelo.put("exito", "Usuario registrado correcamente !");
+            modelo.put("exito", "Usuario registrado correctamente!");
 
             return "index.html";
         } catch (MiException ex) {
@@ -79,6 +79,7 @@ public class portalControlador {
         if (error != null) {
             modelo.put("error", "Usuario o contraseña incorrectos!");
         }
+
         return "LoginUsuario.html";
     }
 
@@ -93,9 +94,11 @@ public class portalControlador {
         }
         if (logueado.getRol().toString().equals("PROVEEDOR")) {
             return "redirect:/proveedor/panelProveedor";
+
         }
         if (logueado.getRol().toString().equals("USER")) {
             return "redirect:/buscador";
+
         }
         return "Buscador.html";
     }
@@ -146,4 +149,15 @@ public class portalControlador {
         }
 
     }
+
+    /*
+     * @GetMapping("/cargar/{id}")
+     * public ResponseEntity<byte[]> cargarImagen(@PathVariable Long id) {
+     * Imagen imagen = (Imagen) imagenRepositorio.getById(id);
+     * HttpHeaders headers = new HttpHeaders();
+     * headers.setContentType(MediaType.IMAGE_JPEG);
+     * return new ResponseEntity<>(imagen.getContenido(), headers, HttpStatus.OK);
+     * }
+     */
+
 }
