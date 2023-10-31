@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
+import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
+import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +37,9 @@ public class proveedorServicio implements UserDetailsService {
 
     @Autowired
     ImagenServicio imagenServicio;
+
+    @Autowired
+    private OrdenTrabajoRepositorio otRepositorio;
 
     @Transactional
     public void crearProveedor(MultipartFile archivo, String nombre, String email, String password, String password2,
@@ -57,7 +62,7 @@ public class proveedorServicio implements UserDetailsService {
 
         Imagen imagen = imagenServicio.guardarImagenProveedor(archivo);
         proveedor.setImagen(imagen);
-
+        proveedor.setPromedioPuntaje(0.0);
         proveedorRepositorio.save(proveedor);
     }
 
@@ -178,4 +183,26 @@ public class proveedorServicio implements UserDetailsService {
         }
     }
 
+    @Transactional
+    public void calcularPromedioPuntajeProveedores(List<Proveedor> proveedores) {
+        for (Proveedor proveedor : proveedores) {
+            Long idProveedor = proveedor.getId();
+            List<OrdenTrabajo> ordenes = otRepositorio.buscarPoridProveedor(idProveedor);
+            int totalPuntaje = 0;
+            int totalCalificaciones = 0;
+
+            for (OrdenTrabajo orden : ordenes) {
+                if (orden.getPuntaje() != null) {
+                    totalPuntaje += orden.getPuntaje();
+                    totalCalificaciones++;
+                }
+            }
+
+            double promedioPuntaje = (totalCalificaciones > 0) ? (double) totalPuntaje / totalCalificaciones : 0.0;
+
+            // Actualiza el promedioPuntaje del proveedor
+            proveedor.setPromedioPuntaje(promedioPuntaje);
+            proveedorRepositorio.save(proveedor);
+        }
+    }
 }

@@ -7,6 +7,8 @@ import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Persona;
+import com.example.demo.entidades.Proveedor;
+
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -64,17 +66,18 @@ public class OrdenTrabajoControlador {
             System.out.println("entre en el proveedor");
             System.out.println(logueado.getId().toString());
             List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
+
+            ots.calcularPromedioPuntajeProveedores();
             modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
             return "MisOrdenes.html"; // Vista para proveedores
         }
 
-        // Manejar cualquier otro caso si es necesario
         return "error.html";
     }
 
     @GetMapping("/cancelar/{id}")
     public String cancelarOrden(@PathVariable Long id) {
-        ots.cancelarOrdenTrabajo(id, id);// OJO Victor agregué id, id para que funcionara
+        ots.cancelarOrdenTrabajo(id, id);
         return "redirect:/orden/ordenes";
     }
 
@@ -91,21 +94,6 @@ public class OrdenTrabajoControlador {
         ots.aceptarOrdenTrabajo(id, idusuario);
         return "redirect:/orden/ordenes";
     }
-    /*
-     * @GetMapping("/finalizar")
-     * public String finalizarOrden(@PathVariable Long id) {
-     * ots.finalizarOrdenTrabajo(id, id);
-     * return "redirect:/orden/ordenes";
-     * }
-     * 
-     * @PostMapping("/finalizar/{id}")
-     * public String finalizarOrden(@PathVariable Long id, HttpSession session) {
-     * Persona logueado = (Persona) session.getAttribute("personasession");
-     * Long idusuario = logueado.getId();
-     * ots.finalizarOrdenTrabajo(id, idusuario);
-     * return "redirect:/orden/ordenes";
-     * }
-     */
 
     @GetMapping("/calificar")
     public String calificarOrden(@PathVariable Long id) {

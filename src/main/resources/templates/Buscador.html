@@ -107,7 +107,7 @@
                             <h5 th:text="${proveedor.nombre}">nombre:</h5>
                             <p class="card-text" th:text="${proveedor.direccion}">direccion:</p>
                             <p class="card-text" th:text="${proveedor.honorarioHora}">honorarios por hora:</p>
-                            <p class="card-text">Cantidad de estrellas: 5</p>
+                            <p class="card-text">Cantidad de estrellas: <span th:if="${proveedor.promedioPuntaje != null}" th:text="${proveedor.promedioPuntaje}"></span></p>
                             <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary"
                                th:if="${session.personasession != null}"
                                 style="margin:10px">Contactar</a>
