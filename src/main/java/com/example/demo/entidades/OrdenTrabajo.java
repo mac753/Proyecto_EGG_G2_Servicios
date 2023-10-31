@@ -30,12 +30,13 @@ public class OrdenTrabajo {
     @ManyToOne
     private Usuario usuario;
     private String comentario;
+    private String comentarioCalificacion;
+    
 
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden,
-            Proveedor proveedor, Usuario usuario, String comentario) {
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden, Proveedor proveedor, Usuario usuario, String comentario, String comentarioCalificacion) {
         this.id = id;
         this.rubro = rubro;
         this.puntaje = puntaje;
@@ -44,7 +45,10 @@ public class OrdenTrabajo {
         this.proveedor = proveedor;
         this.usuario = usuario;
         this.comentario = comentario;
+        this.comentarioCalificacion = comentarioCalificacion;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -110,4 +114,13 @@ public class OrdenTrabajo {
         this.comentario = comentario;
     }
 
+    public String getComentarioCalificacion() {
+        return comentarioCalificacion;
+    }
+
+    public void setComentarioCalificacion(String comentarioCalificacion) {
+        this.comentarioCalificacion = comentarioCalificacion;
+    }
+
+    
 }

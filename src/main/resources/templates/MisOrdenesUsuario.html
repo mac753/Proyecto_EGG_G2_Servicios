@@ -41,7 +41,7 @@
               <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
               <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
               <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
-            <input type="hidden" name="ordenId" th:value="${orden.id}" />
+            <!--<input type="hidden" name="ordenId" th:value="${orden.id}" />-->
             <p>
               <input
                 type="number"

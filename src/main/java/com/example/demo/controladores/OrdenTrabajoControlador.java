@@ -112,11 +112,10 @@ public class OrdenTrabajoControlador {
     
 
     @PostMapping("/calificar/{id}")
-    public String calificarOrden(@PathVariable Long id, HttpSession session, @RequestParam Integer puntaje,
+    public String calificarOrden(@PathVariable Long id, @RequestParam Integer puntaje,
             String comentario) {
-        Persona logueado = (Persona) session.getAttribute("personasession");
-        Long idusuario = logueado.getId();        
-        ots.calificarOrdenTrabajo(id, idusuario, comentario, puntaje);
+        
+        ots.calificarOrdenTrabajo(id, comentario, puntaje);
         return "redirect:/orden/ordenes";
     }
 
