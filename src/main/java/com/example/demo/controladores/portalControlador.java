@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.ImagenRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
@@ -88,7 +90,9 @@ public class portalControlador {
     public String inicio(HttpSession session) {
 
         Persona logueado = (Persona) session.getAttribute("personasession");
-
+        if (logueado.getEstado().equals(Estado.INACTIVO)) {
+            return "redirect:/logout";
+        }
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
         }
