@@ -57,7 +57,7 @@ public class OrdenTrabajoControlador {
 
         if (logueado.getRol().toString().equals("USER")) {
             System.out.println("entre en el user");
-            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
+            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajoUsuario(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenes);
             return "MisOrdenesUsuario.html"; // Vista para usuarios
         } else if (logueado.getRol().toString().equals("PROVEEDOR")) {

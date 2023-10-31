@@ -55,15 +55,16 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "index.html";
+            return "LoginUsuario.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
 
-            return "registroProveedor.html";
+            return "LoginUsuario.html";
 
         }
+
     }
 
     @GetMapping("/buscador")
@@ -133,5 +134,11 @@ public class proveedorControlador {
     public String logout() {
         SecurityContextHolder.clearContext();
         return "redirect:/index";
+    }
+
+    @GetMapping("/indiceProveedor")
+    public String index() {
+
+        return "index.html";
     }
 }

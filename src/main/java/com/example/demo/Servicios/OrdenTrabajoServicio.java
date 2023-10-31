@@ -96,10 +96,10 @@ public class OrdenTrabajoServicio {
         }
     }
 
-    public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
+    public List<OrdenTrabajo> ListarOrdenesTrabajoUsuario(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
-        ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
+        ordenesTrabajo = otRepositorio.buscarPoridUsuario(idPersona);
         return ordenesTrabajo;
     }
 
