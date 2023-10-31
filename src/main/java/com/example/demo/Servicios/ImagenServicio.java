@@ -47,4 +47,16 @@ public class ImagenServicio {
         return null;
     }
 
+    public Imagen buscarImagenPorId(Long idImagen) {
+        Imagen imagen = new Imagen();
+        if (idImagen != null) {
+            Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
+            if (respuesta.isPresent()) {
+                imagen = respuesta.get();
+            }
+        }
+        return imagen;
+
+    }
+
 }

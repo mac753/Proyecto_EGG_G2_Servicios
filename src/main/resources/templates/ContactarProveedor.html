@@ -15,65 +15,73 @@
 <body>
 
     <nav th:replace="fragments/navbar::nav"></nav>
+    <h1 class="text-center">ProSkillFinder</h1>
 
-    <h1 class="titulo1">ENVIALE UN MENSAJE A TU PROVEEDOR</h1>
     <div class="pantalla">
 
-            <div class="izquiercon">
+        <div class="izquiercon">
 
-                <div class="fotoPerfil">
-                    <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg" class="fotoPerfil" alt="">
-                </div>
+            <div class="fotoPerfil">
+                <img th:src="'data:image/jpeg;base64,' + ${imagen}" alt="Imagen de perfil">
+            </div>
 
+            <div class="InfoProv">
 
-                <div class="InfoProv">
-
-                    <form th:action="@{/orden/crearOrden}" method="POST">
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre: <span th:text="${proveedor.nombre}"></span></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Direccion: <span
-                         th:text="${proveedor.direccion}"></span></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Honorarios por hora: <span
-                         th:text="${proveedor.honorarioHora}"></span></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Telefono: <span
-                         th:text="${proveedor.telefono}"></span></li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Presentacion: <span
-                         th:text="${proveedor.presentacion}"></span></li>
-                    </form>
-
-                </div>
-
-
+                <form th:action="@{/orden/crearOrden}" method="POST">
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre: <span
+                            th:text="${proveedor.nombre}"></span></li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Direccion: <span
+                            th:text="${proveedor.direccion}"></span></li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Honorarios por hora: <span
+                            th:text="${proveedor.honorarioHora}"></span></li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Telefono: <span
+                            th:text="${proveedor.telefono}"></span></li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Presentacion: <span
+                            th:text="${proveedor.presentacion}"></span></li>
+                </form>
 
             </div>
+
+
+
+        </div>
 
         <div class="derecha">
 
             <div class="encabezadoCP">
+                >
+                <form th:action="@{/orden/crearOrden}" method="POST">
+                    <input hidden th:value="${proveedor.id}" name="idproveedor">
 
-                <div class="textoOT">
+                    <div class="textoOT">
 
-                    <h4>ORDEN DE TRABAJO</h4>
+                        <h4>ORDEN DE TRABAJO</h4>
 
-                    <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU PETICION </h6>
+                        <h6 class="texCP">INGRESA TU ORDEN DE TRABAJO PARA EL PROVEEDOR, POR FAVOR SER CLARO CON TU
+                            PETICION </h6>
 
 
-                    <form th:action="@{/orden/crearOrden}" method="POST">
-                        <div>
-                            <input hidden th:value="${proveedor.id}" name="idproveedor">
+                        <form th:action="@{/orden/crearOrden}" method="POST">
+                            <div>
+                                <input hidden th:value="${proveedor.id}" name="idproveedor">
 
-                            <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario" name="comentario" required="required"></p>
-                        </div>
-                        <div class="boton">
-                                 <button class="btn btn-primary btn-block py-3" type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
+                                <p><input type="text" class="form-control p-4" placeholder="ingresa acá tu comentario"
+                                        name="comentario" required="required"></p>
+                            </div>
+                            <div class="boton">
+                                <button class="enviar btn-primary btn-block py-3" type="submit">Enviar</button>
+                            </div>
+                    </div>
+
+                </form>
+
+
             </div>
         </div>
     </div>
 
 
-    <section class="text-center container">
+    <section class="">
         <div class="row mt-3">
             <div class="divVolver">
                 <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
@@ -92,5 +100,3 @@
 </body>
 
 </html>
-
- 

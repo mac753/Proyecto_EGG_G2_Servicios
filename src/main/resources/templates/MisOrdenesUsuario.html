@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div>Orden creada</div>
+    <div>aca van todas las ordenes</div>
+    <div>USUARIOOOOOOOOO</div>
+
+    <table>
+      <h3>Listado de orden</h3>
+      <thead>
+        <tr>
+          <th scope="col">id Orden</th>
+          <th scope="col">Nombre Usuario</th>
+          <th scope="col">Nombre Proveedor</th>
+          <th scope="col">Descripcion del trabajo</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Valor cotizado por el proveedor</th>
+          <!--<th sec:authorize="hasRole('PROVEEDOR')" scope="col">Acciones</th>-->
+        </tr>
+      </thead>
+      <tbody th:each="orden : ${listaOrdenes}">
+        <tr>
+          <th th:text="${orden.id}"></th>
+          <td th:text="${orden.usuario.nombre}"></td>
+          <td th:text="${orden.proveedor.nombre}"></td>
+          <td th:text="${orden.comentario}"></td>
+          <td th:text="${orden.estadOrden}"></td>
+          <td th:text="' $ ' + ${orden.valor}"></td>
+          <td>
+            <div th:if="${orden.valor != 0}">
+              <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
+                <input type="hidden" name="ordenId" th:value="${orden.id}" />
+                <button type="submit">Aceptar cotización</button>
+              </form>
+            </div>
+
+            <div>
+              <form
+                th:if="${orden.estadOrden.ACTIVA}"
+                th:action="@{/orden/calificar/__${orden.id}__}"
+                method="post"
+              >
+                <input type="hidden" name="ordenId" th:value="${orden.id}" />
+                <p>
+                  <input
+                    type="number"
+                    class="form-control p-4"
+                    placeholder="Ingrese del 1 al 5, la puntuación del proveedor"
+                    name="puntaje"
+                    required="required"
+                  />
+                </p>
+
+                <p>
+                  <input
+                    type="text"
+                    class="form-control p-4"
+                    placeholder="Si quiere agregar comentarios"
+                    name="comentario"
+                    required="required"
+                  />
+                </p>
+                <button type="submit">Finalizar/Calificar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+  </ul>
+</html>

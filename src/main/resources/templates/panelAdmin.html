@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAnel Admin</title>
+    <title>Panel Admin</title>
 </head>
 
 <body>
@@ -15,9 +15,6 @@
             Perfil
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
-        </ul>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
         </ul>
     </li>
@@ -25,7 +22,7 @@
     <h2>Panel Administrador</h2>
     <div>
         <table>
-            <h3>Listado usuarios</h3>
+            <h3>Listado de Usuarios</h3>
             <thead>
                 <tr>
                     <th scope="col">id</th>
@@ -34,6 +31,7 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Direccion</th>
+                    <th scope="col">Cambiar Estado</th>
                 </tr>
             </thead>
             <tbody th:each="usuario : ${usuarios}">
@@ -43,28 +41,60 @@
                 <td th:text="${usuario.rol}"></td>
                 <td th:text="${usuario.telefono}"></td>
                 <td th:text="${usuario.direccion}"></td>
+                <td th:text="${usuario.estado}"></td>
+                <td><a th:href="@{/admin/cambiarEstado/__${usuario.id}__}" role="button">Cambiar Estado</a></td>
             </tbody>
         </table>
     </div>
-    <h3>Listado Proveedores</h3>
-    <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Direccion</th>
-        </tr>
-    </thead>
-    <tbody th:each="proveedor : ${proveedores}">
-        <th scope="row" th:text="${proveedor.id}"></th>
-        <td th:text="${proveedor.nombre}"></td>
-        <td th:text="${proveedor.email}"></td>
-        <td th:text="${proveedor.rol}"></td>
-        <td th:text="${proveedor.telefono}"></td>
-        <td th:text="${proveedor.direccion}"></td>
-    </tbody>
+
+    <h3>Listado de Proveedores</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Cambiar estado</th>
+            </tr>
+        </thead>
+
+        <tbody th:each="proveedor : ${proveedores}">
+            <th scope="row" th:text="${proveedor.id}"></th>
+            <td th:text="${proveedor.nombre}"></td>
+            <td th:text="${proveedor.email}"></td>
+            <td th:text="${proveedor.rol}"></td>
+            <td th:text="${proveedor.telefono}"></td>
+            <td th:text="${proveedor.direccion}"></td>
+            <td th:text="${proveedor.estado}"></td>
+            <td><a th:href="@{/admin/cambiarEstado/__${proveedor.id}__}" role="button">Cambiar estado</a></td>
+        </tbody>
+    </table>
+
+    <h3>Lista de Ordenes de Trabajo</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descripción del trabajo</th>
+                <th scope="col">Puntaje</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">(Rubro Proveedor)</th>
+                <th scope="col">(Nombre Usuario)</th>
+            </tr>
+        </thead>
+        <tbody th:each="lista : ${listaOt}">
+            <th scope="row" th:text="${lista.id}"></th>
+            <td th:text="${lista.comentario}"></td>
+            <td th:text="${lista.puntaje}"></td>
+            <td th:text="${lista.estadOrden}"></td>
+            <td th:text="${lista.proveedor.nombre}"></td>
+            <td th:text="${lista.proveedor.rubro}"></td>
+            <td th:text="${lista.usuario.nombre}"></td>
+        </tbody>
     </table>
     <div>
 

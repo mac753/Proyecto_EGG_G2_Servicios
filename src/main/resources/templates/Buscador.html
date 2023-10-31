@@ -29,17 +29,22 @@
 
                     <a class="nav-link" href="/login">Login</a>
 
-                    <ul  th:if="${session.personasession != null}">
+                    <ul th:if="${session.personasession != null}">
 
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Perfil </a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false"> Perfil </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Editar mi Perfil</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" th:href="@{/orden/ordenes}"  > Ver mis ordenes </a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" th:href="@{/perfilUsuario}">Editar mi Perfil</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" th:href="@{/orden/ordenes}"> Ver mis ordenes </a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
                             </ul>
                         </li>
 
@@ -62,17 +67,17 @@
     <div class="col-md-4" id="textbien">
         <div class="container">
 
-            <span
-              th:if="${session.personasession != null}"
-              th:text=" 'BIENVENIDO/A ' + ${ session.personasession.nombre }  "
-            ></span>
+            <span th:if="${session.personasession != null}"
+                th:text=" 'BIENVENIDO/A ' + ${ session.personasession.nombre }  "></span>
         </div>
-      </div>
+    </div>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" th:href="@{/perfilUsuario}" >Editar Perfil</a></li>
-        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" th:href="@{/perfilUsuario}">Editar Perfil</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
 
-        <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+        <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
     </ul>
     <div class="row justify-content-center">
         <form action="/proveedor/buscador" method="post">
@@ -94,27 +99,27 @@
 
     <div class="card-deck" id="resultado">
 
-            <th:block th:each="proveedor : ${proveedores}">
-                <div class="col-md-4">
-                    <div class="card custom-card" >
-                        <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg"
-                            class="card-img-top" alt="Proveedor 1">
-                        <div class="card-body">
-                            <h5 th:text="${proveedor.nombre}">nombre:</h5>
-                            <p class="card-text">Cantidad de estrellas: 5</p>
+        <th:block th:each="proveedor : ${proveedores}">
+            <div class="col-md-4">
+                <div class="card custom-card">
 
-                            <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary" id="contac"
-                               th:if="${session.personasession != null}"
-                                style="margin:10px">Contactar</a>
+                    <!--  <img th:src="'data:image/jpeg;base64,' + ${imagen}" alt="Imagen de perfil"> -->
+                    <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg"
+                        class="card-img-top" alt="Proveedor 1">
+                    <div class="card-body">
+                        <h5 th:text="${proveedor.nombre}">nombre:</h5>
+                        <p class="card-text">Cantidad de estrellas: 5</p>
 
-                                <a th:href="@{/login}" class="btn btn-primary" id="regist"
-                               th:if="${session.personasession == null}"
-                                style="margin:10px">Registrate</a>
-                        </div>
+                        <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary" id="contac"
+                            th:if="${session.personasession != null}" style="margin:10px">Contactar</a>
+
+                        <a th:href="@{/login}" class="btn btn-primary" id="regist"
+                            th:if="${session.personasession == null}" style="margin:10px">Registrate</a>
                     </div>
                 </div>
-            </th:block>
-        
+            </div>
+        </th:block>
+
     </div>
 
 
@@ -123,7 +128,7 @@
             <div class="card" style="background-color: #000; height: auto;">
                 <div class="card-body">
                     <p class="row justify-content-center" style="font-weight: bold; color: white;">
-                    No se encontraron proveedores para este rubro</p>
+                        No se encontraron proveedores para este rubro</p>
                 </div>
             </div>
         </div>
@@ -135,7 +140,7 @@
         <img src="https://pic.52112.com/180603/JPG-180603_376/z8rcPckn7v_small.jpg" alt="Descripción de la imagen">
     </div>
 
-    <section class="text-center container">
+    <section class="">
         <div class="row mt-3">
             <div class="divVolver">
                 <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>

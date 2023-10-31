@@ -21,7 +21,6 @@ import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.Servicios.proveedorServicio;
 
 import com.example.demo.entidades.Proveedor;
-import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -55,15 +54,16 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "index.html";
+            return "LoginUsuario.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
 
-            return "registroProveedor.html";
+            return "LoginUsuario.html";
 
         }
+
     }
 
     @GetMapping("/buscador")
@@ -81,9 +81,10 @@ public class proveedorControlador {
 
     @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
-        Proveedor proveedor = (Proveedor) session.getAttribute("proveedorsession");
+        Proveedor proveedor = (Proveedor) session.getAttribute("personasession");
 
         if (proveedor != null) {
+
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {
@@ -133,5 +134,11 @@ public class proveedorControlador {
     public String logout() {
         SecurityContextHolder.clearContext();
         return "redirect:/index";
+    }
+
+    @GetMapping("/indiceProveedor")
+    public String index() {
+
+        return "index.html";
     }
 }

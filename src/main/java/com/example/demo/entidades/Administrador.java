@@ -1,5 +1,9 @@
 package com.example.demo.entidades;
 
-public class Administrador {
+public class Administrador extends Persona {
+
+    public Administrador() {
+        super();
+    }
 
 }

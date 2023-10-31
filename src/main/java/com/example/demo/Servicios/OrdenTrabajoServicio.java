@@ -41,13 +41,13 @@ public class OrdenTrabajoServicio {
 
         if (respuesta.isPresent()) {
             OrdenTrabajo ordentrabajo = respuesta.get();
-            ordentrabajo.setValor(0);
+            ordentrabajo.setValor(valor);
             otRepositorio.save(ordentrabajo);
         }
     }
 
     @Transactional // El usuario acepta la cotizacion e inicia la orden
-    public void aceptarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
+    public void aceptarOrdenTrabajo(Long idOrdenTrabajo) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
         if (respuesta.isPresent()) {
@@ -59,7 +59,7 @@ public class OrdenTrabajoServicio {
     }
 
     @Transactional // El usuario cancela orden de servicio
-    public void cancelarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario) {
+    public void cancelarOrdenTrabajo(Long idOrdenTrabajo) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
         if (respuesta.isPresent()) {
@@ -96,10 +96,10 @@ public class OrdenTrabajoServicio {
         }
     }
 
-    public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
+    public List<OrdenTrabajo> ListarOrdenesTrabajoUsuario(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
-        ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
+        ordenesTrabajo = otRepositorio.buscarPoridUsuario(idPersona);
         return ordenesTrabajo;
     }
 
