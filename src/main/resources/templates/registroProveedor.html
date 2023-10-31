@@ -21,7 +21,7 @@
   <body>
     <nav th:replace="fragments/navbar::nav"></nav>
 
-    <h1>ProSkillFinder</h1>
+    <h1 class="textind">ProSkillFinder</h1>
     <h6 class="textRegU">
       ¿Eres un proveedor de servicios? <br />
       ¿Quieres llegar a más clientes y aumentar tus oportunidades de negocio?<br />
@@ -30,9 +30,9 @@
       <br />
     </h6>
     <div class="container3">
-      <h1>Registro de Proveedor</h1>
+      <h3 class="ruh3">Registro de Proveedor</h3>
       <form
-        th:action="@{/proveedor/registro}"
+        action="/proveedor/registro"
         method="POST"
         enctype="multipart/form-data"
       >
@@ -41,7 +41,7 @@
 
         <label class="textofp" for="email">Email:</label>
         <input
-          class="textofp"
+          class="text"
           type="email"
           id="email"
           name="email"
@@ -74,10 +74,10 @@
 
         <label class="textofp" for="rubro">selecciona un rubro:</label>
         <select id="rubro" name="rubro">
-          <option value="Jardinero">Jardinero</option>
-          <option value="Chapista">Chapista</option>
+          <option value="Jardinero">Jardinero/a</option>
+          <option value="Chapista">Plomero</option>
           <option value="Piletero">Piletero</option>
-          <option value="Salidor">Salidor</option>
+          <option value="Salidor">Paseador/a de perros</option>
           <option value="Limpieza">Limpieza</option>
           <option value="Otro">
             Otro
@@ -106,7 +106,7 @@
         </button>
       </form>
     </div>
-    <section class="text-center container">
+    <section class="">
       <div class="row mt-3">
         <div class="divVolver">
           <a

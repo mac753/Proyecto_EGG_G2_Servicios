@@ -18,6 +18,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
@@ -34,6 +35,9 @@ public class proveedorServicio implements UserDetailsService {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
+
+    @Autowired
+    personaRepositorio personaRepositorio;
 
     @Autowired
     ImagenServicio imagenServicio;
@@ -59,6 +63,7 @@ public class proveedorServicio implements UserDetailsService {
         proveedor.setHonorarioHora(honorarioHoras);
         proveedor.setRubro(rubro);
         proveedor.setPresentacion(presentacion);
+        proveedor.setEstado(Estado.ACTIVO);
 
         Imagen imagen = imagenServicio.guardarImagenProveedor(archivo);
         proveedor.setImagen(imagen);

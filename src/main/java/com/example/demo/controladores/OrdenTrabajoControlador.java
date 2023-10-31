@@ -1,18 +1,20 @@
 
 package com.example.demo.controladores;
 
-import com.example.demo.Enumeraciones.EstadoOrdenTrabajo;
 import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
+import com.example.demo.Servicios.ImagenServicio;
 import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Persona;
 import com.example.demo.entidades.Proveedor;
 
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.entidades.Proveedor;
 
+import jakarta.servlet.http.HttpSession;
+
+import java.util.Base64;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -36,9 +38,14 @@ public class OrdenTrabajoControlador {
     @Autowired
     OrdenTrabajoRepositorio otr;
 
+    @Autowired
+    ImagenServicio imagenServicio;
+
     @GetMapping("/contacto/{idproveedor}")
     public String contactar(@PathVariable Long idproveedor, ModelMap modelo) {
+        Proveedor pr = ps.buscarPorid(idproveedor);
         modelo.addAttribute("proveedor", ps.buscarPorid(idproveedor));
+        modelo.addAttribute("imagen", Base64.getEncoder().encodeToString(pr.getImagen().getContenido()));
         return "ContactarProveedor.html";
     }
 
@@ -83,7 +90,7 @@ public class OrdenTrabajoControlador {
 
     @GetMapping("/aceptar")
     public String aceptarOrdenn(@PathVariable Long id) {
-        ots.aceptarOrdenTrabajo(id, id);
+        ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 
@@ -91,7 +98,7 @@ public class OrdenTrabajoControlador {
     public String aceptarOrden(@PathVariable Long id, HttpSession session) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
-        ots.aceptarOrdenTrabajo(id, idusuario);
+        ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 

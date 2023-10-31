@@ -49,7 +49,17 @@
     </nav>
     <h1>ProSkillFinder</h1>
 
-    <h3>Inicia Sesion o Registrate segun corresponda</h3>
+    <div
+      th:if="${inactivo != null}"
+      class="card text-white bg-success mb-3 mt-3 mensaje"
+    >
+      <div class="card-body">
+        <h5 class="card-title">Mensaje al Usuario</h5>
+        <p class="card-text" th:text="${inactivo}"></p>
+      </div>
+    </div>
+
+    <h3>Inicia Secion o Registrate segun corresponda</h3>
     <div class="container2">
       <div class="left-side">
         <div class="box">
@@ -102,7 +112,7 @@
         </form>
       </div>
     </div>
-    <section class="text-center container">
+    <section class="">
       <div class="row mt-3">
         <div class="divVolver">
           <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones"
@@ -111,12 +121,6 @@
         </div>
       </div>
     </section>
-
-    <!--- <div>
-      <a class="arriba" href="/">Ir arriba</a>
-    </div>-->
-
-    <script src="js/main.js"></script>
 
     <footer class="pie">
       <div class="texto-pie">

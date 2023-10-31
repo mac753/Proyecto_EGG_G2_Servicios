@@ -22,7 +22,6 @@ import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 
 import com.example.demo.entidades.Proveedor;
-import com.example.demo.entidades.Usuario;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -86,9 +85,10 @@ public class proveedorControlador {
 
     @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
-        Proveedor proveedor = (Proveedor) session.getAttribute("proveedorsession");
+        Proveedor proveedor = (Proveedor) session.getAttribute("personasession");
 
         if (proveedor != null) {
+
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {
