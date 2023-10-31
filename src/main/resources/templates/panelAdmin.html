@@ -31,7 +31,7 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Direccion</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Cambiar Estado</th>
                 </tr>
             </thead>
             <tbody th:each="usuario : ${usuarios}">
@@ -69,7 +69,7 @@
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.direccion}"></td>
             <td th:text="${proveedor.estado}"></td>
-            <td><a th:href="@{/admin/cambiarEstado/__${proveedor.id}__}" role="button"></a>Cambiar estado</td>
+            <td><a th:href="@{/admin/cambiarEstado/__${proveedor.id}__}" role="button">Cambiar estado</a></td>
         </tbody>
     </table>
 

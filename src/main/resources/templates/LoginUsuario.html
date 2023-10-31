@@ -34,6 +34,13 @@
   </nav>
   <h1>ProSkillFinder</h1>
 
+  <div th:if="${inactivo != null}" class="card text-white bg-success mb-3 mt-3 mensaje">
+    <div class="card-body">
+      <h5 class="card-title">Mensaje al Usuario</h5>
+      <p class="card-text" th:text="${inactivo}"></p>
+    </div>
+  </div>
+
   <h3>Inicia Secion o Registrate segun corresponda</h3>
   <div class="container2">
     <div class="left-side">

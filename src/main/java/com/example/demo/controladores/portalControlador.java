@@ -81,28 +81,26 @@ public class portalControlador {
         if (error != null) {
             modelo.put("error", "Usuario o contraseña incorrectos!");
         }
-
+        // modelo.put("inactivo", "Usuario desactivado por un administrador");
         return "LoginUsuario.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_PROVEEDOR')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session) {
+    public String inicio(HttpSession session, ModelMap modelo) {
 
         Persona logueado = (Persona) session.getAttribute("personasession");
         if (logueado.getEstado().equals(Estado.INACTIVO)) {
-            return "redirect:/logout";
-        }
-        if (logueado.getRol().toString().equals("ADMIN")) {
+            System.out.println("inactivo");
+            // modelo.put("inactivo", "Usuario desactivado por un administrador");
+            modelo.put("inactivo", "Usuario sancionado por un administrador");
+            return "redirect:/login";
+        } else if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
-        }
-        if (logueado.getRol().toString().equals("PROVEEDOR")) {
+        } else if (logueado.getRol().toString().equals("PROVEEDOR")) {
             return "redirect:/proveedor/panelProveedor";
-
-        }
-        if (logueado.getRol().toString().equals("USER")) {
+        } else if (logueado.getRol().toString().equals("USER")) {
             return "redirect:/buscador";
-
         }
         return "Buscador.html";
     }
