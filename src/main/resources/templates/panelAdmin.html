@@ -31,46 +31,72 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Direccion</th>
+                    <th scope="col">Estado</th>
                 </tr>
             </thead>
-            <tbody th:each="usuario : ${usuarios}" style="background-color: #333; border: 1px solid #FF7F00;">
-                <tr style="color: #FFFFFF">
-                    <th scope="row" th:text="${usuario.id}"></th>
-                    <td th:text="${usuario.nombre}"></td>
-                    <td th:text="${usuario.email}"></td>
-                    <td th:text="${usuario.rol}"></td>
-                    <td th:text="${usuario.telefono}"></td>
-                    <td th:text="${usuario.direccion}"></td>
-                </tr>
+            <tbody th:each="usuario : ${usuarios}">
+                <th scope="row" th:text="${usuario.id}"></th>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.rol}"></td>
+                <td th:text="${usuario.telefono}"></td>
+                <td th:text="${usuario.direccion}"></td>
+                <td th:text="${usuario.estado}"></td>
+                <td><a th:href="@{/admin/cambiarEstado/__${usuario.id}__}" role="button">Cambiar Estado</a></td>
             </tbody>
         </table>
     </div>
 
+    <h3>Listado de Proveedores</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Cambiar estado</th>
+            </tr>
+        </thead>
+
+        <tbody th:each="proveedor : ${proveedores}">
+            <th scope="row" th:text="${proveedor.id}"></th>
+            <td th:text="${proveedor.nombre}"></td>
+            <td th:text="${proveedor.email}"></td>
+            <td th:text="${proveedor.rol}"></td>
+            <td th:text="${proveedor.telefono}"></td>
+            <td th:text="${proveedor.direccion}"></td>
+            <td th:text="${proveedor.estado}"></td>
+            <td><a th:href="@{/admin/cambiarEstado/__${proveedor.id}__}" role="button"></a>Cambiar estado</td>
+        </tbody>
+    </table>
+
+    <h3>Lista de Ordenes de Trabajo</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descripción del trabajo</th>
+                <th scope="col">Puntaje</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">(Rubro Proveedor)</th>
+                <th scope="col">(Nombre Usuario)</th>
+            </tr>
+        </thead>
+        <tbody th:each="lista : ${listaOt}">
+            <th scope="row" th:text="${lista.id}"></th>
+            <td th:text="${lista.comentario}"></td>
+            <td th:text="${lista.puntaje}"></td>
+            <td th:text="${lista.estadOrden}"></td>
+            <td th:text="${lista.proveedor.nombre}"></td>
+            <td th:text="${lista.proveedor.rubro}"></td>
+            <td th:text="${lista.usuario.nombre}"></td>
+        </tbody>
+    </table>
     <div>
-        <table class="table" style="width: 700px; border: 2px solid #FF7F00;">
-            <h3>Listado de Proveedores</h3>
-            <thead class="table-light" style="border: 1px solid #FF7F00;">
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Direccion</th>
-                </tr>
-            </thead>
-            <tbody th:each="proveedor : ${proveedores}" style="background-color: #333; border: 1px solid #FF7F00;">
-                <tr style="color: #FFFFFF">
-                    <th scope="row" th:text="${proveedor.id}"></th>
-                    <td th:text="${proveedor.nombre}"></td>
-                    <td th:text="${proveedor.email}"></td>
-                    <td th:text="${proveedor.rol}"></td>
-                    <td th:text="${proveedor.telefono}"></td>
-                    <td th:text="${proveedor.direccion}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
     <section class="">
         <div class="row mt-3">

@@ -3,6 +3,7 @@ package com.example.demo.entidades;
 
 import com.example.demo.Enumeraciones.EstadoOrdenTrabajo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,6 +20,7 @@ public class OrdenTrabajo {
     private Long id;
     private String rubro;
     private Integer puntaje;
+    @Column(name = "valor")
     private double valor;
 
     @Enumerated(EnumType.STRING)

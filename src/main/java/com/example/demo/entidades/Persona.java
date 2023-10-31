@@ -1,5 +1,6 @@
 package com.example.demo.entidades;
 
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Enumeraciones.Rol;
 
 import jakarta.persistence.Entity;
@@ -21,18 +22,21 @@ public abstract class Persona {
     protected Rol rol;
     protected String password;
     protected Long telefono;
+    @Enumerated(EnumType.STRING)
+    protected Estado estado;
 
     public Persona() {
 
     }
 
-    public Persona(Long id, String nombre, String email, Rol rol, String password, Long telefono) {
+    public Persona(Long id, String nombre, String email, Rol rol, String password, Long telefono, Estado estado) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.rol = rol;
         this.password = password;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -83,9 +87,18 @@ public abstract class Persona {
         this.telefono = telefono;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", email=" + email + ", rol=" + rol + ", password="
-                + password + ", telefono=" + telefono + '}';
+        return "Persona [id=" + id + ", nombre=" + nombre + ", email=" + email + ", rol=" + rol + ", password="
+                + password + ", telefono=" + telefono + ", estado=" + estado + "]";
     }
+
 }
