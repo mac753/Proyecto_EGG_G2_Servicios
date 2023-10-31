@@ -37,9 +37,6 @@ public class proveedorServicio implements UserDetailsService {
     private proveedorRepositorio proveedorRepositorio;
 
     @Autowired
-    personaRepositorio personaRepositorio;
-
-    @Autowired
     ImagenServicio imagenServicio;
 
     @Autowired

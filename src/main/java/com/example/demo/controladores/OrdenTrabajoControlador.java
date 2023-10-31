@@ -84,7 +84,7 @@ public class OrdenTrabajoControlador {
 
     @GetMapping("/cancelar/{id}")
     public String cancelarOrden(@PathVariable Long id) {
-        ots.cancelarOrdenTrabajo(id, id);
+        ots.cancelarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 
