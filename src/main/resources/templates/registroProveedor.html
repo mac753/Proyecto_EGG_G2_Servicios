@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <nav th:replace="fragments/navbar::nav"></nav>
+  <nav th:replace="fragments/navbarprov::navb"></nav>
 
   <h1 class="textind">ProSkillFinder</h1>
   <h6 class="textRegU">
@@ -24,7 +24,7 @@
   </h6>
   <div class="container3">
     <h3 class="ruh3">Registro de Proveedor</h3>
-    <form action="/proveedor/registro" method="POST" enctype="multipart/form-data">
+    <form th:action="@{/registro}" method="POST" enctype="multipart/form-data">
       <label class="textofp" for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required><br>
 

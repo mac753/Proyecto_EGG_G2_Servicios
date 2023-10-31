@@ -61,7 +61,7 @@ public class proveedorControlador {
             modelo.put("email", email);
 
             return "registroProveedor.html";
-
+            
         }
     }
 
