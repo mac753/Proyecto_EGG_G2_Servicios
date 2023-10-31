@@ -64,7 +64,7 @@ public class OrdenTrabajoControlador {
 
         if (logueado.getRol().toString().equals("USER")) {
             System.out.println("entre en el user");
-            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
+            List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajoUsuario(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenes);
             return "MisOrdenesUsuario.html"; // Vista para usuarios
         } else if (logueado.getRol().toString().equals("PROVEEDOR")) {
@@ -98,26 +98,26 @@ public class OrdenTrabajoControlador {
         ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
-
-    @GetMapping("/finalizar")
-    public String finalizarOrden(@PathVariable Long id) {
-        ots.finalizarOrdenTrabajo(id, id);
-        return "redirect:/orden/ordenes";
-    }
-
-    @PostMapping("/finalizar/{id}")
-    public String finalizarOrden(@PathVariable Long id, HttpSession session) {
-        Persona logueado = (Persona) session.getAttribute("personasession");
-        Long idusuario = logueado.getId();
-        ots.finalizarOrdenTrabajo(id, idusuario);
-        return "redirect:/orden/ordenes";
-    }
+    /*
+     * @GetMapping("/finalizar")
+     * public String finalizarOrden(@PathVariable Long id) {
+     * ots.finalizarOrdenTrabajo(id, id);
+     * return "redirect:/orden/ordenes";
+     * }
+     * 
+     * @PostMapping("/finalizar/{id}")
+     * public String finalizarOrden(@PathVariable Long id, HttpSession session) {
+     * Persona logueado = (Persona) session.getAttribute("personasession");
+     * Long idusuario = logueado.getId();
+     * ots.finalizarOrdenTrabajo(id, idusuario);
+     * return "redirect:/orden/ordenes";
+     * }
+     */
 
     @GetMapping("/calificar")
     public String calificarOrden(@PathVariable Long id) {
         // ots.aceptarOrdenTrabajo(id);
-
-        return "Calificar.html";
+        return "redirect:/orden/ordenes";
     }
 
     @PostMapping("/calificar/{id}")
@@ -125,6 +125,7 @@ public class OrdenTrabajoControlador {
             String comentario) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
+        ots.finalizarOrdenTrabajo(id, idusuario);
         ots.calificarOrdenTrabajo(id, idusuario, comentario, puntaje);
         return "redirect:/orden/ordenes";
     }
