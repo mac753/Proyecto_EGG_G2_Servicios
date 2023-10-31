@@ -71,7 +71,7 @@ public class OrdenTrabajoServicio {
     }
 
     @Transactional // El proveedor confirma la finalizacion del servicio
-    public void finalizarOrdenTrabajo(Long idOrdenTrabajo, Long idProveedor) {
+    public void finalizarOrdenTrabajo(Long idOrdenTrabajo) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
 
         if (respuesta.isPresent()) {

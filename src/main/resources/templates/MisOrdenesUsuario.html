@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<html <html xmlns:th="https://www.thymeleaf.org">
   
   
 
@@ -29,9 +24,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           <th scope="col">Estado</th>
           <th scope="col">Valor cotizado por el proveedor</th>
           <th scope="col">Acciones</th>
-          <th th:each="orden : ${listaOrdenes}" th:if="${orden.estadOrden == 'ACTIVA'}" scope="col">Calificacion</th>
-          
-          <!--<th sec:authorize="hasRole('PROVEEDOR')" scope="col">Acciones</th>-->
+        
         </tr>
       </thead>
       <tbody th:each="orden : ${listaOrdenes}">
@@ -42,25 +35,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <td th:text="${orden.estadOrden}"></td>
         <td th:text=" ' $ ' + ${orden.valor}"></td>
 
-        <td>
-          <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-          <!--<a th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar cotizacion</a>-->
-          <a sec:authorize="hasRole('USER')">
-            <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
-              <input type="hidden" name="ordenId" th:value="${orden.id}" />
-              <button type="submit">Aceptar cotización</button>
-            </form>
-          </a>
-                
-
-          <form th:action="@{/orden/finalizar/__${orden.id}__}" method="post">
-            <input type="hidden" name="ordenId" th:value="${orden.id}" />
-            <button type="submit">Terminar</button>
-          </form>
-        </td>
-        <td th:if="${orden.estadOrden == 'ACTIVA'}" >
-            
-        <form th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+        <td >
+              <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO' } and ${orden.valor != 0} " th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar Cotizacion </a>
+              <p></p>               
+              <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+              <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+              <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
             <input type="hidden" name="ordenId" th:value="${orden.id}" />
             <p>
               <input
@@ -82,15 +62,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </p>
             <button type="submit">Calificar</button>
           </form>
-            </span>
-            </td>
-        
-        
-      </tbody>
+         </td> 
+         
+           </tbody>
     </table>
-  </body>
+            
+                
 
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          
+            
+        
+
+         
+        
+        
+
+        
+ <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
   </ul>
+    
+  </body>
+
+ 
 </html>

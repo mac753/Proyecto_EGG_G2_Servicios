@@ -10,7 +10,6 @@ import com.example.demo.entidades.Persona;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -61,6 +60,8 @@ public class OrdenTrabajoControlador {
             System.out.println("entre en el user");
             List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajo(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenes);
+            
+            
             return "MisOrdenesUsuario.html"; // Vista para usuarios      
             
         } 
@@ -102,31 +103,31 @@ public class OrdenTrabajoControlador {
         //ots.aceptarOrdenTrabajo(id);
         return "Calificar.html";
     }
+    
+     @GetMapping("/finalizar/{id}")
+    public String finalizarOrden(@PathVariable Long id){
+        ots.finalizarOrdenTrabajo(id);
+        return "redirect:/orden/ordenes";
+         }
+    
 
+    @PostMapping("/calificar/{id}")
+    public String calificarOrden(@PathVariable Long id, HttpSession session, @RequestParam Integer puntaje,
+            String comentario) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();        
+        ots.calificarOrdenTrabajo(id, idusuario, comentario, puntaje);
+        return "redirect:/orden/ordenes";
+    }
 
-
-    @PostMapping("/aceptar/{id}")
-    public String aceptarOrden(@PathVariable Long id, HttpSession session) {
+    @PostMapping("/cotizacion/{id}")
+    public String cotizar(@PathVariable Long id, @RequestParam double valor, HttpSession session) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
-        //ots.aceptarOrdenTrabajo(id, idusuario);
+        ots.asignarValor(id, idusuario, valor);
+
         return "redirect:/orden/ordenes";
     }
-
-    @GetMapping("/finalizar")
-    public String finalizarOrden(@PathVariable Long id) {
-        ots.finalizarOrdenTrabajo(id, id);
-        return "redirect:/orden/ordenes";
-    }
-
-    @PostMapping("/finalizar/{id}")
-    public String finalizarOrden(@PathVariable Long id, HttpSession session) {
-        Persona logueado = (Persona) session.getAttribute("personasession");
-        Long idusuario = logueado.getId();
-        ots.finalizarOrdenTrabajo(id, idusuario);
-        return "redirect:/orden/ordenes";
-    }
-
 
     
 }
