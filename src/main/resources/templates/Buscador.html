@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-
 
 <head>
     <meta charset="UTF-8">
@@ -16,6 +12,7 @@
 </head>
 
 <body>
+    <div class="opacidadgral">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand">
@@ -83,7 +80,7 @@
 
         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
     </ul>
-    <div class="row justify-content-center">
+    <div class="">
         <form action="/proveedor/buscador" method="post">
             <div class="col-md-8">
                 <select class="seleb" name="rubro" id="rubro" required>
@@ -107,18 +104,19 @@
             <div class="col-md-4">
                 <div class="card custom-card">
 
-                   
+
                     <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg"
                         class="card-img-top" alt="Proveedor 1">
                     <div class="card-body">
                         <h5 th:text="${proveedor.nombre}">nombre:</h5>
                         <p class="card-text">Cantidad de estrellas: <span th:if="${proveedor.promedioPuntaje != null}" th:text="${proveedor.promedioPuntaje}"></span></p>
-
+                        <div class="divVolver">
                         <a th:href="@{/orden/contacto/__${proveedor.id}__}" class="btn btn-primary" id="contac"
                             th:if="${session.personasession != null}" style="margin:10px">Contactar</a>
-
+                        </div>
+                        <div class="divVolver">
                         <a th:href="@{/login}" class="btn btn-primary" id="regist"
-                            th:if="${session.personasession == null}" style="margin:10px">Registrate</a>
+                            th:if="${session.personasession == null}" style="margin:10px">Registrate</a> </div>
                     </div>
                 </div>
             </div>
@@ -127,7 +125,7 @@
     </div>
 
 
-    <div class="row justify-content-center" th:if="${#lists.isEmpty(proveedores)}">
+    <div th:if="${#lists.isEmpty(proveedores)}">
         <div class="col-md-4">
             <div class="card" style="background-color: #000; height: auto;">
                 <div class="card-body">
@@ -144,10 +142,10 @@
         <img src="https://pic.52112.com/180603/JPG-180603_376/z8rcPckn7v_small.jpg" alt="Descripción de la imagen">
     </div>
 
-    <section class="">
+    <section class="botonVolver">
         <div class="row mt-3">
-            <div class="divVolver">
-                <a href="/" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+          <div class="divVolver">
+                <a href="/" class="btn btn-secondary my-2 botonVolver botones">Inicio</a>
             </div>
         </div>
     </section>
@@ -157,7 +155,7 @@
         <div th:replace="fragments/redesS::red_soc"></div>
     </footer>
 
-
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
