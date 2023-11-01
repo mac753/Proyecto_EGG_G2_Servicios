@@ -10,8 +10,6 @@ import com.example.demo.entidades.Proveedor;
 
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,13 +90,13 @@ public class OrdenTrabajoServicio {
     @Transactional // El usuario califica la orden del servicio
     public void calificarOrdenTrabajo(Long idOrdenTrabajo, String comentario, Integer puntaje) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
-        
+
         if (respuesta.isPresent()) {
 
             OrdenTrabajo ordentrabajo = respuesta.get();
             ordentrabajo.setComentarioCalificacion(comentario);
             ordentrabajo.setPuntaje(puntaje);
-            
+
             otRepositorio.save(ordentrabajo);
         }
     }

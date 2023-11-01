@@ -9,13 +9,8 @@ import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Persona;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 import com.example.demo.entidades.Proveedor;
-import com.example.demo.entidades.Proveedor;
-import jakarta.servlet.http.HttpSession;
 import java.util.Base64;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -69,7 +64,7 @@ public class OrdenTrabajoControlador {
             System.out.println("entre en el user");
             List<OrdenTrabajo> listaOrdenes = ots.ListarOrdenesTrabajoUsuario(idusuario);
             modelo.addAttribute("listaOrdenes", listaOrdenes);
-            return "MisOrdenesUsuario.html"; // Vista para usuarios  
+            return "MisOrdenesUsuario.html"; // Vista para usuarios
         } else if (logueado.getRol().toString().equals("PROVEEDOR")) {
 
             System.out.println("entre en el proveedor");
@@ -97,7 +92,8 @@ public class OrdenTrabajoControlador {
     public String aceptarOrden(@PathVariable Long id) {
         ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
-    }      
+    }
+
     @GetMapping("/finalizar/{id}")
     public String finalizarOrden(@PathVariable Long id) {
         ots.finalizarOrdenTrabajo(id);
@@ -123,4 +119,3 @@ public class OrdenTrabajoControlador {
     }
 
 }
-    

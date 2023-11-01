@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.ImagenRepositorio;
-import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Repositorio.personaRepositorio;
 import com.example.demo.Servicios.UsuarioServicio;
 import com.example.demo.entidades.Persona;
@@ -29,13 +28,11 @@ public class portalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-    @Autowired
-    private UsuarioRepositorio usuarioRepositorio;
+
     @Autowired
     private personaRepositorio personaRepositorio;
-     @Autowired
+    @Autowired
     ImagenRepositorio imagenRepositorio;
-
 
     @GetMapping("/")
     public String index() {
@@ -69,7 +66,6 @@ public class portalControlador {
     @GetMapping("/panelUsuario")
     public String panelUsuario(HttpSession session, ModelMap modelo) {
         Persona persona = (Usuario) session.getAttribute("personasession");
-        
 
         if (persona != null) {
             // Aquí tienes acceso al proveedor y sus datos
@@ -156,15 +152,5 @@ public class portalControlador {
         }
 
     }
-
-    /*
-     * @GetMapping("/cargar/{id}")
-     * public ResponseEntity<byte[]> cargarImagen(@PathVariable Long id) {
-     * Imagen imagen = (Imagen) imagenRepositorio.getById(id);
-     * HttpHeaders headers = new HttpHeaders();
-     * headers.setContentType(MediaType.IMAGE_JPEG);
-     * return new ResponseEntity<>(imagen.getContenido(), headers, HttpStatus.OK);
-     * }
-     */
 
 }

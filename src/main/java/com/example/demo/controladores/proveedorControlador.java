@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
-import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.Persona;
 
@@ -35,9 +34,6 @@ public class proveedorControlador {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
-
-    @Autowired
-    private OrdenTrabajoServicio ots;
 
     @GetMapping("/registrar") // localhost:8080/proveedor/registrar
     public String registrar() {
@@ -83,8 +79,7 @@ public class proveedorControlador {
         return "Buscador";
     }
 
-
-   @GetMapping("/panelProveedor")
+    @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
         Persona proveedor = (Persona) session.getAttribute("personasession");
 
@@ -145,16 +140,5 @@ public class proveedorControlador {
 
         return "index.html";
     }
-
-//    @GetMapping("/proveedores")
-//    public String listarProveedores(ModelMap modelo) {
-//        List<Proveedor> proveedores = proveedorServicio.listarProveedor();
-//
-//        // Calcular el promedio de puntaje para los proveedores
-//        proveedorServicio.calcularPromedioPuntajeProveedores(proveedores);
-//
-//        modelo.addAttribute("proveedores", proveedores);
-//        return "ContactarProveedor.html";
-//    }
 
 }
