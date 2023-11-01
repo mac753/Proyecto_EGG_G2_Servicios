@@ -18,21 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Excepciones.MiException;
 import com.example.demo.Repositorio.proveedorRepositorio;
+import com.example.demo.Servicios.OrdenTrabajoServicio;
 import com.example.demo.Servicios.proveedorServicio;
 import com.example.demo.entidades.Persona;
 
 import com.example.demo.entidades.Proveedor;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import com.example.demo.entidades.Usuario;
-
-import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 @RequestMapping("/proveedor") // localhost:8080/proveedor
@@ -43,6 +35,9 @@ public class proveedorControlador {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
+
+    @Autowired
+    private OrdenTrabajoServicio ots;
 
     @GetMapping("/registrar") // localhost:8080/proveedor/registrar
     public String registrar() {
@@ -64,14 +59,15 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "index.html";
+            return "LoginUsuario.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
+            return "LoginUsuario.html";
 
-            return "registroProveedor.html";
         }
+
     }
 
     @GetMapping("/buscador")
@@ -87,16 +83,13 @@ public class proveedorControlador {
         return "Buscador";
     }
 
-//       @GetMapping("/contacto/{idproveedor}")
-//    public String contactar(@PathVariable Long idproveedor, ModelMap modelo) {
-//        modelo.addAttribute("proveedor", ps.buscarPorid(idproveedor));
-//        return "ContactarProveedor.html";
-//    }
 
    @GetMapping("/panelProveedor")
     public String panelProveedor(HttpSession session, ModelMap modelo) {
         Persona proveedor = (Persona) session.getAttribute("personasession");
+
         if (proveedor != null) {
+
             // Aquí tienes acceso al proveedor y sus datos
             modelo.addAttribute("proveedor", proveedor);
         } else {
@@ -141,11 +134,27 @@ public class proveedorControlador {
 
     }
 
-
     @GetMapping("/logout")
     public String logout() {
         SecurityContextHolder.clearContext();
         return "redirect:/index";
     }
-}
 
+    @GetMapping("/indiceProveedor")
+    public String index() {
+
+        return "index.html";
+    }
+
+//    @GetMapping("/proveedores")
+//    public String listarProveedores(ModelMap modelo) {
+//        List<Proveedor> proveedores = proveedorServicio.listarProveedor();
+//
+//        // Calcular el promedio de puntaje para los proveedores
+//        proveedorServicio.calcularPromedioPuntajeProveedores(proveedores);
+//
+//        modelo.addAttribute("proveedores", proveedores);
+//        return "ContactarProveedor.html";
+//    }
+
+}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
@@ -51,55 +50,19 @@
       </ul>
   </div>
 
-    <a
-      class="nav-link dropdown-toggle"
-      href="#"
-      id="navbarDropdown"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      Perfil
-    </a>
+  <footer class="pie">
+    <div th:replace="fragments/footer::foot"></div>
+    <div th:replace="fragments/redesS::red_soc"></div>
+  </footer>
 
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li>
-        <a
-          
-          th:href="@{/orden/ordenes}"
 
-          
-          class="nav-link"
-          >Ver mis ordenes </a
-        >
-      </li>
-      <li><hr class="dropdown-divider" /></li>
-    </ul>
-    
 
-        </a>
-      </li>
-      <li><hr class="dropdown-divider" /></li>
-    </ul>
 
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li>
-        <a
-          th:if="${session.personasession != null}"
-          th:href="@{perfil}"
-          class="nav-link"
-          >Editar Perfil</a
-        >
-      </li>
-      <li><hr class="dropdown-divider" /></li>
-    </ul>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 
-    <a
-      th:if="${session.personasession != null}"
-      th:href="@{/logout}"
-      class="nav-link"
-      >Cerrar Sesión</a
-    >
 
-  </body>
+</body>
+
 </html>

@@ -18,30 +18,30 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Excepciones.MiException;
-import com.example.demo.Repositorio.personaRepositorio;
+import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
-import com.example.demo.entidades.Persona;
+import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Proveedor;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 
 @Service
-public class proveedorServicio {
+public class proveedorServicio implements UserDetailsService {
 
     @Autowired
     private proveedorRepositorio proveedorRepositorio;
-    
-    @Autowired
-    personaRepositorio personaRepositorio;
 
     @Autowired
     ImagenServicio imagenServicio;
+
+    @Autowired
+    private OrdenTrabajoRepositorio otRepositorio;
 
     @Transactional
     public void crearProveedor(MultipartFile archivo, String nombre, String email, String password, String password2,
@@ -61,10 +61,11 @@ public class proveedorServicio {
         proveedor.setHonorarioHora(honorarioHoras);
         proveedor.setRubro(rubro);
         proveedor.setPresentacion(presentacion);
+        proveedor.setEstado(Estado.ACTIVO);
 
         Imagen imagen = imagenServicio.guardarImagenProveedor(archivo);
         proveedor.setImagen(imagen);
-
+        proveedor.setPromedioPuntaje(0.0);
         proveedorRepositorio.save(proveedor);
     }
 
@@ -166,26 +167,61 @@ public class proveedorServicio {
     public Proveedor BuscarPorId(String id) {
         return proveedorRepositorio.buscarPorNombreProveedor(id);
     }
-    
-    
-    
-    
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Proveedor proveedor = proveedorRepositorio.buscarProveedorPorEmail(email);
+        if (proveedor != null) {
+            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + proveedor.getRol().toString());
+            permisos.add(p);
 
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
-//        if (persona != null) {
-//            List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
-//            permisos.add(p);
-//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//            HttpSession session = attr.getRequest().getSession(true);
-//            session.setAttribute("personasession", persona);
-//            return new User(persona.getEmail(), persona.getPassword(), permisos);
-//        } else {
-//            return null;
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", proveedor);
+            return new User(proveedor.getNombre(), proveedor.getPassword(), permisos);
+
+        } else {
+            return null;
+        }
+    }
+
+//    @Transactional
+//    public void calcularPromedioPuntajeProveedores(List<Proveedor> proveedores) {
+//        for (Proveedor proveedor : proveedores) {
+//            Long idProveedor = proveedor.getId();
+//            List<OrdenTrabajo> ordenes = otRepositorio.buscarPoridProveedor(idProveedor);
+//            int totalPuntaje = 0;
+//            int totalCalificaciones = 0;
+//
+//            for (OrdenTrabajo orden : ordenes) {
+//                if (orden.getPuntaje() != null) {
+//                    totalPuntaje += orden.getPuntaje();
+//                    totalCalificaciones++;
+//                }
+//            }
+//
+//            double promedioPuntaje = (totalCalificaciones > 0) ? (double) totalPuntaje / totalCalificaciones : 0.0;
+//           
+//
+//            // Actualiza el promedioPuntaje del proveedor
+//            proveedor.setPromedioPuntaje(promedioPuntaje);
+//            proveedorRepositorio.save(proveedor);
 //        }
 //    }
-
-}
+    
+    @Transactional
+    public void calcularPromedioPuntajeProveedores(Long idProveedor) {
+        Proveedor proveedor = proveedorRepositorio.findById(idProveedor).get();
+        List<OrdenTrabajo> ordenes = otRepositorio.buscarPoridProveedor(idProveedor);
+        double totalPuntaje = proveedor.getPromedioPuntaje();
+        double totalCalificaciones = otRepositorio.buscarPoridProveedor(idProveedor).size();
+        for (OrdenTrabajo orden : ordenes) {
+           totalPuntaje += orden.getPuntaje();
+        }
+        double promedioPuntaje= totalPuntaje/totalCalificaciones;
+            // Actualiza el promedioPuntaje del proveedor
+            proveedor.setPromedioPuntaje(promedioPuntaje);
+            proveedorRepositorio.save(proveedor);
+        }
+    }

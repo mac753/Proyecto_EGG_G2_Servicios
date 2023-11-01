@@ -6,8 +6,12 @@ import com.example.demo.Repositorio.OrdenTrabajoRepositorio;
 import com.example.demo.Repositorio.UsuarioRepositorio;
 import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.OrdenTrabajo;
+import com.example.demo.entidades.Proveedor;
+
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,9 @@ public class OrdenTrabajoServicio {
 
     @Autowired
     proveedorRepositorio proveedorRepositorio;
+
+    @Autowired
+    proveedorServicio proveedorServicio;
 
     @Transactional // crear orden de trabajo en estado cotizando para el contacto.
     public void crearOt(Long idProveedor, Long idUsuario, String comentario) {
@@ -96,20 +103,20 @@ public class OrdenTrabajoServicio {
         }
     }
 
-    public List<OrdenTrabajo> ListarOrdenesTrabajo(Long idPersona) {
+    public List<OrdenTrabajo> ListarOrdenesTrabajoUsuario(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
-        ordenesTrabajo = otRepositorio.buscarPorid(idPersona);
+        ordenesTrabajo = otRepositorio.buscarPoridUsuario(idPersona);
         return ordenesTrabajo;
     }
-    
-     public List<OrdenTrabajo> ListarOrdenesTrabajoProveedor(Long idPersona) {
+
+    public List<OrdenTrabajo> ListarOrdenesTrabajoProveedor(Long idPersona) {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
         ordenesTrabajo = otRepositorio.buscarPoridProveedor(idPersona);
         return ordenesTrabajo;
     }
-    
+
     public List<OrdenTrabajo> ListarTodasOrdenesTrabajo() {
 
         List<OrdenTrabajo> ordenesTrabajo = new ArrayList<OrdenTrabajo>();
@@ -117,6 +124,30 @@ public class OrdenTrabajoServicio {
         return ordenesTrabajo;
     }
 
-   
+    @Transactional
+    public void calcularPromedioPuntajeProveedores() {
+        List<Proveedor> proveedores = proveedorServicio.listarProveedor();
+
+        for (Proveedor proveedor : proveedores) {
+            Long idProveedor = proveedor.getId();
+            List<OrdenTrabajo> ordenes = otRepositorio.buscarPoridProveedor(idProveedor);
+            int totalPuntaje = 0;
+            int totalCalificaciones = 0;
+
+            for (OrdenTrabajo orden : ordenes) {
+                if (orden.getPuntaje() != null) {
+                    totalPuntaje += orden.getPuntaje();
+                    totalCalificaciones++;
+                }
+            }
+
+            double promedioPuntaje = (totalCalificaciones > 0) ? (double) totalPuntaje / totalCalificaciones : 0.0;
+
+            // Actualiza el promedioPuntaje del proveedor
+            proveedor.setPromedioPuntaje(promedioPuntaje);
+            proveedorRepositorio.save(proveedor);
+        }
+
+    }
 
 }

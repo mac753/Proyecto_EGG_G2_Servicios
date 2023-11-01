@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html <html xmlns:th="https://www.thymeleaf.org">
-  
-  
-
   <head>
     <title>TODO supply a title</title>
     <meta charset="UTF-8" />
@@ -28,61 +25,63 @@
         </tr>
       </thead>
       <tbody th:each="orden : ${listaOrdenes}">
-        <th th:text="${orden.id}"></th>
-        <td th:text="${orden.usuario.nombre}"></td>
-        <td th:text="${orden.proveedor.nombre}"></td>
-        <td th:text="${orden.comentario}"></td>
-        <td th:text="${orden.estadOrden}"></td>
-        <td th:text=" ' $ ' + ${orden.valor}"></td>
 
-        <td >
-              <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO' } and ${orden.valor != 0} " th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar Cotizacion </a>
-              <p></p>               
-              <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
-              <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
-              <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
-            <!--<input type="hidden" name="ordenId" th:value="${orden.id}" />-->
-            <p>
-              <input
-                type="number"
-                class="form-control p-4"
-                placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
-                name="puntaje"
-                required="required"
-              />
-            </p>
-            <p>
-              <input
-                type="text"
-                class="form-control p-4"
-                placeholder="Si quiere agrega comentarios"
-                name="comentario"
-                required="required"
-              />
-            </p>
-            <button type="submit">Calificar</button>
+      <th th:text="${orden.id}"></th>
+      <td th:text="${orden.usuario.nombre}"></td>
+      <td th:text="${orden.proveedor.nombre}"></td>
+      <td th:text="${orden.comentario}"></td>
+      <td th:text="${orden.estadOrden}"></td>
+      <td th:text="' $ ' + ${orden.valor}"></td>
+      <td >
+          <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO' } and ${orden.valor != 0} " th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar Cotizacion </a>
+          <p></p>               
+          <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+          <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+          <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
+
+              <p>
+                  <input
+                      type="number"
+                      class="form-control p-4"
+                      placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
+                      name="puntaje"
+                      required="required"
+                      />
+              </p>
+              <p>
+                  <input
+                      type="text"
+                      class="form-control p-4"
+                      placeholder="Si quiere agrega comentarios"
+                      name="comentario"
+                      required="required"
+                      />
+              </p>
+              <button type="submit">Calificar</button>
           </form>
-         </td> 
-         
-           </tbody>
-    </table>
-            
-                
+      </td> 
 
-          
-            
-        
+    </tbody>          
 
-         
-        
-        
 
-        
- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
   </ul>
-    
-  </body>
 
- 
+</body>
+
+
 </html>

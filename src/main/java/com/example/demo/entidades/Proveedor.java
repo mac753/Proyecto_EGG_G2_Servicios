@@ -10,7 +10,7 @@ public class Proveedor extends Persona {
     private float honorarioHora;
     private String rubro;
     private String presentacion;
-
+    private Double promedioPuntaje;
     @OneToOne
     private Imagen imagen;
 
@@ -19,11 +19,12 @@ public class Proveedor extends Persona {
     }
 
     public Proveedor(String direccion, float honorarioHora, String rubro,
-            String presentacion) {
+            String presentacion, Double promedioPuntaje) {
         this.direccion = direccion;
         this.honorarioHora = honorarioHora;
         this.rubro = rubro;
         this.presentacion = presentacion;
+        this.promedioPuntaje = promedioPuntaje;
     }
 
     public String getDireccion() {
@@ -56,6 +57,14 @@ public class Proveedor extends Persona {
 
     public void setPresentacion(String presentacion) {
         this.presentacion = presentacion;
+    }
+
+    public Double getPromedioPuntaje() {
+        return promedioPuntaje;
+    }
+
+    public void setPromedioPuntaje(Double promedioPuntaje) {
+        this.promedioPuntaje = promedioPuntaje;
     }
 
     public Imagen getImagen() {
