@@ -84,6 +84,7 @@
                 <th scope="col">Proveedor</th>
                 <th scope="col">(Rubro Proveedor)</th>
                 <th scope="col">(Nombre Usuario)</th>
+                <th scope="col">Comentario</th>
             </tr>
         </thead>
         <tbody th:each="lista : ${listaOt}">
@@ -94,6 +95,7 @@
             <td th:text="${lista.proveedor.nombre}"></td>
             <td th:text="${lista.proveedor.rubro}"></td>
             <td th:text="${lista.usuario.nombre}"></td>
+            <td th:text="${lista.comentarioCalificacion}"></td>
         </tbody>
     </table>
     <div>

@@ -1,87 +1,77 @@
 <!DOCTYPE html>
-<html <html xmlns:th="https://www.thymeleaf.org">
-  <head>
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div>Orden creada</div>
-    <div >aca van todas las ordenes</div>
-    <div>USUARIOOOOOOOOO</div>
 
-    <table>
-      <h3>Listado de orden</h3>
-      <thead>
-        <tr >
-          <th scope="col">id Orden</th>
-          <th scope="col">Nombre Usuario</th>
-          <th scope="col">Nombre Proveedor</th>
-          <th scope="col">Descripcion del trabajo</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Valor cotizado por el proveedor</th>
-          <th scope="col">Acciones</th>
-        
-        </tr>
-      </thead>
-      <tbody th:each="orden : ${listaOrdenes}">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
-      <th th:text="${orden.id}"></th>
-      <td th:text="${orden.usuario.nombre}"></td>
-      <td th:text="${orden.proveedor.nombre}"></td>
-      <td th:text="${orden.comentario}"></td>
-      <td th:text="${orden.estadOrden}"></td>
-      <td th:text="' $ ' + ${orden.valor}"></td>
-      <td >
-          <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO' } and ${orden.valor != 0} " th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar Cotizacion </a>
-          <p></p>               
-          <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
-          <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
-          <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
+<head>
+  <title>TODO supply a title</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div>Orden creada</div>
+  <div>aca van todas las ordenes</div>
+  <div>USUARIOOOOOOOOO</div>
+
+  <table>
+    <h3>Listado de orden</h3>
+    <thead>
+      <tr>
+        <th scope="col">id Orden</th>
+        <th scope="col">Nombre Usuario</th>
+        <th scope="col">Nombre Proveedor</th>
+        <th scope="col">Descripcion del trabajo</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Valor cotizado por el proveedor</th>
+        <th scope="col">Comentario post-servicio</th>
+      </tr>
+    </thead>
+
+    <tbody th:each="orden : ${listaOrdenes}">
+      <tr>
+        <th th:text="${orden.id}"></th>
+        <td th:text="${orden.usuario.nombre}"></td>
+        <td th:text="${orden.proveedor.nombre}"></td>
+        <td th:text="${orden.comentario}"></td>
+        <td th:text="${orden.estadOrden}"></td>
+        <td th:text="' $ ' + ${orden.valor}"></td>
+        <td th:text="${orden.comentarioCalificacion}"></td>
+        <td>
+          <div th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } ">
+            <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
+              <input type="hidden" name="ordenId" th:value="${orden.id}" />
+              <button id="btnAceptarCotizacion" class="btn btn-primary" type="button" onclick="callAllert();">
+                Aceptar cotización
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <form th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
+              th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+              <input type="hidden" name="ordenId" th:value="${orden.id}" />
+              <p>
+                <input type="number" class="form-control p-4"
+                  placeholder="Ingrese del 1 al 5, la puntuación del proveedor" name="puntaje" required="required" />
+              </p>
 
               <p>
-                  <input
-                      type="number"
-                      class="form-control p-4"
-                      placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
-                      name="puntaje"
-                      required="required"
-                      />
+                <input type="text" class="form-control p-4" placeholder="Si quiere agregar comentarios"
+                  name="comentarioCalificacion" required="required" />
               </p>
-              <p>
-                  <input
-                      type="text"
-                      class="form-control p-4"
-                      placeholder="Si quiere agrega comentarios"
-                      name="comentario"
-                      required="required"
-                      />
-              </p>
-              <button type="submit">Calificar</button>
-          </form>
-      </td> 
-
-    </tbody>          
-
-
+              <button id="btnFinalizarCalificar" class="btn btn-secondary" name="otroBoton" type="submit">
+                Finalizar/Calificar
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
-
-
-
-
-
-
-
-
-
-
-
-
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
-  </ul>
-
 </body>
-
+<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+  <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+</ul>
 
 </html>

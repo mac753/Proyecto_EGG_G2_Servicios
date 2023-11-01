@@ -31,12 +31,12 @@ public class OrdenTrabajo {
     private Usuario usuario;
     private String comentario;
     private String comentarioCalificacion;
-    
 
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden, Proveedor proveedor, Usuario usuario, String comentario, String comentarioCalificacion) {
+    public OrdenTrabajo(Long id, String rubro, Integer puntaje, double valor, EstadoOrdenTrabajo estadOrden,
+            Proveedor proveedor, Usuario usuario, String comentario, String comentarioCalificacion) {
         this.id = id;
         this.rubro = rubro;
         this.puntaje = puntaje;
@@ -47,8 +47,6 @@ public class OrdenTrabajo {
         this.comentario = comentario;
         this.comentarioCalificacion = comentarioCalificacion;
     }
-
-    
 
     public Long getId() {
         return id;
@@ -122,5 +120,4 @@ public class OrdenTrabajo {
         this.comentarioCalificacion = comentarioCalificacion;
     }
 
-    
 }

@@ -94,18 +94,19 @@ public class OrdenTrabajoControlador {
         return "redirect:/orden/ordenes";
     }
 
-    @GetMapping("/finalizar/{id}")
-    public String finalizarOrden(@PathVariable Long id) {
-        ots.finalizarOrdenTrabajo(id);
-
+    @GetMapping("/calificar")
+    public String calificarOrden(@PathVariable Long id) {
+        // ots.aceptarOrdenTrabajo(id);
         return "redirect:/orden/ordenes";
     }
 
     @PostMapping("/calificar/{id}")
-    public String calificarOrden(@PathVariable Long id, @RequestParam Integer puntaje,
-            String comentario) {
-
-        ots.calificarOrdenTrabajo(id, comentario, puntaje);
+    public String calificarOrden(@PathVariable Long id, HttpSession session, @RequestParam Integer puntaje,
+            String comentarioCalificacion) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.finalizarOrdenTrabajo(id, idusuario);
+        ots.calificarOrdenTrabajo(id, idusuario, comentarioCalificacion, puntaje);
         return "redirect:/orden/ordenes";
     }
 

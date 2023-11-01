@@ -4,26 +4,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-       <div
-            th:if="${session.personasession != null}"
-            th:text=" 'BIENVENIDO ' + ${ session.personasession.nombre } + ' rol '+ ${ session.personasession.rol } "
-            ></div>
-    <th sec:authorize="hasRole('ROLE_PROVEEDOR')" scope="col">valor </th> 
-    <th sec:authorize="hasRole('ROL_PROVEEDOR')" scope="col">valor</th>    
-    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">valor</th> 
-     <th sec:authorize="hasAuthority('ROLE_PROVEEDOR')" scope="col">valor </th> 
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div th:if="${session.personasession != null}"
+        th:text=" 'BIENVENIDO ' + ${ session.personasession.nombre } + ' rol '+ ${ session.personasession.rol } "></div>
+    <th sec:authorize="hasRole('ROLE_PROVEEDOR')" scope="col">valor </th>
     <th sec:authorize="hasRole('ROL_PROVEEDOR')" scope="col">valor</th>
-   
-    <th sec:authorize="hasAuthority('PROVEEDOR')" scope="col">valor</th> 
-    
-    
+    <th sec:authorize="hasRole('PROVEEDOR')" scope="col">valor</th>
+    <th sec:authorize="hasAuthority('ROLE_PROVEEDOR')" scope="col">valor </th>
+    <th sec:authorize="hasRole('ROL_PROVEEDOR')" scope="col">valor</th>
+
+    <th sec:authorize="hasAuthority('PROVEEDOR')" scope="col">valor</th>
+
+
     <th sec:authorize="hasAuthority('USER')" scope="col">Acciones</th>
-   
+
 </body>
+
 </html>

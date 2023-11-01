@@ -55,12 +55,12 @@ public class proveedorControlador {
             if (rubroSeleccionado.equals("Otro")) {
                 rubroSeleccionado = rubroOtro;
             }
-            return "LoginUsuario.html";
+            return "redirect:/login";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
-            return "LoginUsuario.html";
+            return "redirect:/login";
 
         }
 
@@ -117,7 +117,7 @@ public class proveedorControlador {
 
             modelo.put("exito", "Proveedor actualizado correctamente!");
 
-            return "index.html";
+            return "redirect:/proveedor/panelProveedor";
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());

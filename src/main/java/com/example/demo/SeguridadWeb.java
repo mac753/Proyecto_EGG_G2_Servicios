@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.example.demo.Servicios.UsuarioServicio;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
