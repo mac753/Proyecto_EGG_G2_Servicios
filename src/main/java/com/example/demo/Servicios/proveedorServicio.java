@@ -26,8 +26,6 @@ import com.example.demo.Repositorio.proveedorRepositorio;
 import com.example.demo.entidades.Imagen;
 import com.example.demo.entidades.OrdenTrabajo;
 import com.example.demo.entidades.Proveedor;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
@@ -186,30 +184,6 @@ public class proveedorServicio implements UserDetailsService {
         }
     }
 
-//    @Transactional
-//    public void calcularPromedioPuntajeProveedores(List<Proveedor> proveedores) {
-//        for (Proveedor proveedor : proveedores) {
-//            Long idProveedor = proveedor.getId();
-//            List<OrdenTrabajo> ordenes = otRepositorio.buscarPoridProveedor(idProveedor);
-//            int totalPuntaje = 0;
-//            int totalCalificaciones = 0;
-//
-//            for (OrdenTrabajo orden : ordenes) {
-//                if (orden.getPuntaje() != null) {
-//                    totalPuntaje += orden.getPuntaje();
-//                    totalCalificaciones++;
-//                }
-//            }
-//
-//            double promedioPuntaje = (totalCalificaciones > 0) ? (double) totalPuntaje / totalCalificaciones : 0.0;
-//           
-//
-//            // Actualiza el promedioPuntaje del proveedor
-//            proveedor.setPromedioPuntaje(promedioPuntaje);
-//            proveedorRepositorio.save(proveedor);
-//        }
-//    }
-    
     @Transactional
     public void calcularPromedioPuntajeProveedores(Long idProveedor) {
         Proveedor proveedor = proveedorRepositorio.findById(idProveedor).get();
@@ -217,11 +191,11 @@ public class proveedorServicio implements UserDetailsService {
         double totalPuntaje = proveedor.getPromedioPuntaje();
         double totalCalificaciones = otRepositorio.buscarPoridProveedor(idProveedor).size();
         for (OrdenTrabajo orden : ordenes) {
-           totalPuntaje += orden.getPuntaje();
+            totalPuntaje += orden.getPuntaje();
         }
-        double promedioPuntaje= totalPuntaje/totalCalificaciones;
-            // Actualiza el promedioPuntaje del proveedor
-            proveedor.setPromedioPuntaje(promedioPuntaje);
-            proveedorRepositorio.save(proveedor);
-        }
+        double promedioPuntaje = totalPuntaje / totalCalificaciones;
+        // Actualiza el promedioPuntaje del proveedor
+        proveedor.setPromedioPuntaje(promedioPuntaje);
+        proveedorRepositorio.save(proveedor);
     }
+}
