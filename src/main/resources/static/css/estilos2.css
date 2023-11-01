@@ -636,10 +636,13 @@ background-color:#333;
   margin-left: 8%;
   width: 1000px;
   border: 3px solid orange;
+  margin-bottom: 5%;
 
 }
+
 .tablead{
   margin-left: 4%;
+  margin-bottom: 5%;
 }
 .TextoAdm{
   color: white;
@@ -647,8 +650,8 @@ background-color:#333;
   text-align: center;
 }
 .tableAdm{
-  background-color:#333;
-  color: white;
+  background-color:white;
+  color: #333;
 }
 /*-------------------------------Panel proveedor-----------------------------*/
 

@@ -79,7 +79,7 @@
             </thead>
             <tbody th:each="proveedor : ${proveedores}" style="background-color: #333; border: 1px solid #FF7F00;">
                 <tr style="color: #FFFFFF">
-                    <th scope="row" th:text="${proveedor.id}"></th>
+                    <th  scope="row" th:text="${proveedor.id}"></th>
                     <td th:text="${proveedor.nombre}"></td>
                     <td th:text="${proveedor.email}"></td>
                     <td th:text="${proveedor.rol}"></td>
@@ -95,6 +95,33 @@
                             </div>
                         </section>
                     </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="tablead" style="width: 1100px; height: 15px; padding: 10px; border: 2px solid #FF7F00;">
+            <h3 class="TextoAdm">Listado de Ordenes de Trabajo</h3>
+            <thead class="tableAdm" style="border: 1px solid #FF7F00;">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descripción del trabajo</th>
+                    <th scope="col">Puntaje</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">(Rubro Proveedor)</th>
+                    <th scope="col">(Nombre Usuario)</th>
+                </tr>
+            </thead>
+            <tbody th:each="lista : ${listaOt}" style="background-color: #333; border: 1px solid #FF7F00;">
+                <tr style="color: #FFFFFF">
+                    <th scope="row" th:text="${lista.id}"></th>
+                    <td th:text="${lista.comentario}"></td>
+                    <td th:text="${lista.puntaje}"></td>
+                    <td th:text="${lista.estadOrden}"></td>
+                    <td th:text="${lista.proveedor.nombre}"></td>
+                    <td th:text="${lista.proveedor.rubro}"></td>
+                    <td th:text="${lista.usuario.nombre}"></td>
                 </tr>
             </tbody>
         </table>
