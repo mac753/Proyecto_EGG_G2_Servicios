@@ -149,4 +149,17 @@ public class OrdenTrabajoServicio {
 
     }
 
+    @Transactional // El admin edita el comentario
+    public void editarComentario(Long idOrdenTrabajo, Long idUsuario, String comentarioCalificacion) {
+        Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
+        // agregar condicional si se califica solo si está finalizada
+        if (respuesta.isPresent()) {
+
+            OrdenTrabajo ordentrabajo = respuesta.get();
+            ordentrabajo.setComentarioCalificacion(comentarioCalificacion);
+
+            otRepositorio.save(ordentrabajo);
+        }
+    }
+
 }

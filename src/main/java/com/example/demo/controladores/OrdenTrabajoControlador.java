@@ -119,4 +119,23 @@ public class OrdenTrabajoControlador {
         return "redirect:/orden/ordenes";
     }
 
+    @GetMapping("/finalizar/{id}")
+    public String finalizarOrden(@PathVariable Long id, HttpSession session) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.finalizarOrdenTrabajo(id, idusuario);
+
+        return "redirect:/orden/ordenes";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/editarComentario/{id}")
+    public String editarComentario(@PathVariable Long id, HttpSession session, String comentarioCalificacion) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.editarComentario(id, idusuario, comentarioCalificacion);
+
+        return "redirect:/admin/dashboard";
+    }
+
 }
