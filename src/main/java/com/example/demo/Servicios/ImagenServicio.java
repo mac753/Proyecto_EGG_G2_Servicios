@@ -30,7 +30,7 @@ public class ImagenServicio {
     }
 
     // modifica la imagen en el perfil del proveedor
-    public Imagen modificarImagenProveedor(MultipartFile archivo, String idImagen) throws MiException, IOException {
+    public Imagen modificarImagenProveedor(MultipartFile archivo, Long idImagen) throws MiException, IOException {
         if (archivo != null) {
             Imagen imagen = new Imagen();
             if (idImagen != null) {
@@ -45,6 +45,18 @@ public class ImagenServicio {
             return imagenRepositorio.save(imagen);
         }
         return null;
+    }
+
+    public Imagen buscarImagenPorId(Long idImagen) {
+        Imagen imagen = new Imagen();
+        if (idImagen != null) {
+            Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
+            if (respuesta.isPresent()) {
+                imagen = respuesta.get();
+            }
+        }
+        return imagen;
+
     }
 
 }

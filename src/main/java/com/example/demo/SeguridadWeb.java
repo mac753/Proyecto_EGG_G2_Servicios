@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Servicios.ServicioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,19 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.example.demo.Servicios.UsuarioServicio;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SeguridadWeb {
 
         @Autowired
-        UsuarioServicio usuarioServicio;
+        ServicioPersona personaServicio;
 
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-                auth.userDetailsService(usuarioServicio)
+                auth.userDetailsService(personaServicio)
                                 .passwordEncoder(new BCryptPasswordEncoder());
         }
 
