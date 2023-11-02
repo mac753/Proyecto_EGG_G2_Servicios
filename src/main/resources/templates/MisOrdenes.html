@@ -31,10 +31,10 @@
           <th scope="col">id Orden</th>
           <th scope="col">Nombre Usuario</th>
           <th scope="col">Nombre Proveedor</th>
-          <th scope="col">Comentario</th>
+          <th scope="col">Descripcion del trabajo</th>
           <th scope="col">Estado</th>
-          <th scope="col">Acciones</th>
-          <th scope="col"> </th>
+          <th th:each="orden : ${listaOrdenes}" th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" scope="col">Cotizacion</th>
+                
         </thead>
         <tbody th:each="orden : ${listaOrdenes}" style="background-color: #333; border: 1px solid #FF7F00;">
           <tr style="color: #FFFFFF">
@@ -43,11 +43,29 @@
             <td th:text="${orden.proveedor.nombre}"></td>
             <td th:text="${orden.comentario}"></td>
             <td th:text="${orden.estadOrden}"></td>
-            <td>
-              <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-              <a th:href="@{/orden/aceptar/__${orden.id}__}">Aceptar cotizacion</a>
-              <a th:href="@{/orden/calificar/__${orden.id}__}">Calificar</a>
+            <td >              
+              <form th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:action="@{/orden/cotizacion/__${orden.id}__}" method="POST">
+                  <div class="textoOT">            
+                      <input
+                          type="number"
+                          class="form-control p-4"
+                          placeholder="Ingresa el valor de la cotización"
+                          name="valor"
+                          required="required"
+                          />
+
+                      <div class="boton">
+                          <button class="btn btn-primary btn-block py-3" type="submit">
+                              Enviar Cotización
+                          </button>
+                      </div>
+                  </div>
+              </form>              
+        </td>
+        <td>
+             
             </td>
+            
           </tr>
         </tbody>
       </table>

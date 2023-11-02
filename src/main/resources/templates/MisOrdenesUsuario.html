@@ -39,6 +39,7 @@
             <th scope="col">Descripcion del trabajo</th>
             <th scope="col">Estado</th>
             <th scope="col">Valor cotizado por el proveedor</th>
+            <th scope="col">Acciones</th>
             <th scope="col">Comentario post-servicio</th>
           </tr>
         </thead>
@@ -51,38 +52,40 @@
             <td th:text="${orden.comentario}"></td>
             <td th:text="${orden.estadOrden}"></td>
             <td th:text="' $ ' + ${orden.valor}"></td>
-            <td th:text="${orden.comentarioCalificacion}"></td>
             <td>
-              <div th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } ">
-                <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
-                  <input type="hidden" name="ordenId" th:value="${orden.id}" />
-                  <button id="btnAceptarCotizacion" class="btn btn-primary" type="button" onclick="callAllert();">
-                    Aceptar cotización
-                  </button>
-                </form>
+              <div >
+                  <a th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } " th:href="@{/orden/aceptar/__${orden.id}__}" >Aceptar Cotizacion </a>
+                <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a>
+                 <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}" th:href="@{/orden/finalizar/__${orden.id}__}" >Finalizar</a>
               </div>
 
               <div>
-                <form th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
-                  th:action="@{/orden/calificar/__${orden.id}__}" method="post">
-                  <input type="hidden" name="ordenId" th:value="${orden.id}" />
-                  <p>
-                    <input type="number" class="form-control p-4"
-                      placeholder="Ingrese del 1 al 5, la puntuación del proveedor" name="puntaje"
-                      required="required" />
-                  </p>
+                <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'} and ${orden.puntaje == null}" th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
 
-                  <p>
-                    <input type="text" class="form-control p-4" placeholder="Si quiere agregar comentarios"
-                      name="comentarioCalificacion" required="required" />
-                  </p>
-                  <button id="btnFinalizarCalificar" class="btn btn-secondary btn-sm" name="otroBoton" type="button"
-                    onclick="callAllert();">
-                    Finalizar/Calificar
-                  </button>
-                </form>
+              <p>
+                  <input
+                      type="number"
+                      class="form-control p-4"
+                      placeholder="Ingrese del 1 al 5, la puntuacion del proveedor"
+                      name="puntaje"
+                      required="required"
+                      />
+              </p>
+              <p>
+                  <input
+                      type="text"
+                      class="form-control p-4"
+                      placeholder="Si quiere agrega comentarios"
+                      name="comentario"
+                      required="required"
+                      />
+              </p>
+              <button type="submit">Calificar</button>
+          </form>
               </div>
             </td>
+            <td th:text="${orden.comentarioCalificacion}"></td>
+            
           </tr>
         </tbody>
       </table>

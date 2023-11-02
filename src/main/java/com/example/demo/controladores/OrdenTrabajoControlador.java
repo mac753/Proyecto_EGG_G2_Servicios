@@ -102,11 +102,11 @@ public class OrdenTrabajoControlador {
 
     @PostMapping("/calificar/{id}")
     public String calificarOrden(@PathVariable Long id, HttpSession session, @RequestParam Integer puntaje,
-            String comentarioCalificacion) {
+            String comentario) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
-        ots.finalizarOrdenTrabajo(id, idusuario);
-        ots.calificarOrdenTrabajo(id, idusuario, comentarioCalificacion, puntaje);
+        //ots.finalizarOrdenTrabajo(id, idusuario);
+        ots.calificarOrdenTrabajo(id, idusuario, comentario, puntaje);
         return "redirect:/orden/ordenes";
     }
 
@@ -115,6 +115,13 @@ public class OrdenTrabajoControlador {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
         ots.asignarValor(id, idusuario, valor);
+
+        return "redirect:/orden/ordenes";
+    }
+    
+     @GetMapping("/finalizar/{id}")
+    public String finalizarOrden(@PathVariable Long id) {
+        ots.finalizarOrdenTrabajo(id);
 
         return "redirect:/orden/ordenes";
     }
