@@ -141,7 +141,7 @@ public class portalControlador {
 
             modelo.put("exito", "Usuario actualizado correctamente!");
 
-            return "index.html";
+            return "redirect:/buscador";
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
