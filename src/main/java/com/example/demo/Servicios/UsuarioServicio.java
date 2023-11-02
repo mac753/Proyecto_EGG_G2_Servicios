@@ -2,39 +2,27 @@ package com.example.demo.Servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.example.demo.Enumeraciones.Estado;
 import com.example.demo.Enumeraciones.Rol;
 import com.example.demo.Repositorio.UsuarioRepositorio;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import com.example.demo.Excepciones.MiException;
-
 import com.example.demo.entidades.Usuario;
-
-
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UsuarioServicio implements UserDetailsService {
+public class UsuarioServicio {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
     @Transactional
     public void crearUsuario(String nombre, String email, String password, String password2, Long telefono,
-                             String direccion)
+            String direccion)
             throws MiException {
         validar(nombre, email, password, password2, telefono, direccion);
 
@@ -46,12 +34,38 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setTelefono(telefono);
         usuario.setDireccion(direccion);
         usuario.setRol(Rol.USER);
+        usuario.setEstado(Estado.ACTIVO);
         usuarioRepositorio.save(usuario);
 
     }
 
+    @Transactional
+    public void actualizar(Long id, String nombre, String email, String password,
+            String password2,
+            Long telefono, String direccion) throws MiException {
+
+        validar(nombre, email, password, password2, telefono, direccion);
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+            usuario.setNombre(nombre);
+            usuario.setEmail(email);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+            usuario.setDireccion(direccion);
+
+            usuario.setRol(Rol.USER);
+            // Estado indica que el usuario estara activo por defecto
+            usuario.setEstado(Estado.ACTIVO);
+
+            usuarioRepositorio.save(usuario);
+
+        }
+    }
+
     private void validar(String nombre, String email, String password, String password2, Long telefono,
-                         String direccion)
+            String direccion)
             throws MiException {
 
         if (nombre.isEmpty()) {
@@ -75,23 +89,10 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.BuscarUsuarioPorEmail(email);
-        if (usuario != null) {
-            List<GrantedAuthority> permisos = new ArrayList();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-            permisos.add(p);
-            // ServletRequestAttributes attr = (ServletRequestAttributes)
-            // RequestContextHolder.currentRequestAttributes();
-            // HttpSession session = attr.getRequest().getSession(true);
-            // session.setAttribute("usuariosession", usuario);
-            // return (UserDetails) new User(usuario.getEmail(), usuario.getPassword(),
-            // permisos);
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-        } else {
-            return null;
-        }
+    public List<Usuario> listarUsuarios(Rol rol) {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        usuarios = (List<Usuario>) usuarioRepositorio.buscarUsuarios(rol);
+        return usuarios;
     }
 
 }
