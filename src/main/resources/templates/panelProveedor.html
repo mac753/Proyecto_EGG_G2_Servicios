@@ -14,55 +14,67 @@
 
 <body>
 
-
+  <div class="opacidadgral">
   <nav th:replace="fragments/navbarprov::navp"></nav>
-
-  <h1>Mi Perfil</h1>
+  <h1 class="text-center">ProSkillFinder</h1>
+  <h1 class="indh3">Mi Perfil</h1>
   <div class="col-md-4">
     <div class="container">
-      <p>
+      <p id="textbien">
         BIENVENIDO
         <span th:if="${session.personasession != null}" th:text=" ${session.personasession.nombre} "></span>
       </p>
     </div>
   </div>
 
-  <div class="container4">
-    <ul>
-      <th:block th:each="proveedor: ${proveedor}">
-        <div class="col-md-4">
-          <div class="card1" style="background-color: #000; width: 300px;">
-            <img src="https://agencia-fotografia.com/wp-content/uploads/2014/06/foto1-150x150.jpg" class="card-img-top"
-              alt="Proveedor 1">
-            <div class="card-body">
-              <h5 style="font-weight: bold; color: white;">Nombre: <span class="card-text"
-                  th:text="${proveedor.nombre}"></span></h5>
-              <h5 style="color: white;">Direccion: <span class="card-text" th:text="${proveedor.direccion}"></span></h5>
-              <h5 style="color: white;">Honorarios por hora: <span class="card-text"
-                  th:text="${proveedor.honorarioHora}"></span></h5>
-              <h5 class="card-text" style="color: white;">Cantidad de estrellas: <span
-                  th:text="${proveedor.presentacion}"></span></h5>
-              <h5>Presentación: </h5>
-            </div>
-          </div>
+
+  <div class="pantalla">
+
+    <div class="izquiercon">
+
+
+        <div class="InfoProv">
+
+            <form th:action="@{/orden/crearOrden}" method="POST">
+                <div class="fotoPerfil">
+                    <img class="rounded mx-auto d-block" th:src="'data:image/jpeg;base64,' + ${imagen}" alt="Imagen de perfil" width="150" height="150">
+                </div>
+                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Nombre: <span
+                        th:text="${proveedor.nombre}"></span></li>
+                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Direccion: <span
+                        th:text="${proveedor.direccion}"></span></li>
+                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Honorarios por hora: <span
+                        th:text="${proveedor.honorarioHora}"></span></li>
+                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Telefono: <span
+                        th:text="${proveedor.telefono}"></span></li>
+                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Presentacion: <span
+                        th:text="${proveedor.presentacion}"></span></li>
+            </form>
+
         </div>
-      </th:block>
-    </ul>
+
+
+
+    </div>
+
+    <div class="derecha">
+
+     <div class="bprov">
+        <h5 class="text-center">Si necesita contactar algun servicio debe registrarse como usuario</h5>
+
+        <a th:if="${session.personasession != null}" th:href="@{/orden/ordenes}" id="botonppp" class="btn btn-secondary my-2 botones">Ver mis ordenes
+        </a>
+
+
+        <a th:if="${session.personasession != null}" th:href="@{perfil}" id="botonppp" class="btn btn-secondary my-2 botones">Editar Perfil</a>
+
+         <a th:if="${session.personasession != null}" th:href="@{/logout}" id="botonppp" class="btn btn-secondary my-2 botones">Cerrar Sesión</a>
+    
+      </div>
+
+    </div>    
   </div>
-
-  <h5>Si necesita contactar algun servicio debe registrarse como usuario</h5>
-
-  <a th:if="${session.personasession != null}" th:href="@{/orden/ordenes}" class="nav-link">Ver mis ordenes
-  </a>
-
-
-  <a th:if="${session.personasession != null}" th:href="@{perfil}" class="nav-link">Editar Perfil</a>
-
-  <a th:if="${session.personasession != null}" th:href="@{/logout}" class="nav-link">Cerrar Sesión</a>
-
-
-
-  <section class="">
+  <section class="botonVolver">
     <div class="row mt-3">
       <div class="divVolver">
         <a th:href="@{/proveedor/panelProveedor}" class="btn btn-secondary my-2 botonVolver botones">Ir Arriba</a>
@@ -75,7 +87,7 @@
     <div th:replace="fragments/redesS::red_soc"></div>
   </footer>
 
-
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

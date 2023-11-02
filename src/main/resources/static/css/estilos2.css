@@ -4,9 +4,53 @@
   padding: 0;
 }
 
-/*header es del boostrap*/
 
-/*Footer*/
+/*---------------------Body-------------------------------*/
+
+
+body {
+
+  background-image: url('../logos/f20.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
+  /* background: linear-gradient(90deg, rgb(255, 239, 122) 0%, rgb(229, 113, 5) 100%);*/
+}
+
+
+.opacidadgral {
+  background-color: rgba(250, 246, 246, 0.3);
+  margin: 0;
+  padding: 0;
+}
+
+
+.botonVolver {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ;
+}
+
+.divVolver {
+  .btn {
+    background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+
+  }
+
+  .btn:hover {
+    color: red;
+  }
+}
+
+
+
+
+/*-------------------header es del boostrap--------------------*/
+
+/*----------------------Footer----------------*/
 
 .pie {
   padding: 20px;
@@ -40,17 +84,11 @@
   transform: scale(1.2);
 }
 
-/*Body*/
-
-
-body {
-  background: linear-gradient(90deg, rgb(255, 239, 122) 0%, rgb(229, 113, 5) 100%);
-}
 
 
 
 
-/*index*/
+/*--------------------------index-----------------------*/
 
 
 
@@ -182,7 +220,8 @@ body {
 
 
 
-/* conocenos*/
+/* --------------------------conocenos---------------------------------*/
+
 
 
 .titulo1 {
@@ -193,6 +232,7 @@ body {
   margin-right: 15%;
   margin-bottom: 10%;
   text-align: center;
+
 
 }
 
@@ -216,6 +256,7 @@ body {
   font-size: 18px;
   margin-left: 15%;
   margin-right: 15%;
+  color: #000
 }
 
 .textfin {
@@ -226,11 +267,11 @@ body {
   margin-right: 15%;
   margin-top: 5%;
   margin-bottom: 5%;
-
+  color: #000
 }
 
 
-/*login*/
+/*-----------------------------login-------------------*/
 
 .container2 {
   display: flex;
@@ -244,12 +285,16 @@ body {
 .left-side {
   border-radius: 10px;
   width: 50%;
-  padding: 20px;
+  height: auto;
+  padding: 30px;
   background-color: #333;
-  margin-right: 5%;
+  margin-right: 8%;
   margin-left: 10%;
   border: 5px solid orange;
+  position: relative;
 }
+
+
 
 .right-side {
   border-radius: 10px;
@@ -282,11 +327,7 @@ body {
   color: red;
 }
 
-.box {
-  background-color: #333;
-  padding: 20px;
 
-}
 
 h4 {
   font-size: 18px;
@@ -294,17 +335,13 @@ h4 {
   color: white;
 }
 
-.btn {
-  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-  margin-left: 48%;
-}
 
 .textobox {
   color: white;
 }
 
 
-/*Registro Proveedor*/
+/*-----------------------------Registro Proveedor-------------------*/
 
 
 .container3 {
@@ -347,7 +384,6 @@ textarea {
 
 /*buscar proveedor*/
 .botonBus {
-
   margin-left: 50%;
 }
 
@@ -357,7 +393,7 @@ textarea {
   margin-left: 30%;
 }
 
-/*registro usuario*/
+/*--------------------------registro usuario----------------------*/
 
 .regUsuario {
   width: 555px;
@@ -396,12 +432,13 @@ textarea {
   margin-right: 10%;
 }
 
-/*del buscador*/
+/*------------------------ buscador----------------------*/
 
 
 .imagen-enmarcada {
   text-align: center;
-  border: 2px solid orange;
+  border: 5px solid orange;
+  border-radius: 10px;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -410,11 +447,13 @@ textarea {
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 5%;
+
 }
 
 .imagen-enmarcada img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 
 .textbusq {
@@ -428,10 +467,20 @@ textarea {
   height: auto;
 }
 
+#textbien {
+  width: auto;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
 .botonbus {
   color: white;
   margin-left: 70%;
   border-radius: 5px;
+  margin-top: 7px;
   border: 1px solid #000;
   width: 10%;
   background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
@@ -466,16 +515,9 @@ textarea {
   margin-left: 10px;
 }
 
-#textbien {
-  width: 15%;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: white;
-  font-weight: bold;
-  text-align: center;
-}
 
-/*  Contactar Proveedor */
+
+/* --------------------------- Contactar Proveedor -------------------------------------------*/
 
 .pantalla {
   display: flex;
@@ -489,46 +531,38 @@ textarea {
   display: flex;
   flex-direction: column;
   margin-left: 5%;
-
+  border-radius: 10px;
+  border: 3px solid orange;
+  background-color: #333;
+  color: white;
+  margin-bottom: 15%;
 }
+
 
 .derecha {
   flex: 2;
-  padding: 20px
-}
-
-.enviar {
-  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
-  width: 15%;
-  border-radius: 5px;
-
-}
-
-.izqAb {
-  margin-top: 20%;
-  border: 2px solid orange;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-left: 80%;
-  width: 100%;
-  border-radius: 10px;
-  background-color: #333;
-
 }
-
-.comen {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid orange;
-  margin-bottom: 2px;
-  border-radius: 10px;
-}
-
 
 .encabezadoCP {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.textoOT {
+  margin-left: 200px;
+  text-align: center;
+  border: 3px solid orange;
+  width: 60%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #333;
+  border-radius: 10px;
 }
 
 .texCP {
@@ -543,13 +577,24 @@ textarea {
   text-align: center;
   border: 3px solid orange;
   width: 60%;
-  padding: 5px;
+  padding: 20px;
   box-sizing: border-box;
   background-color: #333;
   border-radius: 10px;
 }
 
-/*Modificar Usuario*/
+.enviar {
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+  width: 25%;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+
+}
+
+
+
+/*------------------------------------------Modificar Usuario----------------------------------------------*/
 
 
 .modUsuario {
@@ -578,8 +623,75 @@ textarea {
   margin: 5%;
 }
 
+/*------------------MIS ORDENES/MIS ORDENES USUARUIO-------------*/
+.table {
+  margin-left: 20%;
+  margin-bottom: 20%;
+}
 
-/* Media query para pantallas más pequeñas */
+.tablemo {
+  color: white;
+  background-color: #333;
+
+}
+
+/*----------------------------perf Admin-------------*/
+.tablead1 {
+  margin-left: 8%;
+  width: 1000px;
+  border: 3px solid orange;
+  margin-bottom: 5%;
+
+}
+
+.tablead {
+  margin-left: 4%;
+  margin-bottom: 5%;
+}
+
+.TextoAdm {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.tableAdm {
+  background-color: white;
+  color: #333;
+}
+
+/*-------------------------------Panel proveedor-----------------------------*/
+
+
+.bprov {
+  width: 80%;
+  height: 100px;
+  margin-bottom: 19%;
+  margin-right: 10%;
+  margin-left: 25%;
+
+}
+
+h5 {
+  text-align: center;
+}
+
+
+#botonppp {
+  display: flex;
+  margin-left: 40%;
+  width: 20%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgb(125, 45, 245) 0%, rgb(111, 111, 226) 100%);
+  color: white;
+
+}
+
+#botonppp:hover {
+  color: red;
+}
+
+/*----------------------- Media query para pantallas más pequeñas ------------------------------------------*/
 @media screen and (max-width: 768px) {
 
   header {
@@ -670,59 +782,73 @@ textarea {
 
   .btn {
     margin-left: 43%;
-  }
-
-  .enviar {
-    width: 35%;
-  }
-
-
-}
-
-@media screen and (max-width: 991px) {
-  .logo {
-    width: 10%;
-  }
-
-  .barraSuperior .texto {
-    display: flex;
-    flex-direction: column;
-    font-size: 10px;
-    width: 100%;
-  }
-
-  .navbar .navbar-toggler {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translate(0, -50%);
-    display: block;
-  }
-
-  .fotoPerfil {
-
-    width: 70%;
-    height: 70%;
 
   }
 
-  .seleb {
-    margin-left: 25%;
+  .texCP {
+    font-size: 12px;
   }
 
-  .botonbus {
-    margin-left: 45%;
-    width: 10%;
+  .textoOT {
+    margin-left: 50px;
+
+    .enviar {
+      width: 53%;
+    }
+
+    .divVolver {
+      .btn {
+        width: 70%;
+      }
+    }
+
   }
 
-  #textbien {
-    width: 30%;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    font-weight: bold;
-    text-align: center;
+  @media screen and (max-width: 991px) {
+    .logo {
+      width: 10%;
+    }
+
+    .barraSuperior .texto {
+      display: flex;
+      flex-direction: column;
+      font-size: 10px;
+      width: 100%;
+    }
+
+    .navbar .navbar-toggler {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate(0, -50%);
+      display: block;
+    }
+
+    .fotoPerfil {
+
+      width: 70%;
+      height: 70%;
+
+    }
+
+    .seleb {
+      margin-left: 25%;
+    }
+
+    .botonbus {
+      margin-left: 45%;
+      width: 10%;
+    }
+
+    #textbien {
+      width: 30%;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      font-weight: bold;
+      text-align: center;
+
+    }
 
   }
-
 }
