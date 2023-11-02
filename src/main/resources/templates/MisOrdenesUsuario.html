@@ -40,10 +40,14 @@
             <th scope="col">Estado</th>
             <th scope="col">Valor cotizado por el proveedor</th>
             <th scope="col">Comentario post-servicio</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
 
-        <tbody th:each="orden : ${listaOrdenes}" style="background-color: #333; border: 1px solid #FF7F00;">
+        <tbody th:each="orden : ${listaOrdenes}" style="background-color: #333; border: 1px solid #FF7F00; ">
           <tr style="color: #FFFFFF">
             <th th:text="${orden.id}"></th>
             <td th:text="${orden.usuario.nombre}"></td>
@@ -52,71 +56,132 @@
             <td th:text="${orden.estadOrden}"></td>
             <td th:text="' $ ' + ${orden.valor}"></td>
             <td th:text="${orden.comentarioCalificacion}"></td>
+
             <td>
-              <div>
-                <a th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } "
-                  th:href="@{/orden/aceptar/__${orden.id}__}">Aceptar Cotizacion </a>
-                <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
-                  th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-                <a th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
-                  th:href="@{/orden/finalizar/__${orden.id}__}">Finalizar</a>
+              <!--<button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);" data-bs-toggle="modal" data-bs-target="#staticBackdrop0"><a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}" th:href="@{/orden/cancelar/__${orden.id}__}" >Cancelar</a></button>-->
+              <a th:if="${orden.getEstadOrden().toString() == 'COTIZANDO'}"
+                th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
+            </td>
+            <td>
+
+              <div th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } ">
+
+                <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
+                  <input type="hidden" name="ordenId" th:value="${orden.id}" />
+                  <button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop0">Aceptar cotizacion</button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop0" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion Aceptada!</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <h1 class="text-center">ProSkillFinder</h1>
+                          <br>
+                          <p class="text-center">Tu Cotizacion ha sido Aceptada, <br> el proveedor se contactara a la
+                            brevedad contigo,<br> GRACIAS POR ELEGIRNO!!!</p>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                            style="margin-left: auto; margin-right: auto;">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
 
-              <div>
-                <form th:if="${orden.getEstadOrden().toString() == 'FINALIZADA'} and ${orden.puntaje == null}"
-                  th:action="@{/orden/calificar/__${orden.id}__}" method="POST">
 
-                  <p>
-                    <input type="number" class="form-control p-4"
-                      placeholder="Ingrese del 1 al 5, la puntuacion del proveedor" name="puntaje"
-                      required="required" />
-                  </p>
-                  <p>
-                    <input type="text" class="form-control p-4" placeholder="Si quiere agrega comentarios"
-                      name="comentario" required="required" />
-                  </p>
-                  <button type="submit">Calificar</button>
+            </td>
+            <td>
+              <div>
+                <form th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
+                  th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+                  <input type="hidden" name="ordenId" th:value="${orden.id}" />
+
+                  <button type="submit" class="btn btn-primary" style="background-color :rgb(111, 111, 226);"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Continuar sin calificar</button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion Denegada :C</h1>
+                          <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <h1 class="text-center">ProSkillFinder</h1>
+                          <br>
+                          <p class="text-center">Tu Cotizacion ha sido Denegada,tu proveedor lo ha recibido, GRACIAS te
+                            esperamos la proxima!</p>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                            style="margin-left: auto; margin-right: auto;">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
             </td>
-            <td th:text="${orden.comentarioCalificacion}"></td>
+            <td>
+              <form th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
+                th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+                <!-- Button trigger modal -->
+                <button type="submit" class="btn btn-primary" style="background-color :rgb(111, 111, 226);"
+                  data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Calificar</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
+                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion</h1>
+                        <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h1 class="text-center">ProSkillFinder</h1>
+                        <br>
+                        <a th:href="@{/orden/calificar/__${orden.id}__}"></a>
+                        <p>Califica a tu proveedor segun su desempeño:</p>
+
+                        <input type="hidden" name="ordenId" th:value="${orden.id}" />
+                        <p>
+                          <input type="number" class="form-control p-4" placeholder="Ingrese puntuacion del 1 al 5"
+                            name="puntaje" required="required" />
+                        </p>
+                        <p>
+                          <input type="text" class="form-control p-4" placeholder="Si quiere agrega comentarios"
+                            name="comentarioCalificacion" required="required" />
+                        </p>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar
+                          Calificacion</button>
+                        <button type="submit" class="btn btn-primary">Aceptar Calificacion</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </td>
+
           </tr>
         </tbody>
       </table>
 
-      <script type="text/javascript">
-        document
-          .getElementById("btnAceptarCotizacion")
-          .addEventListener("click", function () {
-            swal(
-              "¡Cotización Aceptada!",
-              "Pronto el proveedor se contacatará contigo para coordinar el servicio.",
-              "success"
-            ).then(function () {
-              // Después de mostrar el mensaje, envía el formulario manualmente
-              var form = document
-                .querySelector("#btnAceptarCotizacion")
-                .closest("form");
-              form.submit();
-            });
-          });
 
-        document
-          .getElementsByName("btnFinalizarCalificar")
-          .addEventListener("click", function () {
-            swal(
-              "¡Servicio Finzalidado!",
-              "Gracias por confiar en los servicios de ProSkillFinder",
-              "success"
-            ).then(function () {
-              // Después de mostrar el mensaje, envía el formulario manualmente
-              var form = document
-                .querySelector("#btnFinalizarCalificar")
-                .closest("form");
-              form.submit();
-            });
-          });
-      </script>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
       </ul>

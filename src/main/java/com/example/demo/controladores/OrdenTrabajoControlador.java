@@ -94,6 +94,14 @@ public class OrdenTrabajoControlador {
         return "redirect:/orden/ordenes";
     }
 
+    @PostMapping("/aceptar/{id}")
+    public String aceptarOrden(@PathVariable Long id, HttpSession session) {
+        Persona logueado = (Persona) session.getAttribute("personasession");
+        Long idusuario = logueado.getId();
+        ots.aceptarOrdenTrabajo(id);
+        return "redirect:/orden/ordenes";
+    }
+
     @GetMapping("/calificar")
     public String calificarOrden(@PathVariable Long id) {
         // ots.aceptarOrdenTrabajo(id);

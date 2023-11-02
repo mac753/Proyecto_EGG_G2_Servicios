@@ -514,7 +514,12 @@ textarea {
   height: auto;
   margin-left: 10px;
 }
-
+.noprov{
+  display: flex;
+  align-items: center;
+  margin-left: 40%;
+  text-align: center;
+}
 
 
 /* --------------------------- Contactar Proveedor -------------------------------------------*/
@@ -625,7 +630,7 @@ textarea {
 
 /*------------------MIS ORDENES/MIS ORDENES USUARUIO-------------*/
 .table {
-  margin-left: 20%;
+  margin-left: 2%;
   margin-bottom: 20%;
 }
 

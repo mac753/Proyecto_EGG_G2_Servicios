@@ -35,6 +35,7 @@
                         <th scope="col">Telefono</th>
                         <th scope="col">Direccion</th>
                         <th scope="col">Cambiar Estado</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody th:each="usuario : ${usuarios}" style="background-color: #333; border: 1px solid #FF7F00;">
@@ -75,6 +76,7 @@
                         <th scope="col">Teléfono</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Cambiar estado</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody th:each="proveedor : ${proveedores}" style="background-color: #333; border: 1px solid #FF7F00;">
@@ -101,7 +103,7 @@
             </table>
         </div>
         <div>
-            <table class="tablead" style="width: 1200px; height: 15px; padding: 10px; border: 2px solid #FF7F00;">
+            <table class="tablead" style="width: 1300px; height: 15px; padding: 10px; border: 2px solid #FF7F00;">
                 <h3 class="TextoAdm">Listado de Ordenes de Trabajo</h3>
                 <thead class="tableAdm" style="border: 1px solid #FF7F00;">
                     <tr>
@@ -132,7 +134,8 @@
                                     <div class="row mt-3">
                                         <div class="divVolver">
                                             <input type="text" name="comentarioCalificacion">
-                                            <button type="submit">Comentario editado</button>
+                                            <button class="btn btn-secondary my-2 botonVolver botones"
+                                                type="submit">Comentario editado</button>
                                         </div>
                                     </div>
                                 </section>
@@ -143,14 +146,14 @@
             </table>
             <div>
 
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
-                </ul>
+
 
                 <section class="botonVolver">
                     <div class="row mt-3">
                         <div class="divVolver">
                             <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                            <a th:if="${session.personasession != null}" th:href="@{/logout}"
+                                class="btn btn-secondary my-2 botones">Cerrar Sesión</a>
                         </div>
                     </div>
                 </section>
