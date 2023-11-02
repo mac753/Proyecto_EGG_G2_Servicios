@@ -14,6 +14,7 @@ import com.example.demo.entidades.Proveedor;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Base64;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -75,7 +76,9 @@ public class OrdenTrabajoControlador {
             List<OrdenTrabajo> listaOrdenesProveedor = ots.ListarOrdenesTrabajoProveedor(idusuario);
 
             ots.calcularPromedioPuntajeProveedores();
+
             modelo.addAttribute("listaOrdenes", listaOrdenesProveedor);
+
             return "MisOrdenes.html"; // Vista para proveedores
         }
 
@@ -110,11 +113,11 @@ public class OrdenTrabajoControlador {
 
     @PostMapping("/calificar/{id}")
     public String calificarOrden(@PathVariable Long id, HttpSession session, @RequestParam Integer puntaje,
-            String comentario) {
+            String comentarioCalificacion) {
         Persona logueado = (Persona) session.getAttribute("personasession");
         Long idusuario = logueado.getId();
         ots.finalizarOrdenTrabajo(id, idusuario);
-        ots.calificarOrdenTrabajo(id, idusuario, comentario, puntaje);
+        ots.calificarOrdenTrabajo(id, idusuario, comentarioCalificacion, puntaje);
         return "redirect:/orden/ordenes";
     }
 

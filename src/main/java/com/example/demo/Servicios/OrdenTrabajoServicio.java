@@ -90,13 +90,14 @@ public class OrdenTrabajoServicio {
     }
 
     @Transactional // El usuario califica la orden del servicio
-    public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario, String comentario, Integer puntaje) {
+    public void calificarOrdenTrabajo(Long idOrdenTrabajo, Long idUsuario, String comentarioCalificacion,
+            Integer puntaje) {
         Optional<OrdenTrabajo> respuesta = otRepositorio.findById(idOrdenTrabajo);
         // agregar condicional si se califica solo si está finalizada
         if (respuesta.isPresent()) {
 
             OrdenTrabajo ordentrabajo = respuesta.get();
-            ordentrabajo.setComentario(comentario);
+            ordentrabajo.setComentarioCalificacion(comentarioCalificacion);
             ordentrabajo.setPuntaje(puntaje);
             // ordentrabajo.getProveedor().setPuntaje
             otRepositorio.save(ordentrabajo);
@@ -146,6 +147,7 @@ public class OrdenTrabajoServicio {
             // Actualiza el promedioPuntaje del proveedor
             proveedor.setPromedioPuntaje(promedioPuntaje);
             proveedorRepositorio.save(proveedor);
+            ordenes.sort(Comparator.comparing(OrdenTrabajo::getPuntaje).reversed());
         }
 
     }

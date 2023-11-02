@@ -117,7 +117,8 @@ public class UsuarioServicio implements UserDetailsService {
         Persona persona = personaRepositorio.buscarPersonarPorEmail(email);
         if (persona != null) {
             List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + persona.getRol().toString());
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" +
+                    persona.getRol().toString());
             permisos.add(p);
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
