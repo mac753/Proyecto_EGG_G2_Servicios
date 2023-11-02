@@ -12,7 +12,7 @@
     </head>
   <body>
 
-    <div class="opacidadgral">
+  <div class="opacidadgral">
     <nav th:replace="fragments/navbarprov::navp"></nav>
     <h1 class="text-center">ProSkillFinder</h1>
 
@@ -35,6 +35,7 @@
           <th scope="col">Estado</th>
           <th scope="col">Acciones</th>
           <th scope="col"> </th>
+          <th scope="col"></th>
         </thead>
         <tbody th:each="orden : ${listaOrdenes}" style="background-color: #333; border: 1px solid #FF7F00;">
           <tr style="color: #FFFFFF">
@@ -44,11 +45,31 @@
             <td th:text="${orden.comentario}"></td>
             <td th:text="${orden.estadOrden}"></td>
             <td>
-              <a th:href="@{/orden/cancelar/__${orden.id}__}">Cancelar</a>
-              <a th:href="@{/orden/aceptar/__${orden.id}__}">Aceptar cotizacion</a>
-              <a th:href="@{/orden/calificar/__${orden.id}__}">Calificar</a>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cotizacion</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <a>Ingresa tu monto:</a>
+                      <p>
+                        <input type="number" class="form-control p-4" name="ordenId" required="required" th:value="${orden.id}"/>
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:href="@{/orden/aceptar/${orden.id}}">Cancelar Cotizacion</button>
+                    <button type="button" class="btn btn-primary" th:href="@{/orden/aceptar/${orden.id}}">Aceptar Cotizacion</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -68,7 +89,7 @@
     <footer class="pie">
       <div th:replace="fragments/footer::foot"></div>
       <div th:replace="fragments/redesS::red_soc"></div>
-    </footer> 
+    </footer>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -29,7 +29,7 @@
     </div>
 
     <div>
-      <table class="table" style="width: 700px; border: 2px solid #FF7F00;">
+      <table class="table" style="width: 950px; border: 2px solid #FF7F00;">
 
         <thead class="tablemo" style="border: 1px solid #FF7F00;">
           <tr>
@@ -40,6 +40,8 @@
             <th scope="col">Estado</th>
             <th scope="col">Valor cotizado por el proveedor</th>
             <th scope="col">Comentario post-servicio</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
           </tr>
         </thead>
 
@@ -51,36 +53,99 @@
             <td th:text="${orden.comentario}"></td>
             <td th:text="${orden.estadOrden}"></td>
             <td th:text="' $ ' + ${orden.valor}"></td>
-            <td th:text="${orden.comentarioCalificacion}"></td>
             <td>
-              <div th:if="${orden.valor != 0} and ${orden.getEstadOrden().toString() == 'COTIZANDO' } ">
+              <a sec:authorize="hasRole('USER')">
                 <form th:action="@{/orden/aceptar/__${orden.id}__}" method="post">
                   <input type="hidden" name="ordenId" th:value="${orden.id}" />
-                  <button id="btnAceptarCotizacion" class="btn btn-primary" type="button" onclick="callAllert();">
-                    Aceptar cotización
-                  </button>
-                </form>
-              </div>
+                  <button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);" data-bs-toggle="modal" data-bs-target="#staticBackdrop0">Aceptar cotizacion</button>
 
-              <div>
-                <form th:if="${orden.getEstadOrden().toString() == 'ACTIVA'}"
-                  th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop0" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion Aceptada!</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <h1 class="text-center">ProSkillFinder</h1>
+                          <br>
+                          <p class="text-center">Tu Cotizacion ha sido Aceptada, <br> el proveedor se contactara a la brevedad contigo,<br> GRACIAS POR ELEGIRNO!!!</p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="margin-left: auto; margin-right: auto;">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </a>
+            </td>
+  
+            <td>
+              <a sec:authorize="hasRole('USER')"></a>
+                <form th:action="@{/orden/finalizar/__${orden.id}__}" method="post">
                   <input type="hidden" name="ordenId" th:value="${orden.id}" />
-                  <p>
-                    <input type="number" class="form-control p-4"
-                      placeholder="Ingrese del 1 al 5, la puntuación del proveedor" name="puntaje"
-                      required="required" />
-                  </p>
+                  <button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Denegar cotizacion</button>
+  
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion Denegada :C</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="text-center">ProSkillFinder</h1>
+                            <br>
+                            <p class="text-center">Tu Cotizacion ha sido Denegada,tu proveedor lo ha recibido, GRACIAS te esperamos la proxima!</p>
 
-                  <p>
-                    <input type="text" class="form-control p-4" placeholder="Si quiere agregar comentarios"
-                      name="comentarioCalificacion" required="required" />
-                  </p>
-                  <button id="btnFinalizarCalificar" class="btn btn-secondary btn-sm" name="otroBoton" type="button"
-                    onclick="callAllert();">
-                    Finalizar/Calificar
-                  </button>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="margin-left: auto; margin-right: auto;">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </form>
+              </a>
+            </td>
+
+            <td>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" style="background-color :rgb(111, 111, 226);" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Calificar</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content" style="background-color: #333; border: 1px solid #FF7F00;">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Cotizacion</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h1 class="text-center">ProSkillFinder</h1>
+                      <br>
+                      <a th:href="@{/orden/calificar/__${orden.id}__}"></a>
+                      <p>Califica a tu proveedor segun su desempeño:</p>
+                      <form th:action="@{/orden/calificar/__${orden.id}__}" method="post">
+                        <input type="hidden" name="ordenId" th:value="${orden.id}" />
+                        <p>
+                          <input type="number" class="form-control p-4" placeholder="Ingrese puntuacion del 1 al 5" name="puntaje" required="required"/>
+                        </p>
+                        <p>
+                          <input type="text" class="form-control p-4" placeholder="Si quiere agrega comentarios" name="comentario" required="required"/>
+                        </p>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar Calificacion</button>
+                    <button type="button" class="btn btn-primary">Aceptar Calificacion</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>
